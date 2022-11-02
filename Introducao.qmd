@@ -1,8 +1,10 @@
 ---
 title: "Introdução"
 author: "Marcelo Honorio"
+data: "[bit.ly/introducao-ds](https://bit.ly/introducao-ds)"
 format: 
   revealjs:
+    output-file: slide.html
     transition: fade
     background-transition: fade
     highlight-style: ayu-mirage
