@@ -409,7 +409,7 @@ Marcelo Honorio
 </div>
 <div>
 <ul>
-<li class="fragment">Por que aprender um linguagem de programação?</li>
+<li class="fragment">Por que aprender uma linguagem de programação?</li>
 <li class="fragment">Por que o R?</li>
 <li class="fragment">Instalação da linguagem R e do Software Rstudio;</li>
 <li class="fragment">Apresentação do ambiente do Rstudio;</li>
@@ -420,9 +420,9 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>Por que aprender um linguagem de programação?</h2>
+<h2>Por que aprender uma linguagem de programação?</h2>
 <ul>
-<li class="fragment">Aprender a programar é muito importante quando desejamos entender os dados! Mais: é importante para que possamos intepretar esses dados; para que possamos transformá-los em informação!</li>
+<li class="fragment">Aprender a programar é muito importante quando desejamos entender e interpretar os dados.</li>
 <li class="fragment">Se você trabalha ou deseja trabalhar com dados, programar é uma habilidade de extrema relevância.</li>
 </ul>
 </section>
@@ -519,13 +519,13 @@ Marcelo Honorio
 <ul>
 <li class="fragment">A linguagem R surgiu em 1995, derivada da linguagem S;</li>
 <li class="fragment">Possui inúmeros pacotes (mais de 10 mil), com vantagem para a aplicação da Estatística Avançada e uma vasta comunidade de suporte, além de fortes capacidades voltadas ao Data Science.</li>
-<li class="fragment">CRAN (Comprehensive R Archive Network) é o repositório principal da linguagem R em que cada usuário pode contribuir como novos pacotes (que são coleções de funções em R como código compilado). Esses pacotes podem ser facilmente instalados com um linha de código.</li>
+<li class="fragment">CRAN (Comprehensive R Archive Network) é o repositório principal da linguagem R em que cada usuário pode contribuir com novos pacotes (que são coleções de funções em R como código compilado). Esses pacotes podem ser facilmente instalados com uma linha de código.</li>
 </ul>
 </section>
 <section class="slide level2">
 <h2>Sobre o R</h2>
 <ul>
-<li class="fragment">leituras recomendadas para quem inda não conhece a linguagem R e deseja se aprofundar:
+<li class="fragment">leituras recomendadas para quem ainda não conhece a linguagem R e deseja se aprofundar:
 <ul>
 <li class="fragment">Ciência de Dados com R - Introdução (Guerra, Oliveira, McDonnell &amp; Gonzaga, 2020) <a href="https://cdr.ibpad.com.br/index.html" class="uri">https://cdr.ibpad.com.br/index.html</a></li>
 <li class="fragment">Hands-On Programming with R (Grolemund, 2014) <a href="https://rstudio-education.github.io/hopr/" class="uri">https://rstudio-education.github.io/hopr/</a></li>
@@ -816,7 +816,7 @@ Marcelo Honorio
 <ul>
 <li class="fragment"><p><code style="color:#00589b">if</code> e <code style="color:#00589b">else</code> servem para executarmos um código apenas se uma condição (teste lógico) for satisfeita</p></li>
 <li class="fragment"><p><code style="color:#00589b">for</code> repetir uma mesma tarefa para um conjunto de valores diferentes</p></li>
-<li class="fragment"><p><code style="color:#00589b">while</code> repetir uma mesma tarefa enquanto a condições for respeitada</p></li>
+<li class="fragment"><p><code style="color:#00589b">while</code> repetir uma mesma tarefa enquanto as condições for respeitada</p></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -864,7 +864,7 @@ Marcelo Honorio
 <li class="fragment">excel;</li>
 <li class="fragment">txt</li>
 </ul>
-<p>intalando o pacote <strong>readr</strong></p>
+<p>instalando o pacote <strong>readr</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">install.packages</span>(<span class="st">'readr'</span>)</span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -877,8 +877,8 @@ Marcelo Honorio
 <li class="fragment"><code style="color:#00589b">filter</code>: manter ou descartar linhas</li>
 <li class="fragment"><code style="color:#00589b">select</code>: manter ou descartar colunas</li>
 <li class="fragment"><code style="color:#00589b">count</code>: contabiliza os dados por variável</li>
-<li class="fragment"><code style="color:#00589b">arrange</code>: ordenar o dataset por vaiável</li>
-<li class="fragment"><code style="color:#00589b">mutate</code>: criar nova vaiável</li>
+<li class="fragment"><code style="color:#00589b">arrange</code>: ordenar o dataset por variável</li>
+<li class="fragment"><code style="color:#00589b">mutate</code>: criar nova variável</li>
 <li class="fragment"><code style="color:#00589b">group_by</code>/<code style="color:#00589b">summarize</code>: agregar dados</li>
 <li class="fragment"><code style="color:#00589b">*_join</code>: unir conjunto de dados</li>
 </ul>
@@ -941,7 +941,7 @@ Marcelo Honorio
 <section class="slide level2">
 <h2>ARRANGE</h2>
 <p><br></p>
-<p><code style="color:#00589b">arrange</code> ordenar o dataset por vaiável</p>
+<p><code style="color:#00589b">arrange</code> ordenar o dataset por variável</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">arrange</span>(variavel_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -960,7 +960,7 @@ Marcelo Honorio
 <section class="slide level2">
 <h2>COUNT</h2>
 <p><br></p>
-<p><code style="color:#00589b">count</code> contabiliza os dados de um determinada variável</p>
+<p><code style="color:#00589b">count</code> contabiliza os dados de uma determinada variável</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">count</span>(variavel_1)</span>
@@ -977,7 +977,7 @@ Marcelo Honorio
 <section class="slide level2">
 <h2>MUTATE</h2>
 <p><br></p>
-<p><code style="color:#00589b">mutate</code> criar nova vaiável (com um <code style="color:#00589b">=</code>)</p>
+<p><code style="color:#00589b">mutate</code> criar nova variável (com um <code style="color:#00589b">=</code>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">mutate</span>(<span class="at">new =</span> <span class="st">"hello!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1117,7 +1117,7 @@ Marcelo Honorio
 <div class="columns">
 <div class="column" style="width:80%;">
 <p><br></p>
-<p>carrega oito pacotes principais quando invocado e também agrupa outro pacotes na instalação</p>
+<p>carrega oito pacotes principais quando invocado e também agrupa outros pacotes na instalação</p>
 </div><div class="column" style="width:20%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>

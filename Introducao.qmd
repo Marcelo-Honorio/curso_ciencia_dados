@@ -1,7 +1,6 @@
 ---
 title: "Introdução"
 author: "Marcelo Honorio"
-data: "[bit.ly/introducao-ds](https://bit.ly/introducao-ds)"
 format: 
   revealjs:
     output-file: slide.html
@@ -27,7 +26,7 @@ library(kableExtra)
 ```
 
 ::: incremental
--   Por que aprender um linguagem de programação?
+-   Por que aprender uma linguagem de programação?
 -   Por que o R?
 -   Instalação da linguagem R e do Software Rstudio;
 -   Apresentação do ambiente do Rstudio;
@@ -36,9 +35,9 @@ library(kableExtra)
 -   Transformação de dados
 :::
 
-## Por que aprender um linguagem de programação?
+## Por que aprender uma linguagem de programação?
 
--   Aprender a programar é muito importante quando desejamos entender os dados! Mais: é importante para que possamos intepretar esses dados; para que possamos transformá-los em informação!
+-   Aprender a programar é muito importante quando desejamos entender e interpretar os dados.
 -   Se você trabalha ou deseja trabalhar com dados, programar é uma habilidade de extrema relevância.
 
 ## Linguagens para Ciência de Dados
@@ -142,11 +141,11 @@ reg.predict(x)
 
 -   A linguagem R surgiu em 1995, derivada da linguagem S;
 -   Possui inúmeros pacotes (mais de 10 mil), com vantagem para a aplicação da Estatística Avançada e uma vasta comunidade de suporte, além de fortes capacidades voltadas ao Data Science.
--   CRAN (Comprehensive R Archive Network) é o repositório principal da linguagem R em que cada usuário pode contribuir como novos pacotes (que são coleções de funções em R como código compilado). Esses pacotes podem ser facilmente instalados com um linha de código.
+-   CRAN (Comprehensive R Archive Network) é o repositório principal da linguagem R em que cada usuário pode contribuir com novos pacotes (que são coleções de funções em R como código compilado). Esses pacotes podem ser facilmente instalados com uma linha de código.
 
 ## Sobre o R
 
--   leituras recomendadas para quem inda não conhece a linguagem R e deseja se aprofundar:
+-   leituras recomendadas para quem ainda não conhece a linguagem R e deseja se aprofundar:
     -   Ciência de Dados com R - Introdução (Guerra, Oliveira, McDonnell & Gonzaga, 2020) <https://cdr.ibpad.com.br/index.html>
     -   Hands-On Programming with R (Grolemund, 2014) <https://rstudio-education.github.io/hopr/>
     -   R para Data Science (Wickham & Grolemund, 2019) <https://r4ds.had.co.nz/>
@@ -360,7 +359,7 @@ da função e pressione F1 para ver a documentação de funções.
 
 - `for`{style="color:#00589b"} repetir uma mesma tarefa para um conjunto de valores diferentes
 
-- `while`{style="color:#00589b"} repetir uma mesma tarefa enquanto a condições for respeitada
+- `while`{style="color:#00589b"} repetir uma mesma tarefa enquanto as condições for respeitada
 
 ## Outros tópicos
 
@@ -418,7 +417,7 @@ O **R** base possui funções para leitura dos principais tipos de arquivos.
 - excel;
 - txt
 
-intalando o pacote **readr**
+instalando o pacote **readr**
 ```{r, echo=TRUE, eval=FALSE}
 install.packages('readr')
 library(readr)
@@ -431,8 +430,8 @@ library(readr)
 - `filter`{style="color:#00589b"}: manter ou descartar linhas 
 - `select`{style="color:#00589b"}: manter ou descartar colunas
 - `count`{style="color:#00589b"}: contabiliza os dados por variável
-- `arrange`{style="color:#00589b"}: ordenar o dataset por vaiável
-- `mutate`{style="color:#00589b"}: criar nova vaiável
+- `arrange`{style="color:#00589b"}: ordenar o dataset por variável
+- `mutate`{style="color:#00589b"}: criar nova variável
 - `group_by`{style="color:#00589b"}/`summarize`{style="color:#00589b"}: agregar dados
 - `*_join`{style="color:#00589b"}: unir conjunto de dados
 
@@ -510,7 +509,7 @@ dataset |>
 
 <br>
 
-`arrange`{style="color:#00589b"} ordenar o dataset por vaiável
+`arrange`{style="color:#00589b"} ordenar o dataset por variável
 ```{r, echo=TRUE, eval=FALSE}
 dataset |> 
   arrange(variavel_1)
@@ -533,7 +532,7 @@ dataset |>
 
 <br>
 
-`count`{style="color:#00589b"} contabiliza os dados de um determinada variável
+`count`{style="color:#00589b"} contabiliza os dados de uma determinada variável
 
 ```{r,  echo=TRUE, eval=FALSE}
 dataset |> 
@@ -552,7 +551,7 @@ dataset |>
 
 <br> 
 
-`mutate`{style="color:#00589b"} criar nova vaiável (com um `=`{style="color:#00589b"})
+`mutate`{style="color:#00589b"} criar nova variável (com um `=`{style="color:#00589b"})
 ```{r,  echo=TRUE, eval=FALSE}
 dataset |> 
   mutate(new = "hello!")
@@ -715,7 +714,7 @@ Trabalhar com textos exige um certo conhecimento de **expressões regulares**
 
 <br>
 
-carrega oito pacotes principais quando invocado e também agrupa outro pacotes na instalação
+carrega oito pacotes principais quando invocado e também agrupa outros pacotes na instalação
 :::
 
 ::: {.column width="20%"}
