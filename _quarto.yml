@@ -1,5 +1,14 @@
 project:
-  title: "aprendendo_quarto"
+  type: website
+  output-dir: docs
 
-editor: visual
-
+website:
+  title: "introducao ciencia de dados"
+  navbar: 
+    href: introducao.qmd
+    
+format: 
+  html: 
+    theme: custom.scss
+    toc: true
+  
