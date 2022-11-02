@@ -1,0 +1,742 @@
+---
+title: "Introdução"
+author: "Marcelo Honorio"
+format: 
+  revealjs:
+    transition: fade
+    background-transition: fade
+    highlight-style: ayu-mirage
+    incremental: true   
+    footer: "Introdução"
+    theme: custom.scss
+    slide-number: c/t
+    show-slide-number: all
+    hash-type: number
+editor: source
+---
+
+## Plano de Aula
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+::: incremental
+-   Por que aprender um linguagem de programação?
+-   Por que o R?
+-   Instalação da linguagem R e do Software Rstudio;
+-   Apresentação do ambiente do Rstudio;
+-   Obejtos, funções e Argumentos.
+-   Importando dados
+-   Transformação de dados
+:::
+
+## Por que aprender um linguagem de programação?
+
+-   Aprender a programar é muito importante quando desejamos entender os dados! Mais: é importante para que possamos intepretar esses dados; para que possamos transformá-los em informação!
+-   Se você trabalha ou deseja trabalhar com dados, programar é uma habilidade de extrema relevância.
+
+## Linguagens para Ciência de Dados
+
+<br>
+
+Existem diversas linguagens/ferramentas: **R, Python, SAS, SQL, Matlab, Stata, Aplicações de BI** etc.
+
+<p align="center">
+  <img src="imagens/python_r.jpeg" style="height: 300px; width:150px align=center"/>
+<p>
+
+Cabe ao cientista de dados avaliar qual é a ferramenta mais adequada para alcançar seus objetivos.
+
+## Linguagens para Ciência de Dados
+
+::: columns
+::: column
+<img src="imagens/r_programming.png" style="height: 100px; width:300px"/>
+
+-   Implementação da linguagem S
+-   Foco em análise e visualizações de dados
+-   Liguagem focada em análises
+-   Sintaxe orientada à **funções**
+:::
+
+::: column
+<img src="imagens/py_programming.png" style="height: 100px; width:350px"/>
+
+-   Implementação da linguagem C
+-   Foco na leitura do código e produtividade
+-   Liguagem de propósito geral
+-   Sintaxe orientada à **objetos**
+:::
+:::
+
+## Linguagens para Ciência de dados
+
+::: columns
+::: column
+<img src="imagens/r_programming.png" style="height: 100px; width:300px"/>
+
+```{r, eval=FALSE, echo=TRUE}
+# Carregando pacotes e dados
+library(readr)
+library(dplyr)
+
+dados <- read_csv("data.csv")
+
+# Extrair colunas
+dados_selec <- select(dados, c(1,2,3))
+
+# Gráficos de duas variáveis
+plot(dados_selec$x, dados_selec$y)
+
+# Treinar modelo de regressão linear
+reg <- lm(y ~., data = dados_selec)
+
+# Realizar predições
+reg_pred <- predict(reg, newdata = dados_selec)
+
+```
+::::
+
+::: column
+<img src="imagens/py_programming.png" style="height: 100px; width:350px"/>
+
+```{python, eval=FALSE, echo=TRUE}
+# Carregando pacotes e dados
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+dados <- pd.read_csv("data.csv")
+
+# Extrair colunas
+x = dados.iloc([1, 2, 3])
+y = dados.y
+
+# Gráficos de duas variáveis
+dados.plot(x = 'variável', y = 'variável')
+
+# Treinar modelo de regressão linear
+reg = LinearRegression()
+reg.fit(x, y)
+
+# Realizar predições
+reg.predict(x)
+```
+:::
+::::
+
+## Orientação
+
+<br>
+
+<p align="center">
+  <img src="imagens/orientacao.jpg" style="height: 500px; width:300px align=center"/>
+<p>
+
+## Sobre o R
+
+-   A linguagem R surgiu em 1995, derivada da linguagem S;
+-   Possui inúmeros pacotes (mais de 10 mil), com vantagem para a aplicação da Estatística Avançada e uma vasta comunidade de suporte, além de fortes capacidades voltadas ao Data Science.
+-   CRAN (Comprehensive R Archive Network) é o repositório principal da linguagem R em que cada usuário pode contribuir como novos pacotes (que são coleções de funções em R como código compilado). Esses pacotes podem ser facilmente instalados com um linha de código.
+
+## Sobre o R
+
+-   leituras recomendadas para quem inda não conhece a linguagem R e deseja se aprofundar:
+    -   Ciência de Dados com R - Introdução (Guerra, Oliveira, McDonnell & Gonzaga, 2020) <https://cdr.ibpad.com.br/index.html>
+    -   Hands-On Programming with R (Grolemund, 2014) <https://rstudio-education.github.io/hopr/>
+    -   R para Data Science (Wickham & Grolemund, 2019) <https://r4ds.had.co.nz/>
+
+## A Instalação da Linguagem R
+
+<br>
+
+::: columns
+::: {.column width="60%"}
+[**https://www.r-project.org/**](https://www.r-project.org/){.uri}
+
+-   Escolher um servidor, de preferência o mais próximo de sua localização;
+-   Escolher o sistema operacional utilizado;
+-   Fazer a instalação mantendo as opções *default*.
+:::
+
+::: {.column width="40%"}
+
+<br>
+
+<img src="imagens/install_r.png"  style="height: 300px; width:450px align=center">
+:::
+:::
+
+## A Instalação do RStudio
+
+<br>
+
+::: columns
+::: {.column width="60%"}
+[**https://www.rstudio.com/**](https://www.rstudio.com/){.uri}
+
+-   Selecionar a versão gratuita (FREE);
+-   Escolher o sistema operacional utilizado;
+-   Fazer a instalação mantendo as opções *default*.
+:::
+
+::: {.column width="40%"}
+
+<br>
+
+<img src="imagens/rstudio_r.jpg" style="height: 300px; width:450px align=center"/>
+:::
+:::
+
+## Objetos, Funções e Argumentos
+
+-   **Objetos** são maneiras simples de acessar algo que foi salvo na memória da máquina. Pode ser um valor, uma palvras, uma ou mais variáveis, uma URL, uma base de dados amostral ou populacional, etc. **No R TUDO** é um objeto! Cada um desses objetos possui uma classe!
+
+-   **Funções** correspondem a ações, a ordens direcionadas à máquina;
+
+-   **Argumentos** correspondem a um refinamento ou um melhor direcionamento das ações ou ordens propostas pelas funções.
+
+## Criando um objeto no R
+
+<br>
+
+Existem duas formas de se criar um objeto na linguagem R:
+
+<br>
+
+```{r, echo=TRUE}
+x = 1:6
+x
+
+y <- 1:4
+y
+```
+
+O sinal de **atribuição** pode ser rapidamente declarado ao se pressionar conjuntamente as teclas 'Alt' e '-' (para Windows e Linux) ou 'Option' e '-' (para Mac).
+
+## Criando um objeto no R
+
+<br>
+
+Os nomes dos objetos estabelecidos em R devem seguir certas regras:
+
+```{r, echo=TRUE, error=TRUE}
+## Não devem começar por números e nem por pontos;
+
+2x <- 1:6
+```
+
+```{r, echo=TRUE, error=TRUE}
+## Não é desejável que contenham espaços;
+
+nome completo <- "Marcelo Honorio"
+
+```
+
+## Criando um objeto no R
+
+<br>
+
+Os nomes dos objetos estabelecidos em R devem seguir certas regras:
+
+```{r, , echo=TRUE, error=TRUE}
+#Suas nomenclaturas também não aceitam caracteres especiais, como: !, ~, $..
+
+!x <- 1:6
+```
+
+```{r}
+# Recomenda-se não utilizar os mesmos nomes de funções já estabelecidas; 
+# Recomenda-se não utilizar acentos e letras maiúsculas.
+```
+- Recomenda-se não utilizar os mesmos nomes de funções já estabelecidas; 
+- Recomenda-se não utilizar acentos e letras maiúsculas
+
+::: aside
+Linguagem é *case sensitive*
+:::
+
+##
+::: columns
+::: column
+### Tipos de dados
+
+-   Integer <br> `inteiro <- 1`{style="color:#00589b"}
+-   Numeric <br> `numeric <- 1.4`{style="color:#00589b"}
+-   Logical <br> [`5 > 1`/`TRUE`]{style="color:#00589b"}
+-   String <br> `"Marcelo"`{style="color:#00589b"}
+-   Factor <br> `"Homem"/"Mulher"`{style="color:green"}
+:::
+
+::: column
+### Estruturas de dados
+
+-   Vector <br> ![](imagens/vector.jpg){.r-stretch}
+
+-   Matrix <br> <img src="imagens/matrix.jpg"/>
+
+-   Data Frame <br> <img src="imagens/dataframe.jpg"/>
+
+-   List <br> <img src="imagens/list.jpg"/>
+:::
+:::
+
+## Utilizando Funções e Argumentos no R
+
+Para utilizar uma função no R, devemos conhecer sua forma funcional, isto é, devemos, em regra, declarar os argumentos inerentes a ela. Exemplo de utilização da função `round()`{style="color:#00589b"}:
+
+<br>
+
+`round()`{style="color:#00589b"} - (função)<br>
+`x`{style="color:#00589b"} - (vetor)
+
+```{r, echo=TRUE}
+x <- c(1.3545, 1.5454)
+round(x)
+```
+
+`digits=`{style="color:#00589b"} - (argumento)
+
+```{r, echo=TRUE}
+#argumento pra determinar o número de casas decimais
+round(x, digits = 1)
+```
+
+## Principais funções introdutórias do R:
+
+```{r, eval=TRUE}
+`Função R` <- c("c()", "args()", "sample()", "class()", "View()", "head()", "tail()",
+                "str()", "length()", "dim()", "nrow()", "ncol()", "rm()", "install.packages()")
+`Serve para:` <- c("Declarar mais de um valor e/ou objeto", "Verificar os argumentos de uma dada função no R", "Criar amostras", "Verificar as classes dos objetos do R", "Visualizar objetos em um formato semelhante ao de uma planilha", "Visualizar as primeiras observações de uma base de dados", "Visualizar as últimas observações de uma base de dados", "Observar a estrutura de uma base de dados", "Observar o comprimento de um vetor ou de uma lista de dados", "Descobrir as dimensões de um objeto", "Contar o número de linhas de uma base de dados", "Contar o número de colunas de uma base de dados", "Remover um objeto do ambiente de trabalho", "Instalar pacotes")
+
+x <- tibble::tibble(`Função R`, `Serve para:`)
+
+kableExtra::kable(x) |> 
+  kableExtra::kable_classic(full_width = F, font_size = 24, position="center") |> 
+  kableExtra::kable_styling(fixed_thead = T)
+```
+
+## Funções para estatísticas básicas no R:
+
+<br>
+
+| **Função R** | **Estatística**    |
+|--------------|--------------------|
+| `sum()`{style="color:#00589b"}      | Soma de valores    |
+| `mean()`{style="color:#00589b"}     | Média              |
+| `var()`{style="color:#00589b"}      | Variância          |
+| `median()`{style="color:#00589b"}   | Mediana            |
+| `summary()`{style="color:#00589b"}  | Resumo Estatístico |
+| `Quantile()`{style="color:#00589b"} | Quantis            |
+
+## Funções
+
+O Rstudio possui a função auto complete **(ctrl + barra de espaço)**.
+
+Para saber como informar os parâmetros corretamente coloque o cursor no nome 
+da função e pressione F1 para ver a documentação de funções.
+
+<br>
+
+**Formas de acessar o help:**
+
+`help.search('log')`{style="color:#00589b"} - procurar por um palvras chaves<br>
+`RSiteSearch('log')`{style="color:#00589b"} - busca no site do R<br>
+`?nome.da.função()`{style="color:#00589b"} - ex: `log()`{style="color:#00589b"}<br>
+`??nome.da.função()`{style="color:#00589b"} - funções que não estão ‘instalados’<br>
+
+## Outros tópicos
+
+<br>
+
+**Controle de Fluxo**: Como toda boa linguagem de programação, o R possui estruturas de `if`, `else`, `for` e `while`.
+
+- `if`{style="color:#00589b"} e `else`{style="color:#00589b"} servem para executarmos um código apenas se uma condição (teste lógico) for satisfeita
+
+- `for`{style="color:#00589b"} repetir uma mesma tarefa para um conjunto de valores diferentes
+
+- `while`{style="color:#00589b"} repetir uma mesma tarefa enquanto a condições for respeitada
+
+## Outros tópicos
+
+<br>
+
+Além de usar **funções** já prontas, você pode criar a sua própria função. A sintaxe é a seguinte:
+```{r, eval=FALSE, echo=TRUE}
+nome_da_funcao <- function(argumento_1, argumento_2) {
+  
+  # Código que a função irá executar
+  
+}
+```
+
+<br>
+
+Exemplo:
+```{r, echo=TRUE, eval=TRUE}
+minha_soma <- function(x, y) {
+  soma <- x + y
+  
+  soma  # resultado retornado
+}
+```
+
+
+
+## Tidyverse
+
+uma coleção de pacotes R cuidadosamente desenhados para atuarem no workflow comum da ciência de dados:
+
+::: incremental
+-   Importação;
+
+    `install.packages('readr')`{style="color:#00589b"}
+
+-   Manipulação e exploração;
+
+    `install.packages('tidyr')`{style="color:#00589b"} `install.packages('dplyr')`{style="color:#00589b"}
+
+-   Visualização de dados.
+
+    `install.packages('ggplot2')`{style="color:#00589b"}
+:::
+
+## Importando dados com readr
+
+<br>
+
+O **R** base possui funções para leitura dos principais tipos de arquivos.
+
+**readr** e **readxl**:
+
+- csv;
+- excel;
+- txt
+
+intalando o pacote **readr**
+```{r, echo=TRUE, eval=FALSE}
+install.packages('readr')
+library(readr)
+```
+
+## Manipulando os dados com dplyr
+
+**Funções básicas:**
+
+- `filter`{style="color:#00589b"}: manter ou descartar linhas 
+- `select`{style="color:#00589b"}: manter ou descartar colunas
+- `count`{style="color:#00589b"}: contabiliza os dados por variável
+- `arrange`{style="color:#00589b"}: ordenar o dataset por vaiável
+- `mutate`{style="color:#00589b"}: criar nova vaiável
+- `group_by`{style="color:#00589b"}/`summarize`{style="color:#00589b"}: agregar dados
+- `*_join`{style="color:#00589b"}: unir conjunto de dados
+
+::: aside
+É necessário execultar `library(dplyr)`{style="color:#00589b"} para poder utilizar as funções
+:::
+
+
+## FILTER
+
+<br>
+
+`filter()`{style="color:#00589b"} manter ou discartar linhas
+
+`==`{style="color:#00589b"} operador de igualdade <br>
+`<=`{style="color:#00589b"} operador de menor ou igual <br>
+`>=`{style="color:#00589b"} operador de maior ou igual <br>
+`!=`{style="color:#00589b"} operador de diferença <br>
+```{r, echo=TRUE, eval=FALSE}
+  filter(dataset, variavel == observacao)
+```
+
+<br>
+
+Operadores lógicos **E**(`&`{style="color:#00589b"}), **OU**(`|`{style="color:#00589b"}) e **NÃO** (`!`{style="color:#00589b"})
+
+::: aside
+O **%in%** permite aplicar filtros por lista
+:::
+
+## O pipe em ação
+
+<br>
+O pipe é muito ultil quando queremos aplicar mais de uma função de manipulação em uma base.
+
+<br>
+
+`function(data, argument(s))`{style="color:#00589b"}
+```{r, echo=TRUE, eval=TRUE}
+x <- c(1.2, 2, 3.5, 4, 5.9)
+mean(x)
+```
+
+<br>
+
+utizando o `|>`{style="color:#00589b"}
+
+```{r, echo=TRUE, eval=TRUE}
+x <- c(1.2, 2, 3.5, 4, 5.9)
+
+x |> mean() |> round()
+
+```
+
+## SELECT
+
+<br>
+
+`select`{style="color:#00589b"} manter ou descartar colunas
+
+```{r, echo=TRUE, eval=FALSE}
+dataset |> 
+  select(variavel_1, variavel_2...)
+```
+
+<br>
+
+Eliminar coluna com `-column`{style="color:#00589b"}
+```{r, echo=TRUE, eval=FALSE}
+dataset |> 
+  select(-variavel_1)
+```
+
+## ARRANGE
+
+<br>
+
+`arrange`{style="color:#00589b"} ordenar o dataset por vaiável
+```{r, echo=TRUE, eval=FALSE}
+dataset |> 
+  arrange(variavel_1)
+```
+
+<br>
+
+Use `desc()`{style="color:#00589b"} para decrescer a ordem
+```{r,  echo=TRUE, eval=FALSE}
+dataset |> 
+  arrange(desc(variavel_1))
+
+#podemos ordenar por mais de uma variável
+dataset |> 
+  arrange(variavel_1, desc(variavel_2))
+
+```
+
+## COUNT
+
+<br>
+
+`count`{style="color:#00589b"} contabiliza os dados de um determinada variável
+
+```{r,  echo=TRUE, eval=FALSE}
+dataset |> 
+  count(variavel_1)
+
+#relacionar duas variáveis
+dataset |> 
+  count(variavel_1, wt = variavel_2)
+
+#ordenar a contagem
+dataset |> 
+  count(variavel_1, sort = TRUE)
+```
+
+## MUTATE
+
+<br> 
+
+`mutate`{style="color:#00589b"} criar nova vaiável (com um `=`{style="color:#00589b"})
+```{r,  echo=TRUE, eval=FALSE}
+dataset |> 
+  mutate(new = "hello!")
+```
+
+<br>
+
+Pode ser combinado com uma ou mais condições `ifelse`{style="color:#00589b"}, que tem 3 argumentos:
+
+::: {style="font-size: 0.6em; text-align: center"}
+`(condição, valor se TRUE, valor se TRUE)`{style="color:#00589b"}
+:::
+```{r,  echo=TRUE, eval=FALSE}
+dataset |> 
+  mutate(new = ifelse(var_1 == "nome", 1, 0))
+```
+
+## MUTATE
+
+<br>
+
+`case_when()`{style="color:#00589b"} para múltiplas condições
+```{r, echo=TRUE, eval=FALSE}
+faculty %>% 
+  mutate(new = case_when(var_1 %in% c("Sociology","Political Science") ~ "Social Sciences",
+                         var_2 %in% c("Music","English") ~ "Humanities",
+                         var_3 %in% c("Chemistry","Physics") ~ "Sciences"))
+```
+
+## GROUP BY/ SUMMARIZE
+
+<br>
+
+`group_by`{style="color:#00589b"}/`summarize`{style="color:#00589b"} agregar dados
+`group_by()`{style="color:#00589b"} identifica os grupos da variavel
+`summarize()`{style="color:#00589b"} especificar a agregação
+```{r, echo=TRUE, eval=FALSE}
+dataset |> 
+  group_by(var_1) |> 
+  summarize(soma = sum(var_2))
+```
+
+<br>
+
+Também podem ser combinados `mean`{style="color:#00589b"}, `median`{style="color:#00589b"}, `min`{style="color:#00589b"}, `n`{style="color:#00589b"}
+```{r, echo=TRUE, eval=FALSE}
+dataset |> 
+  group_by(var_1) |> 
+  summarize(soma = sum(var_2),
+            mediana = median(var_2),
+            minimo = min(var_2))
+```
+
+## Juntando dados
+
+<br>
+
+Existem duas formas de junção de dados: **UNIÂO** e **CRUZAMENTO**
+
+`bind_cols`{style="color:#00589b"} e `bind_rows`{style="color:#00589b"} para vincular dois ou mais dataset em um.
+
+<p align="center">
+  <img src = "imagens/binds.png">
+<p>
+
+## JOINING DATA
+
+<br>
+
+**R** tem muitas funções úteis para lidar com dados relacionais
+
+<br>
+
+tudo o que você precisa é de pelo menos um variável em comum entre os conjuntos de dados
+
+<br>
+
+`left_join`{style="color:#00589b"} é a mais comum
+
+## JOINING DATA
+
+<p align="center">
+  <img src = "imagens/join.png">
+<p>
+
+## JOINING DATA
+
+Além da função `left_join()`{style="color:#00589b"}, também são muito utilizadas as funções `right_join()`{style="color:#00589b"} e `full_join()`{style="color:#00589b"}.
+
+<p align="center">
+  <img src = "imagens/joins_left.png" style="height: 500px; width:250px align=center">
+<p>
+
+## JOINING DATA
+
+Além da função `left_join()`{style="color:#00589b"}, também são muito utilizadas as funções `right_join()`{style="color:#00589b"} e `full_join()`{style="color:#00589b"}.
+
+<br>
+
+<p align="center">
+  <img src = "imagens/joins_full.png">
+<p>
+
+## STRINGR
+
+<br>
+Permite a manipulação de textos por meio de uma sintaxe consistente e com muita facilidade.
+
+**Regras básicas do pacote:**
+
+- As funções de manipulação de texto começam com `str_`{style="color:#00589b"}
+- O primeiro argumento da função é sempre uma *string* ou um vetor de *strings*.
+```{r, echo=TRUE, eval=FALSE}
+dataset |> 
+  filter(str_detect(var_1, 'professor')) |> 
+  mutate(year = str_c(str_sub(var_2, 1, 4),
+                      "-",
+                      str_sub(var_2, 1, 4)))
+```
+
+## STRINGR
+
+<br>
+**Funções básicas:**
+
+- `str_length()`{style="color:#00589b"} retorna o número de caracteres de cada elemento do vetor
+
+- funções para modificar a caixa das letras
+```{r, echo=TRUE, eval=TRUE}
+s <- "Marcelo HONORIO"
+str_to_lower(s)
+
+str_to_upper(s)
+
+str_to_title(s)
+
+```
+
+## STRINGR
+
+<br>
+**Funções básicas:**
+
+- `str_trim()`{style="color:#00589b"} remove os espaços excedentes antes e depois da string
+
+- `str_sub()`{style="color:#00589b"} obter uma parte fixa de uma string
+
+- `str_c()`{style="color:#00589b"} análoga à função `paste0()`{style="color:#00589b"} do R base, concatena strings em uma única string.
+
+::: aside
+Trabalhar com textos exige um certo conhecimento de **expressões regulares**
+:::
+
+
+
+## tidyverse
+
+::: columns
+::: {.column width="80%"}
+
+<br>
+
+carrega oito pacotes principais quando invocado e também agrupa outro pacotes na instalação
+:::
+
+::: {.column width="20%"}
+![](imagens/tidyverse.png){fig-align="center"}
+:::
+:::
+
+![](imagens/data_science.png){fig-align="center"}
+ 
+## tidyverse
+
+Na prática, carregar o {`tidyverse`{style="color:#00589b"}} é o mesmo que carregar os seguintes pacotes:
+
+- {`tibble`{style="color:#00589b"}} para data frames repaginados;
+
+- {`readr`{style="color:#00589b"}} para importarmos bases para o R;
+
+- {`tidyr`{style="color:#00589b"}} e {`dplyr`{style="color:#00589b"}} para arrumação e manipulação de dados;
+
+- {`stringr`{style="color:#00589b"}} para trabalharmos com textos;
+
+- {`forcats`{style="color:#00589b"}} para trabalharmos com fatores;
+
+- {`ggplot2`{style="color:#00589b"}} para gráficos;
+
+- {`purrr`{style="color:#00589b"}} para programação funcional.

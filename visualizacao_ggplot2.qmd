@@ -1,0 +1,296 @@
+---
+title: "Visualização de Dados com ggplot2"
+author: "Marcelo Honorio"
+format: 
+  revealjs:
+    theme: custom.scss
+    transition: fade
+    background-transition: fade
+    highlight-style: ayu-mirage
+editor: source
+code-link: true
+execute:
+  echo: true
+  freeze: auto
+---
+
+## Visualização de dados (ggplot2)
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(scales)
+library(knitr)
+library(kableExtra)
+library(colorblindr)
+```
+
+<br>
+
+O ggplot2 é mais um pacote desenvolvido por Hadley Wickham, o criador do tidyr e do dplyr. A ideia do pacote, ainda que com algumas modificações, vem de uma obra chamada The Grammar of Graphics, que é uma maneira de descrever um gráficos a partir dos seus componentes.
+
+<br>
+
+**Tamplate:**
+
+## Visualização de dados (ggplot2)
+
+<br>
+
+`ggplot2` é o pacote de visualização de dados que é carregado com o `tidyverse`
+
+a gramática dos dados gráficos mapeia os atributos estéticos dos pontos geométricos
+
+codificar dados em pistas visuais (por exemplo, comprimento, cor, posição, tamanho) é como significamos mudanças e comparações
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   **Geometria**
+-   **Mapeamento estético**
+:::
+
+::: {.column width="70%"}
+```{r, eval=TRUE}
+mtcars
+```
+:::
+:::
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   **Mapeamento estético**
+-   **Geometria**
+:::
+
+::: {.column width="70%"}
+```{r, echo=TRUE, eval=TRUE}
+#| code-line-numbers: "1"
+ggplot(mtcars)
+```
+:::
+:::
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   [**Mapeamento estético**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   **Geometria**
+:::
+
+::: {.column width="70%"}
+```{r, echo=TRUE, eval=TRUE}
+#| code-line-numbers: "2"
+ggplot(mtcars, 
+       aes(x = cyl, y = wt))
+```
+:::
+:::
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   [**Mapeamento estético**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   [**Geometria**]{style="font-weight:bold;background-color:#ccddeb;"}
+:::
+
+::: {.column width="70%"}
+```{r, echo=TRUE, eval=TRUE}
+#| code-line-numbers: "3"
+ggplot(mtcars, 
+       aes(x = cyl, y = wt)) +
+  geom_boxplot()
+```
+:::
+:::
+
+## Formas geometrica
+
+Os objetos geométricos começam com a expressão `geom_`
+
+```{r, eval=TRUE, echo=FALSE}
+#| tbl-colwidths: [60,40]
+Tipo <- c("Dispersão", "Gráficos de bolhas", "Gráficos de barras", "Histograma",
+          "Boxplot", "Densidade", "Gráfico de linhas")
+`Objeto Geométrico` <- c("geom_point", "goem_point", "geom_bar e geom_coll", "geom_histogram",
+                         "geom_boxplot", "geom_density", "geom_line")
+
+x <- tibble::tibble(Tipo, `Objeto Geométrico`)
+
+library(knitr)
+kable(x)
+
+```
+
+## Bar chart
+
+```{r}
+#| code-line-numbers: "1-2|3|4"
+#| eval: false
+mtcars  |> 
+  count(cyl)  |> 
+  ggplot(aes(x = cyl, y = n)) +
+  geom_bar(stat = "identity")
+```
+
+. . .
+
+to combine lines into one code chunk, use `+` instead of ` |> `
+
+. . .
+
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+mtcars  |> 
+  count(cyl)  |> 
+  ggplot(aes(x = cyl, y = n)) +
+  geom_bar(stat = "identity")
+```
+
+------------------------------------------------------------------------
+
+## Bar chart
+
+can create a prettier plot pretty easily
+
+```{r}
+#| code-fold: true
+#| code-summary: "mostrar o codigo"
+#| fig-align: "center"
+mtcars |> 
+  count(cyl)  |> 
+  ggplot(aes(x = reorder(cyl, -n), y = n)) +
+  geom_bar(stat = "identity", fill = "#cc0000") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
+  geom_text(aes(label = n), vjust = -0.5) +
+  labs(x = NULL, y = NULL,
+       title = "Count of faculty by rank, 2018-2021") +
+  theme_linedraw() +
+  theme(panel.grid.major.x = element_blank(),
+        axis.ticks = element_blank())
+```
+
+------------------------------------------------------------------------
+
+## Line graph
+
+<br>
+
+```{r}
+#| code-line-numbers: "1-2|3|4"
+#| eval: false
+mtcars  |>  
+  filter(!is.na(mpg)) |>
+  ggplot(aes(x = cyl, y = wt, color = carb)) +
+  geom_line()
+```
+
+. . .
+
+```{r}
+#| echo: false
+#| fig-height: 4
+#| fig-align: "center"
+mtcars  |>  
+  filter(!is.na(mpg))  |>  
+  ggplot(aes(x = wt, y = qsec, color = cyl)) +
+  geom_line()
+```
+
+------------------------------------------------------------------------
+
+## Line graph
+
+```{r}
+#| code-fold: true
+#| code-summary: "expand for full code"
+#| fig-align: "center"
+mtcars  |>  
+  filter(!is.na(mpg))  |>  
+  ggplot(aes(x = wt, y = qsec, color = cyl)) +
+  geom_line() +
+  geom_point() +
+  #scale_color_brewer(type = "qual", palette = "Dark2") +
+  labs(x = NULL, y = "Average enrollment",
+       title = "Average undergraduate enrollment per rank over time") +
+  theme_linedraw() +
+  theme(panel.grid.major.x = element_blank(),
+        axis.ticks = element_blank(),
+        legend.title = element_blank(),
+        legend.background = element_rect(fill = NA),
+        legend.key = element_rect(fill = NA),
+        legend.position = c(0.85, 0.82))
+```
+
+
+## Mapeamento básico
+
+Esquema de uma plotagem de dados sem quaisquer modificações.
+
+<img src = "imagens/ggplot_1.png">
+```{r}
+
+```
+
+## Adicionando propriedades estéticas
+
+Mapear variáveis em outras propriedades estéticas do gráfico, tais como cor, tamanho e forma.
+
+<img src = "imagens/ggplot_2.png">
+
+## Combinando aes e geom
+
+Podemos combinar uma série de camadas compostas de aes e geoms diferentes, adicionando informações ao gráfico iterativamente.
+
+<img src = "imagens/ggplot_3.png">
+
+## Combinando aes e geom
+
+Mapear dentro dos geoms valem apenas para aquele geom especificamente.
+
+<img src = "imagens/ggplot_4.png">
+
+
+
+------------------------------------------------------------------------
+
+## ggplot2 resources
+
+from [R for Data Science](https://r4ds.had.co.nz/data-visualisation.html)
+
+<br>
+
+[Data Visualization: a practical introduction](https://socviz.co/index.html#preface)
+
+<br>
+
+creating [custom themes](https://themockup.blog/posts/2020-12-26-creating-and-using-custom-ggplot2-themes/)
+
+<br>
+
+the [ggplot2 book](https://ggplot2-book.org/)
+
+<br>
+
+the [R graph gallery](https://r-graph-gallery.com/index.html)
+
+------------------------------------------------------------------------
