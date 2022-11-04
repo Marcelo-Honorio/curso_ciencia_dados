@@ -62,7 +62,7 @@ Cabe ao cientista de dados avaliar qual é a ferramenta mais adequada para alcan
 
 -   Implementação da linguagem S
 -   Foco em análise e visualizações de dados
--   Liguagem focada em análises
+-   Linguagem focada em análises
 -   Sintaxe orientada à **funções**
 :::
 
@@ -71,7 +71,7 @@ Cabe ao cientista de dados avaliar qual é a ferramenta mais adequada para alcan
 
 -   Implementação da linguagem C
 -   Foco na leitura do código e produtividade
--   Liguagem de propósito geral
+-   Linguagem de propósito geral
 -   Sintaxe orientada à **objetos**
 :::
 :::
@@ -196,7 +196,7 @@ reg.predict(x)
 
 ## Objetos, Funções e Argumentos
 
--   **Objetos** são maneiras simples de acessar algo que foi salvo na [memória da máquina]{style="color:red"}. Pode ser um valor, uma palvras, uma ou mais variáveis, uma URL, uma base de dados amostral ou populacional, etc. **No R TUDO** é um objeto! Cada um desses objetos possui uma classe!
+-   **Objetos** são maneiras simples de acessar algo que foi salvo na [memória da máquina]{style="color:red"}. Pode ser um valor, uma palavras, uma ou mais variáveis, uma URL, uma base de dados amostral ou populacional, etc. **No R TUDO** é um objeto! Cada um desses objetos possui uma classe!
 
 -   **Funções** correspondem a ações, a ordens direcionadas à máquina;
 
@@ -643,7 +643,7 @@ Existem duas formas de junção de dados: **UNIÂO** e **CRUZAMENTO**
 
 <br>
 
-tudo o que você precisa é de pelo menos um variável em comum entre os conjuntos de dados
+tudo o que você precisa é de pelo menos uma variável em comum entre os conjuntos de dados
 
 <br>
 
