@@ -421,6 +421,7 @@ Marcelo Honorio
 </section>
 <section class="slide level2">
 <h2>Por que aprender uma linguagem de programação?</h2>
+<p><br></p>
 <ul>
 <li class="fragment">Aprender a programar é muito importante quando desejamos entender e interpretar os dados.</li>
 <li class="fragment">Se você trabalha ou deseja trabalhar com dados, programar é uma habilidade de extrema relevância.</li>
@@ -518,7 +519,7 @@ Marcelo Honorio
 <h2>Sobre o R</h2>
 <ul>
 <li class="fragment">A linguagem R surgiu em 1995, derivada da linguagem S;</li>
-<li class="fragment">Possui inúmeros pacotes (mais de 10 mil), com vantagem para a aplicação da Estatística Avançada e uma vasta comunidade de suporte, além de fortes capacidades voltadas ao Data Science.</li>
+<li class="fragment">Possui inúmeros pacotes (mais de 17 mil), com vantagem para a aplicação da Estatística Avançada e uma vasta comunidade de suporte, além de fortes capacidades voltadas ao Data Science.</li>
 <li class="fragment">CRAN (Comprehensive R Archive Network) é o repositório principal da linguagem R em que cada usuário pode contribuir com novos pacotes (que são coleções de funções em R como código compilado). Esses pacotes podem ser facilmente instalados com uma linha de código.</li>
 </ul>
 </section>
@@ -570,9 +571,9 @@ Marcelo Honorio
 <section class="slide level2">
 <h2>Objetos, Funções e Argumentos</h2>
 <ul>
-<li class="fragment"><p><strong>Objetos</strong> são maneiras simples de acessar algo que foi salvo na memória da máquina. Pode ser um valor, uma palvras, uma ou mais variáveis, uma URL, uma base de dados amostral ou populacional, etc. <strong>No R TUDO</strong> é um objeto! Cada um desses objetos possui uma classe!</p></li>
+<li class="fragment"><p><strong>Objetos</strong> são maneiras simples de acessar algo que foi salvo na <span style="color:red">memória da máquina</span>. Pode ser um valor, uma palvras, uma ou mais variáveis, uma URL, uma base de dados amostral ou populacional, etc. <strong>No R TUDO</strong> é um objeto! Cada um desses objetos possui uma classe!</p></li>
 <li class="fragment"><p><strong>Funções</strong> correspondem a ações, a ordens direcionadas à máquina;</p></li>
-<li class="fragment"><p><strong>Argumentos</strong> correspondem a um refinamento ou um melhor direcionamento das ações ou ordens propostas pelas funções.</p></li>
+<li class="fragment"><p><strong>Argumentos</strong> correspondem a um <span style="color:red">refinamento</span> ou um melhor direcionamento das ações ou ordens propostas pelas funções.</p></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -648,16 +649,15 @@ Marcelo Honorio
 <h2></h2>
 <div class="columns">
 <div class="column">
-<h3>Tipos de dados</h3>
+<h3>Tipos básicos</h3>
 <ul>
 <li class="fragment">Integer <br> <code style="color:#00589b">inteiro &lt;- 1</code></li>
 <li class="fragment">Numeric <br> <code style="color:#00589b">numeric &lt;- 1.4</code></li>
-<li class="fragment">Logical <br> <span style="color:#00589b"><code>5 &gt; 1</code>/<code>TRUE</code></span></li>
+<li class="fragment">Logical <br> <code style="color:#00589b">5 &gt; 1</code>/<code style="color:#00589b">TRUE</code></li>
 <li class="fragment">String <br> <code style="color:#00589b">"Marcelo"</code></li>
-<li class="fragment">Factor <br> <code style="color:green">"Homem"/"Mulher"</code></li>
 </ul>
 </div><div class="column">
-<h3>Estruturas de dados</h3>
+<h3>Tipos complexos</h3>
 <ul>
 <li class="fragment"><p>Vector <br> <img data-src="imagens/vector.jpg" class="r-stretch"></p></li>
 <li class="fragment"><p>Matrix <br> <img src="imagens/matrix.jpg"></p></li>
@@ -666,7 +666,10 @@ Marcelo Honorio
 </ul>
 </div>
 </div>
-</section>
+
+<aside><div>
+<p>Factor - <code style="color:green">"Homem"/"Mulher"</code></p>
+</div></aside></section>
 <section class="slide level2">
 <h2>Utilizando Funções e Argumentos no R</h2>
 <p>Para utilizar uma função no R, devemos conhecer sua forma funcional, isto é, devemos, em regra, declarar os argumentos inerentes a ela. Exemplo de utilização da função <code style="color:#00589b">round()</code>:</p>
@@ -795,7 +798,7 @@ Marcelo Honorio
 <td>Resumo Estatístico</td>
 </tr>
 <tr class="even">
-<td><code style="color:#00589b">Quantile()</code></td>
+<td><code style="color:#00589b">quantile()</code></td>
 <td>Quantis</td>
 </tr>
 </tbody>
@@ -812,11 +815,11 @@ Marcelo Honorio
 <section class="slide level2">
 <h2>Outros tópicos</h2>
 <p><br></p>
-<p><strong>Controle de Fluxo</strong>: Como toda boa linguagem de programação, o R possui estruturas de <code>if</code>, <code>else</code>, <code>for</code> e <code>while</code>.</p>
+<p><strong>Controle de Fluxo</strong>: Como toda boa linguagem de programação, o R possui estruturas de <code style="color:#00589b">if</code>, <code style="color:#00589b">else</code>, <code style="color:#00589b">for</code> e <code style="color:#00589b">while</code>.</p>
 <ul>
-<li class="fragment"><p><code style="color:#00589b">if</code> e <code style="color:#00589b">else</code> servem para executarmos um código apenas se uma condição (teste lógico) for satisfeita</p></li>
+<li class="fragment"><p><code style="color:#00589b">if</code> e <code style="color:#00589b">else</code> servem para executarmos um código apenas <span style="color:red">se</span> uma condição (teste lógico) for satisfeita</p></li>
 <li class="fragment"><p><code style="color:#00589b">for</code> repetir uma mesma tarefa para um conjunto de valores diferentes</p></li>
-<li class="fragment"><p><code style="color:#00589b">while</code> repetir uma mesma tarefa enquanto as condições for respeitada</p></li>
+<li class="fragment"><p><code style="color:#00589b">while</code> repetir uma mesma tarefa <span style="color:red">enquanto</span> a condição for respeitada</p></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -841,11 +844,22 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>Tidyverse</h2>
-<p>uma coleção de pacotes R cuidadosamente desenhados para atuarem no workflow comum da ciência de dados:</p>
-<div>
+<h2>Instalação de pacotes</h2>
+<p><br></p>
+<p>Existem três principais maneiras de instalar pacotes. Em ordem de frequência, são:</p>
 <ul>
-<li class="fragment"><p>Importação;</p>
+<li class="fragment">Via CRAN (Comprehensive R Archive Network): <code style="color:#00589b">install.packages("nome-do-pacote")</code>.</li>
+<li class="fragment">Via Github: <code style="color:#00589b">devtools::install_github("nome-do-usuario/nome-do-repositorio")</code>.</li>
+<li class="fragment">Via arquivo .zip/.tar.gz: <code style="color:#00589b">install.packages("~/nome-do-pacote.zip", repos = NULL)</code>.</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Instalação de pacotes</h2>
+<p><br></p>
+<div>
+<p>Pacotes que fazem parte do ciclo da ciência de dados</p>
+<ul>
+<li class="fragment"><p>Importar dados;</p>
 <p><code style="color:#00589b">install.packages('readr')</code></p></li>
 <li class="fragment"><p>Manipulação e exploração;</p>
 <p><code style="color:#00589b">install.packages('tidyr')</code> <code style="color:#00589b">install.packages('dplyr')</code></p></li>
@@ -858,15 +872,11 @@ Marcelo Honorio
 <h2>Importando dados com readr</h2>
 <p><br></p>
 <p>O <strong>R</strong> base possui funções para leitura dos principais tipos de arquivos.</p>
-<p><strong>readr</strong> e <strong>readxl</strong>:</p>
-<ul>
-<li class="fragment">csv;</li>
-<li class="fragment">excel;</li>
-<li class="fragment">txt</li>
-</ul>
-<p>instalando o pacote <strong>readr</strong></p>
+<p><strong>readr</strong>: <code>.csv</code> e <code>.txt</code> são as extensões mais comuns</p>
+<p><strong>readxl</strong>: para extensões <code>.xlsx</code> e <code>.xls</code></p>
+<p>instalando o pacote <strong>readxl</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">install.packages</span>(<span class="st">'readr'</span>)</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">install.packages</span>(<span class="st">'readxl'</span>)</span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -874,22 +884,21 @@ Marcelo Honorio
 <h2>Manipulando os dados com dplyr</h2>
 <p><strong>Funções básicas:</strong></p>
 <ul>
-<li class="fragment"><code style="color:#00589b">filter</code>: manter ou descartar linhas</li>
-<li class="fragment"><code style="color:#00589b">select</code>: manter ou descartar colunas</li>
+<li class="fragment"><code style="color:#00589b">filter</code>: filtra linhas</li>
+<li class="fragment"><code style="color:#00589b">select</code>: seleciona colunas</li>
 <li class="fragment"><code style="color:#00589b">count</code>: contabiliza os dados por variável</li>
-<li class="fragment"><code style="color:#00589b">arrange</code>: ordenar o dataset por variável</li>
-<li class="fragment"><code style="color:#00589b">mutate</code>: criar nova variável</li>
-<li class="fragment"><code style="color:#00589b">group_by</code>/<code style="color:#00589b">summarize</code>: agregar dados</li>
-<li class="fragment"><code style="color:#00589b">*_join</code>: unir conjunto de dados</li>
+<li class="fragment"><code style="color:#00589b">arrange</code>: ordena a base</li>
+<li class="fragment"><code style="color:#00589b">mutate</code>: cria/modifica colunas</li>
+<li class="fragment"><code style="color:#00589b">group_by</code>/<code style="color:#00589b">summarize</code>: agrega e sumariza a base</li>
 </ul>
 
 <aside><div>
 <p>É necessário execultar <code style="color:#00589b">library(dplyr)</code> para poder utilizar as funções</p>
 </div></aside></section>
 <section class="slide level2">
-<h2>FILTER</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
-<p><code style="color:#00589b">filter()</code> manter ou discartar linhas</p>
+<p>função <code style="color:#00589b">filter()</code> manter ou discartar linhas</p>
 <p><code style="color:#00589b">==</code> operador de igualdade <br> <code style="color:#00589b">&lt;=</code> operador de menor ou igual <br> <code style="color:#00589b">&gt;=</code> operador de maior ou igual <br> <code style="color:#00589b">!=</code> operador de diferença <br></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>  <span class="fu">filter</span>(dataset, variavel <span class="sc">==</span> observacao)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -924,9 +933,9 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>SELECT</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
-<p><code style="color:#00589b">select</code> manter ou descartar colunas</p>
+<p>função <code style="color:#00589b">select</code> manter ou descartar colunas</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">select</span>(variavel_1, variavel_2...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -939,9 +948,9 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>ARRANGE</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
-<p><code style="color:#00589b">arrange</code> ordenar o dataset por variável</p>
+<p>função <code style="color:#00589b">arrange</code> ordenar o dataset por variável</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">arrange</span>(variavel_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -958,9 +967,9 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>COUNT</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
-<p><code style="color:#00589b">count</code> contabiliza os dados de uma determinada variável</p>
+<p>função <code style="color:#00589b">count</code> contabiliza os dados de uma determinada variável</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">count</span>(variavel_1)</span>
@@ -975,9 +984,9 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>MUTATE</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
-<p><code style="color:#00589b">mutate</code> criar nova variável (com um <code style="color:#00589b">=</code>)</p>
+<p>função <code style="color:#00589b">mutate</code> criar nova variável (com um <code style="color:#00589b">=</code>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">mutate</span>(<span class="at">new =</span> <span class="st">"hello!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -985,7 +994,7 @@ Marcelo Honorio
 <p><br></p>
 <p>Pode ser combinado com uma ou mais condições <code style="color:#00589b">ifelse</code>, que tem 3 argumentos:</p>
 <div style="font-size: 0.6em; text-align: center">
-<p><code style="color:#00589b">(condição, valor se TRUE, valor se TRUE)</code></p>
+<p><code style="color:#00589b">(condição, valor se TRUE, valor se FALSE)</code></p>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>dataset <span class="sc">|&gt;</span> </span>
@@ -993,9 +1002,9 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>MUTATE</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
-<p><code style="color:#00589b">case_when()</code> para múltiplas condições</p>
+<p>função <code style="color:#00589b">case_when()</code> para múltiplas condições</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>faculty <span class="sc">%&gt;%</span> </span>
 <span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">mutate</span>(<span class="at">new =</span> <span class="fu">case_when</span>(var_1 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Sociology"</span>,<span class="st">"Political Science"</span>) <span class="sc">~</span> <span class="st">"Social Sciences"</span>,</span>
@@ -1004,9 +1013,11 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>GROUP BY/ SUMMARIZE</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
-<p><code style="color:#00589b">group_by</code>/<code style="color:#00589b">summarize</code> agregar dados <code style="color:#00589b">group_by()</code> identifica os grupos da variavel <code style="color:#00589b">summarize()</code> especificar a agregação</p>
+<p>funções <code style="color:#00589b">group_by</code>/<code style="color:#00589b">summarize</code></p>
+<p><code style="color:#00589b">group_by()</code> identifica os grupos da variavel</p>
+<p><code style="color:#00589b">summarize()</code> especificar a agregação</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">group_by</span>(var_1) <span class="sc">|&gt;</span> </span>
@@ -1023,7 +1034,7 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>Juntando dados</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
 <p>Existem duas formas de junção de dados: <strong>UNIÂO</strong> e <strong>CRUZAMENTO</strong></p>
 <p><code style="color:#00589b">bind_cols</code> e <code style="color:#00589b">bind_rows</code> para vincular dois ou mais dataset em um.</p>
@@ -1032,7 +1043,7 @@ Marcelo Honorio
 </p><p>
 </p></section>
 <section class="slide level2">
-<h2>JOINING DATA</h2>
+<h2>Pacote dplyr</h2>
 <p><br></p>
 <p><strong>R</strong> tem muitas funções úteis para lidar com dados relacionais</p>
 <p><br></p>
@@ -1041,20 +1052,20 @@ Marcelo Honorio
 <p><code style="color:#00589b">left_join</code> é a mais comum</p>
 </section>
 <section class="slide level2">
-<h2>JOINING DATA</h2>
+<h2>Pacote dplyr</h2>
 <p align="center">
 <img src="imagens/join.png">
 </p><p>
 </p></section>
 <section class="slide level2">
-<h2>JOINING DATA</h2>
+<h2>Pacote dplyr</h2>
 <p>Além da função <code style="color:#00589b">left_join()</code>, também são muito utilizadas as funções <code style="color:#00589b">right_join()</code> e <code style="color:#00589b">full_join()</code>.</p>
 <p align="center">
 <img src="imagens/joins_left.png" style="height: 500px; width:250px align=center">
 </p><p>
 </p></section>
 <section class="slide level2">
-<h2>JOINING DATA</h2>
+<h2>Pacote dplyr</h2>
 <p>Além da função <code style="color:#00589b">left_join()</code>, também são muito utilizadas as funções <code style="color:#00589b">right_join()</code> e <code style="color:#00589b">full_join()</code>.</p>
 <p><br></p>
 <p align="center">
@@ -1062,7 +1073,7 @@ Marcelo Honorio
 </p><p>
 </p></section>
 <section class="slide level2">
-<h2>STRINGR</h2>
+<h2>O pacote stringr</h2>
 <p><br> Permite a manipulação de textos por meio de uma sintaxe consistente e com muita facilidade.</p>
 <p><strong>Regras básicas do pacote:</strong></p>
 <ul>
@@ -1078,7 +1089,7 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>STRINGR</h2>
+<h2>O pacote stringr</h2>
 <p><br> <strong>Funções básicas:</strong></p>
 <ul>
 <li class="fragment"><p><code style="color:#00589b">str_length()</code> retorna o número de caracteres de cada elemento do vetor</p></li>
@@ -1101,7 +1112,7 @@ Marcelo Honorio
 </div>
 </section>
 <section class="slide level2">
-<h2>STRINGR</h2>
+<h2>O pacote stringr</h2>
 <p><br> <strong>Funções básicas:</strong></p>
 <ul>
 <li class="fragment"><p><code style="color:#00589b">str_trim()</code> remove os espaços excedentes antes e depois da string</p></li>
@@ -1112,6 +1123,57 @@ Marcelo Honorio
 <aside><div>
 <p>Trabalhar com textos exige um certo conhecimento de <strong>expressões regulares</strong></p>
 </div></aside></section>
+<section class="slide level2">
+<h2>O pacote tidyr</h2>
+<p><br></p>
+<p><code style="color:#00589b">separate()</code> e <code style="color:#00589b">unite()</code>: para separar variáveis concatenadas em uma única coluna ou uni-las.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">#separar uma coluna</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>dados <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">separate</span>( </span>
+<span id="cb42-4"><a href="#cb42-4"></a>    <span class="at">col =</span> coluna_velha, </span>
+<span id="cb42-5"><a href="#cb42-5"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"colunas"</span>, <span class="st">"novas"</span>),</span>
+<span id="cb42-6"><a href="#cb42-6"></a>    <span class="at">sep =</span> <span class="st">"separador"</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a>  )</span>
+<span id="cb42-8"><a href="#cb42-8"></a></span>
+<span id="cb42-9"><a href="#cb42-9"></a><span class="do">## unir colunas</span></span>
+<span id="cb42-10"><a href="#cb42-10"></a>dados <span class="sc">%&gt;%</span> </span>
+<span id="cb42-11"><a href="#cb42-11"></a>  <span class="fu">unite</span>(</span>
+<span id="cb42-12"><a href="#cb42-12"></a>    <span class="at">col =</span> coluna_nova, </span>
+<span id="cb42-13"><a href="#cb42-13"></a>    colunas_para_juntar, </span>
+<span id="cb42-14"><a href="#cb42-14"></a>    <span class="at">sep =</span> <span class="st">"separador"</span> </span>
+<span id="cb42-15"><a href="#cb42-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+<h2>O pacote tidyr</h2>
+<p><br></p>
+<p><code style="color:#00589b">pivot_wider()</code> e <code style="color:#00589b">pivot_longer()</code>: para pivotar a base.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="do">## passando colunas para linhas</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>imdb_atuacao <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb43-4"><a href="#cb43-4"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"atuacao"</span>), </span>
+<span id="cb43-5"><a href="#cb43-5"></a>    <span class="at">names_to =</span> <span class="st">"protagonismo"</span>,</span>
+<span id="cb43-6"><a href="#cb43-6"></a>    <span class="at">values_to =</span> <span class="st">"ator_atriz"</span></span>
+<span id="cb43-7"><a href="#cb43-7"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-8"><a href="#cb43-8"></a>  <span class="fu">select</span>(titulo, ator_atriz, protagonismo) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-9"><a href="#cb43-9"></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span>
+<span id="cb43-10"><a href="#cb43-10"></a></span>
+<span id="cb43-11"><a href="#cb43-11"></a><span class="do">## passando linhas para colunas</span></span>
+<span id="cb43-12"><a href="#cb43-12"></a>imdb_atuacao <span class="sc">%&gt;%</span> </span>
+<span id="cb43-13"><a href="#cb43-13"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb43-14"><a href="#cb43-14"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"atuacao"</span>), </span>
+<span id="cb43-15"><a href="#cb43-15"></a>    <span class="at">names_to =</span> <span class="st">"ator_protagonismo"</span>,</span>
+<span id="cb43-16"><a href="#cb43-16"></a>    <span class="at">values_to =</span> <span class="st">"ator_nome"</span></span>
+<span id="cb43-17"><a href="#cb43-17"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-18"><a href="#cb43-18"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb43-19"><a href="#cb43-19"></a>    <span class="at">names_from =</span> <span class="st">"ator_protagonismo"</span>,</span>
+<span id="cb43-20"><a href="#cb43-20"></a>    <span class="at">values_from =</span> <span class="st">"ator_nome"</span></span>
+<span id="cb43-21"><a href="#cb43-21"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-22"><a href="#cb43-22"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section class="slide level2">
 <h2>tidyverse</h2>
 <div class="columns">

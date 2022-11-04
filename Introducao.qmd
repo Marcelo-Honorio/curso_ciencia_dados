@@ -37,6 +37,8 @@ library(kableExtra)
 
 ## Por que aprender uma linguagem de programação?
 
+<br>
+
 -   Aprender a programar é muito importante quando desejamos entender e interpretar os dados.
 -   Se você trabalha ou deseja trabalhar com dados, programar é uma habilidade de extrema relevância.
 
@@ -140,7 +142,7 @@ reg.predict(x)
 ## Sobre o R
 
 -   A linguagem R surgiu em 1995, derivada da linguagem S;
--   Possui inúmeros pacotes (mais de 10 mil), com vantagem para a aplicação da Estatística Avançada e uma vasta comunidade de suporte, além de fortes capacidades voltadas ao Data Science.
+-   Possui inúmeros pacotes (mais de 17 mil), com vantagem para a aplicação da Estatística Avançada e uma vasta comunidade de suporte, além de fortes capacidades voltadas ao Data Science.
 -   CRAN (Comprehensive R Archive Network) é o repositório principal da linguagem R em que cada usuário pode contribuir com novos pacotes (que são coleções de funções em R como código compilado). Esses pacotes podem ser facilmente instalados com uma linha de código.
 
 ## Sobre o R
@@ -194,11 +196,11 @@ reg.predict(x)
 
 ## Objetos, Funções e Argumentos
 
--   **Objetos** são maneiras simples de acessar algo que foi salvo na memória da máquina. Pode ser um valor, uma palvras, uma ou mais variáveis, uma URL, uma base de dados amostral ou populacional, etc. **No R TUDO** é um objeto! Cada um desses objetos possui uma classe!
+-   **Objetos** são maneiras simples de acessar algo que foi salvo na [memória da máquina]{style="color:red"}. Pode ser um valor, uma palvras, uma ou mais variáveis, uma URL, uma base de dados amostral ou populacional, etc. **No R TUDO** é um objeto! Cada um desses objetos possui uma classe!
 
 -   **Funções** correspondem a ações, a ordens direcionadas à máquina;
 
--   **Argumentos** correspondem a um refinamento ou um melhor direcionamento das ações ou ordens propostas pelas funções.
+-   **Argumentos** correspondem a um [refinamento]{style="color:red"} ou um melhor direcionamento das ações ou ordens propostas pelas funções.
 
 ## Criando um objeto no R
 
@@ -263,17 +265,17 @@ Linguagem é *case sensitive*
 ##
 ::: columns
 ::: column
-### Tipos de dados
+### Tipos básicos
 
 -   Integer <br> `inteiro <- 1`{style="color:#00589b"}
 -   Numeric <br> `numeric <- 1.4`{style="color:#00589b"}
--   Logical <br> [`5 > 1`/`TRUE`]{style="color:#00589b"}
+-   Logical <br> `5 > 1`{style="color:#00589b"}/`TRUE`{style="color:#00589b"}
 -   String <br> `"Marcelo"`{style="color:#00589b"}
--   Factor <br> `"Homem"/"Mulher"`{style="color:green"}
+
 :::
 
 ::: column
-### Estruturas de dados
+### Tipos complexos
 
 -   Vector <br> ![](imagens/vector.jpg){.r-stretch}
 
@@ -283,6 +285,10 @@ Linguagem é *case sensitive*
 
 -   List <br> <img src="imagens/list.jpg"/>
 :::
+:::
+
+::: aside
+Factor - `"Homem"/"Mulher"`{style="color:green"}
 :::
 
 ## Utilizando Funções e Argumentos no R
@@ -331,7 +337,7 @@ kableExtra::kable(x) |>
 | `var()`{style="color:#00589b"}      | Variância          |
 | `median()`{style="color:#00589b"}   | Mediana            |
 | `summary()`{style="color:#00589b"}  | Resumo Estatístico |
-| `Quantile()`{style="color:#00589b"} | Quantis            |
+| `quantile()`{style="color:#00589b"} | Quantis            |
 
 ## Funções
 
@@ -353,13 +359,13 @@ da função e pressione F1 para ver a documentação de funções.
 
 <br>
 
-**Controle de Fluxo**: Como toda boa linguagem de programação, o R possui estruturas de `if`, `else`, `for` e `while`.
+**Controle de Fluxo**: Como toda boa linguagem de programação, o R possui estruturas de `if`{style="color:#00589b"}, `else`{style="color:#00589b"}, `for`{style="color:#00589b"} e `while`{style="color:#00589b"}.
 
-- `if`{style="color:#00589b"} e `else`{style="color:#00589b"} servem para executarmos um código apenas se uma condição (teste lógico) for satisfeita
+- `if`{style="color:#00589b"} e `else`{style="color:#00589b"} servem para executarmos um código apenas [se]{style="color:red"} uma condição (teste lógico) for satisfeita
 
 - `for`{style="color:#00589b"} repetir uma mesma tarefa para um conjunto de valores diferentes
 
-- `while`{style="color:#00589b"} repetir uma mesma tarefa enquanto as condições for respeitada
+- `while`{style="color:#00589b"} repetir uma mesma tarefa [enquanto]{style="color:red"} a condição for respeitada
 
 ## Outros tópicos
 
@@ -387,12 +393,24 @@ minha_soma <- function(x, y) {
 
 
 
-## Tidyverse
+## Instalação de pacotes
 
-uma coleção de pacotes R cuidadosamente desenhados para atuarem no workflow comum da ciência de dados:
+<br>
+
+Existem três principais maneiras de instalar pacotes. Em ordem de frequência, são:
+
+- Via CRAN (Comprehensive R Archive Network): `install.packages("nome-do-pacote")`{style="color:#00589b"}.
+- Via Github: `devtools::install_github("nome-do-usuario/nome-do-repositorio")`{style="color:#00589b"}.
+- Via arquivo .zip/.tar.gz: `install.packages("~/nome-do-pacote.zip", repos = NULL)`{style="color:#00589b"}.
+
+## Instalação de pacotes
+
+<br> 
 
 ::: incremental
--   Importação;
+Pacotes que fazem parte do ciclo da ciência de dados
+
+-   Importar dados;
 
     `install.packages('readr')`{style="color:#00589b"}
 
@@ -411,15 +429,14 @@ uma coleção de pacotes R cuidadosamente desenhados para atuarem no workflow co
 
 O **R** base possui funções para leitura dos principais tipos de arquivos.
 
-**readr** e **readxl**:
+**readr**: `.csv` e `.txt` são as extensões mais comuns
 
-- csv;
-- excel;
-- txt
 
-instalando o pacote **readr**
+**readxl**: para extensões `.xlsx` e `.xls`
+
+instalando o pacote **readxl**
 ```{r, echo=TRUE, eval=FALSE}
-install.packages('readr')
+install.packages('readxl')
 library(readr)
 ```
 
@@ -427,24 +444,23 @@ library(readr)
 
 **Funções básicas:**
 
-- `filter`{style="color:#00589b"}: manter ou descartar linhas 
-- `select`{style="color:#00589b"}: manter ou descartar colunas
+- `filter`{style="color:#00589b"}: filtra linhas 
+- `select`{style="color:#00589b"}: seleciona colunas
 - `count`{style="color:#00589b"}: contabiliza os dados por variável
-- `arrange`{style="color:#00589b"}: ordenar o dataset por variável
-- `mutate`{style="color:#00589b"}: criar nova variável
-- `group_by`{style="color:#00589b"}/`summarize`{style="color:#00589b"}: agregar dados
-- `*_join`{style="color:#00589b"}: unir conjunto de dados
+- `arrange`{style="color:#00589b"}: ordena a base
+- `mutate`{style="color:#00589b"}: cria/modifica colunas
+- `group_by`{style="color:#00589b"}/`summarize`{style="color:#00589b"}: agrega e sumariza a base
 
 ::: aside
 É necessário execultar `library(dplyr)`{style="color:#00589b"} para poder utilizar as funções
 :::
 
 
-## FILTER
+## Pacote dplyr
 
 <br>
 
-`filter()`{style="color:#00589b"} manter ou discartar linhas
+função `filter()`{style="color:#00589b"} manter ou discartar linhas
 
 `==`{style="color:#00589b"} operador de igualdade <br>
 `<=`{style="color:#00589b"} operador de menor ou igual <br>
@@ -486,11 +502,11 @@ x |> mean() |> round()
 
 ```
 
-## SELECT
+## Pacote dplyr
 
 <br>
 
-`select`{style="color:#00589b"} manter ou descartar colunas
+função `select`{style="color:#00589b"} manter ou descartar colunas
 
 ```{r, echo=TRUE, eval=FALSE}
 dataset |> 
@@ -505,11 +521,11 @@ dataset |>
   select(-variavel_1)
 ```
 
-## ARRANGE
+## Pacote dplyr
 
 <br>
 
-`arrange`{style="color:#00589b"} ordenar o dataset por variável
+função `arrange`{style="color:#00589b"} ordenar o dataset por variável
 ```{r, echo=TRUE, eval=FALSE}
 dataset |> 
   arrange(variavel_1)
@@ -528,11 +544,11 @@ dataset |>
 
 ```
 
-## COUNT
+## Pacote dplyr
 
 <br>
 
-`count`{style="color:#00589b"} contabiliza os dados de uma determinada variável
+função `count`{style="color:#00589b"} contabiliza os dados de uma determinada variável
 
 ```{r,  echo=TRUE, eval=FALSE}
 dataset |> 
@@ -547,11 +563,11 @@ dataset |>
   count(variavel_1, sort = TRUE)
 ```
 
-## MUTATE
+## Pacote dplyr
 
 <br> 
 
-`mutate`{style="color:#00589b"} criar nova variável (com um `=`{style="color:#00589b"})
+função `mutate`{style="color:#00589b"} criar nova variável (com um `=`{style="color:#00589b"})
 ```{r,  echo=TRUE, eval=FALSE}
 dataset |> 
   mutate(new = "hello!")
@@ -562,18 +578,18 @@ dataset |>
 Pode ser combinado com uma ou mais condições `ifelse`{style="color:#00589b"}, que tem 3 argumentos:
 
 ::: {style="font-size: 0.6em; text-align: center"}
-`(condição, valor se TRUE, valor se TRUE)`{style="color:#00589b"}
+`(condição, valor se TRUE, valor se FALSE)`{style="color:#00589b"}
 :::
 ```{r,  echo=TRUE, eval=FALSE}
 dataset |> 
   mutate(new = ifelse(var_1 == "nome", 1, 0))
 ```
 
-## MUTATE
+## Pacote dplyr
 
 <br>
 
-`case_when()`{style="color:#00589b"} para múltiplas condições
+função `case_when()`{style="color:#00589b"} para múltiplas condições
 ```{r, echo=TRUE, eval=FALSE}
 faculty %>% 
   mutate(new = case_when(var_1 %in% c("Sociology","Political Science") ~ "Social Sciences",
@@ -581,12 +597,14 @@ faculty %>%
                          var_3 %in% c("Chemistry","Physics") ~ "Sciences"))
 ```
 
-## GROUP BY/ SUMMARIZE
+## Pacote dplyr
 
 <br>
 
-`group_by`{style="color:#00589b"}/`summarize`{style="color:#00589b"} agregar dados
+funções `group_by`{style="color:#00589b"}/`summarize`{style="color:#00589b"}
+
 `group_by()`{style="color:#00589b"} identifica os grupos da variavel
+
 `summarize()`{style="color:#00589b"} especificar a agregação
 ```{r, echo=TRUE, eval=FALSE}
 dataset |> 
@@ -605,7 +623,7 @@ dataset |>
             minimo = min(var_2))
 ```
 
-## Juntando dados
+## Pacote dplyr
 
 <br>
 
@@ -617,7 +635,7 @@ Existem duas formas de junção de dados: **UNIÂO** e **CRUZAMENTO**
   <img src = "imagens/binds.png">
 <p>
 
-## JOINING DATA
+## Pacote dplyr
 
 <br>
 
@@ -631,13 +649,13 @@ tudo o que você precisa é de pelo menos um variável em comum entre os conjunt
 
 `left_join`{style="color:#00589b"} é a mais comum
 
-## JOINING DATA
+## Pacote dplyr
 
 <p align="center">
   <img src = "imagens/join.png">
 <p>
 
-## JOINING DATA
+## Pacote dplyr
 
 Além da função `left_join()`{style="color:#00589b"}, também são muito utilizadas as funções `right_join()`{style="color:#00589b"} e `full_join()`{style="color:#00589b"}.
 
@@ -645,7 +663,7 @@ Além da função `left_join()`{style="color:#00589b"}, também são muito utili
   <img src = "imagens/joins_left.png" style="height: 500px; width:250px align=center">
 <p>
 
-## JOINING DATA
+## Pacote dplyr
 
 Além da função `left_join()`{style="color:#00589b"}, também são muito utilizadas as funções `right_join()`{style="color:#00589b"} e `full_join()`{style="color:#00589b"}.
 
@@ -655,7 +673,7 @@ Além da função `left_join()`{style="color:#00589b"}, também são muito utili
   <img src = "imagens/joins_full.png">
 <p>
 
-## STRINGR
+## O pacote stringr
 
 <br>
 Permite a manipulação de textos por meio de uma sintaxe consistente e com muita facilidade.
@@ -672,7 +690,7 @@ dataset |>
                       str_sub(var_2, 1, 4)))
 ```
 
-## STRINGR
+## O pacote stringr
 
 <br>
 **Funções básicas:**
@@ -690,7 +708,7 @@ str_to_title(s)
 
 ```
 
-## STRINGR
+## O pacote stringr
 
 <br>
 **Funções básicas:**
@@ -705,7 +723,58 @@ str_to_title(s)
 Trabalhar com textos exige um certo conhecimento de **expressões regulares**
 :::
 
+## O pacote tidyr
 
+<br>
+
+`separate()`{style="color:#00589b"} e `unite()`{style="color:#00589b"}: para separar variáveis concatenadas em uma única coluna ou uni-las.
+```{r, echo=TRUE, eval=FALSE}
+#separar uma coluna
+dados %>% 
+  separate( 
+    col = coluna_velha, 
+    into = c("colunas", "novas"),
+    sep = "separador"
+  )
+
+## unir colunas
+dados %>% 
+  unite(
+    col = coluna_nova, 
+    colunas_para_juntar, 
+    sep = "separador" 
+  )
+```
+
+## O pacote tidyr
+
+<br>
+
+`pivot_wider()`{style="color:#00589b"} e `pivot_longer()`{style="color:#00589b"}: para pivotar a base.
+```{r, echo=TRUE, eval=FALSE}
+## passando colunas para linhas
+imdb_atuacao %>% 
+  pivot_longer(
+    cols = starts_with("atuacao"), 
+    names_to = "protagonismo",
+    values_to = "ator_atriz"
+  ) %>% 
+  select(titulo, ator_atriz, protagonismo) %>% 
+  head(6)
+
+## passando linhas para colunas
+imdb_atuacao %>% 
+  pivot_longer(
+    cols = starts_with("atuacao"), 
+    names_to = "ator_protagonismo",
+    values_to = "ator_nome"
+  ) %>% 
+  pivot_wider(
+    names_from = "ator_protagonismo",
+    values_from = "ator_nome"
+  ) %>% 
+  head(4)
+```
 
 ## tidyverse
 
