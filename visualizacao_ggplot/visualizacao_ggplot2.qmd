@@ -1,0 +1,807 @@
+---
+title: "Visualização de Dados com ggplot2"
+author: "Marcelo Honorio"
+format: 
+  revealjs:
+    theme: custom.scss
+    transition: fade
+    background-transition: fade
+    highlight-style: ayu-mirage
+editor: source
+code-link: true
+execute:
+  echo: true
+  freeze: auto
+---
+
+## Visualização de dados (ggplot2)
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(scales)
+library(knitr)
+library(kableExtra)
+library(colorblindr)
+library(dados)
+library(palmerpenguins)
+library(plotly)
+```
+
+O ggplot2 é mais um pacote desenvolvido por **Hadley Wickham**, o criador do tidyr e do dplyr. A ideia do pacote, ainda que com algumas modificações, vem de uma obra chamada *The Grammar of Graphics*, que é uma maneira de descrever um gráficos a partir dos seus componentes.
+
+<p align="center">
+  <img src="imagens/grammar_graphics.png" style="align=center"/>
+<p>
+
+## ggplot2 $\in$ tidyverse
+
+<br>
+
+::: columns
+::: {.column width="40%"}
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("imagens/ggplot2-part-of-tidyverse.png")
+```
+:::
+::: {.column width="60%"}
+- **ggplot2** é o pacote de visualização de dados
+- Os gráficos são construídos camada por camada
+- A estrutura do código para gráficos pode ser resumida como:
+
+```{r eval = FALSE}
+ggplot(data = [dataset]) +
+   geom_xxx(mapping = aes(x = [x-variable], 
+                          y = [y-variable])) +
+   other_options
+```
+:::
+:::
+
+## Importância
+
+<br>
+
+::: columns
+:::{.column}
+
+**Comparação**
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/r_previsao.png")
+```
+:::
+:::{.column}
+
+<br>
+
+**Gráfico de Resíduos**
+```{r echo=FALSE, out.width="100%", size=5}
+#| fig-align: "center"
+knitr::include_graphics("imagens/erro_previsao.png")
+```
+:::
+:::
+
+## Dados
+
+Todos os dadasets que vamos utilizar são do pacote **dados**
+
+::: {.panel-tabset}
+### mtcarros
+```{r}
+mtcarros
+```
+
+### pinguins
+```{r}
+pinguins
+```
+
+### diamante
+```{r}
+diamante
+```
+
+### Gapminder
+```{r}
+dados_gapminder
+```
+
+:::
+
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   **Mapeamento estético**
+-   **Geometria**
+:::
+
+::: {.column width="70%"}
+```{r, eval=TRUE}
+mtcarros
+```
+:::
+:::
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   **Mapeamento estético**
+-   **Geometria**
+:::
+
+::: {.column width="70%"}
+```{r, echo=TRUE, eval=TRUE}
+#| code-line-numbers: "1"
+#| fig-align: "center"
+ggplot(data = mtcarros)
+```
+:::
+:::
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   [**Mapeamento estético**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   **Geometria**
+:::
+
+::: {.column width="70%"}
+```{r, echo=TRUE, eval=TRUE}
+#| code-line-numbers: "2-3"
+#| fig-align: "center"
+ggplot(data =  mtcarros, 
+       mapping = aes(x = as.factor(cilindros), 
+                     y = milhas_por_galao))
+```
+:::
+:::
+
+## Os Componentes de um gráfico
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+-   [**Dados**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   [**Mapeamento estético**]{style="font-weight:bold;background-color:#ccddeb;"}
+-   [**Geometria**]{style="font-weight:bold;background-color:#ccddeb;"}
+:::
+
+::: {.column width="70%"}
+```{r, echo=TRUE, eval=TRUE}
+#| code-line-numbers: "4"
+#| fig-align: "center" 
+ggplot(data = mtcarros, 
+       mapping = aes(x = as.factor(cilindros), 
+                     y = milhas_por_galao)) +
+  geom_boxplot()
+```
+:::
+:::
+
+## Mapeamentos estéticos
+
+
+Para mapear uma estética a uma variável, associe o nome da estética ao nome da variável dentro de `aes()`{style="color:#00589b"} 
+
+```{r, echo=TRUE, eval=TRUE}
+#| code-line-numbers: "2"
+#| fig-align: "center"
+ggplot(data = mtcarros) +
+  geom_boxplot(mapping = aes(x = as.factor(cilindros), y = milhas_por_galao, fill = as.factor(cilindros)))
+```
+
+Um estético é uma propriedade visual dos objetos em seu gráfico. Estético incluem coisas como tamanho, forma ou cor dos seus formatos.
+
+## Mapeamentos estéticos
+
+::: {.panel-tabset}
+
+### Plot
+```{r echo=TRUE, eval=TRUE}
+#| fig-align: "center"
+ggplot(data = pinguins) +
+  geom_point(mapping = aes(x = profundidade_bico, y = comprimento_bico))
+```
+
+### Cor
+```{r echo=TRUE, eval=TRUE}
+#| fig-align: "center"
+# mapear as cores com color
+ggplot(data = pinguins) +
+  geom_point(mapping = aes(x = profundidade_bico, y = comprimento_bico, color = especie))
+```
+
+### Tamanho
+```{r echo=TRUE, eval=TRUE}
+#| fig-align: "center"
+# mapear tamanhos com size
+ggplot(data = pinguins) +
+  geom_point(mapping = aes(x = profundidade_bico, y = comprimento_bico, color = especie, size = massa_corporal))
+```
+
+### Forma
+```{r echo=TRUE, eval=TRUE}
+#| fig-align: "center"
+# mapear formas com shape
+ggplot(data = pinguins) +
+  geom_point(mapping = aes(x = profundidade_bico, y = comprimento_bico, color = especie, shape = ilha))
+```
+
+### Transparência
+```{r echo=TRUE, eval=TRUE}
+#| fig-align: "center"
+# mapear transparência com alpha
+ggplot(data = pinguins) +
+  geom_point(mapping = aes(x = profundidade_bico, y = comprimento_bico, color = especie, alpha = ilha))
+```
+
+:::
+
+## Mapeamentos estéticos
+
+Para configurar uma estética manualmente, configure-a por nome como um argumento da sua funçao geom, isto é, fora de `aes()`{style="color:#00589b"}. 
+```{r echo=TRUE, eval=TRUE}
+#| fig-align: "center"
+ggplot(data = pinguins) +
+  geom_point(mapping = aes(x = profundidade_bico, y = comprimento_bico), color = "blue")
+```
+
+Aqui a **cor** não transmite informações sobre uma variável, só muda a aparência do gráfico.
+
+## Nomes de argumentos
+
+Podemos omitir os nomes dos primeiros argumentos `ggplot()`{style="color:#00589b"}.
+
+```{r named-args, eval = FALSE}
+ggplot(data = pinguins) +
+  geom_point(mapping = aes(x = profundidade_bico, 
+                           y = comprimento_bico, 
+                           color = especie))
+```
+
+Omitindo os nomes dos primeiros argumentos 
+
+```{r not-named-args}
+#| fig-align: "center"
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie))
+```
+
+## Formas geométricas
+
+Os objetos geométricos começam com a expressão `geom_` 
+
+```{r, eval=TRUE, echo=FALSE}
+#| tbl-colwidths: [60,40]
+Tipo <- c("Dispersão", "Gráficos de bolhas", "Gráficos de barras", "Histograma",
+          "Boxplot", "Densidade", "Gráfico de linhas")
+`Objeto Geométrico` <- c("geom_point", "goem_point", "geom_bar e geom_coll", "geom_histogram",
+                         "geom_boxplot", "geom_density", "geom_line")
+
+x <- tibble::tibble(Tipo, `Objeto Geométrico`)
+
+library(knitr)
+kable(x)
+
+```
+
+## Gráficos de barras
+
+Geralmente utilizados para comparações entre categorias.
+
+```{r}
+#| code-line-numbers: "1-2|3|4"
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+mtcarros  |> 
+  count(cilindros)  |> 
+  ggplot() +
+  geom_bar(aes(x = cilindros, y = n), stat = "identity")
+```
+Tem como **aes**: [x`,` y`,` alpha`,` colour`,` fill`,` size`,` linetype]{style="color:#00589b"}
+. . .
+
+Observe que um objeto gráfico usa `+` ao invés de `|>`
+
+. . .
+
+## Gráficos de linhas
+
+Geralmente utlizados para apresentar o comportamento de uma variável quantitativa em um intervalo de tempo.
+
+```{r}
+#| code-line-numbers: "1-2|3|6|7"
+#| fig-height: 4
+#| fig-align: "center"
+xValue <- 1:10
+yValue <- cumsum(rnorm(10))
+data <- data.frame(xValue,yValue)
+
+# Plot
+ggplot(data) +
+  geom_line(aes(x=xValue, y=yValue))
+```
+
+Tem como **aes**: [x`,` y`,` alpha`,` colour`,` linetype`,` size]{style="color:#00589b"}
+
+## Gráficos de linhas
+
+Com **titulo**
+
+```{r}
+#| fig-align: "center"
+xValue <- 1:10
+yValue <- cumsum(rnorm(10))
+data <- data.frame(xValue,yValue)
+
+# Plot
+ggplot(data) +
+  geom_line(aes(x=xValue, y=yValue), color="#69b3a2", size=2, alpha=0.9, linetype=2) +
+  ggtitle("Evolução de algo")
+```
+
+
+## Gráfico de dispersão 
+
+Bastante usado para verificar relações entre duas variáveis quantativas.
+
+```{r}
+#| fig-align: "center"
+ggplot(dados_gapminder) + 
+    geom_point(aes(x=expectativa_de_vida, y=pib_per_capita, color=continente), size=6)
+```
+
+Tem como **aes**: [x`,` y`,` alpha`,` colour`,` fill`,` shape`,` size`,` stroke]{style="color:#00589b"}
+
+## Gráficos de bolhas
+
+Permite observar as possiveis relações entre três variáveis.
+
+```{r}
+#| fig-align: "center"
+ggplot(dados_gapminder) + 
+    geom_point(aes(x=expectativa_de_vida, y=pib_per_capita, size=populacao), colour = "#69b3a2")
+```
+
+
+## Histrogramas
+
+Utilizados para representar a distribuição de dados de uma variável
+
+```{r}
+#| fig-align: "center"
+ggplot(diamante) +
+    geom_histogram(aes(x=quilate), fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    ggtitle("Intervalo automatico")
+```
+
+## Histrogramas
+
+Para definir o tamanho de cada intervalo, podemos utilizar o argumento `bindwidth`{style="color:#00589b"}
+
+```{r}
+#| fig-align: "center"
+ggplot(diamante) +
+    geom_histogram(aes(x=quilate), binwidth=0.05, fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    ggtitle("Intervalo de 0.05")
+```
+
+## Gráficos com dois geom 
+
+Podemos construímos o gráfico de dispersão e acrescentar também uma reta de tendência linear aos pontos.
+
+```{r}
+#| fig-align: "center"
+ggplot(pinguins, aes(x = massa_corporal, y = comprimento_bico)) +
+  geom_point()
+               
+```
+
+## Gráficos com dois geom 
+
+Podemos construímos o gráfico de dispersão e acrescentar também uma reta de tendência linear aos pontos.
+
+```{r}
+#| fig-align: "center"
+ggplot(pinguins, aes(x = massa_corporal, y = comprimento_bico)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+               
+```
+
+## Facetas
+
+`facet_wrap()`{style="color:#00589b"} é uma função para dividir seu gráfico em facetas a partir de uma variável categórica
+
+```{r}
+#| fig-align: "center"
+ggplot(diamante) +
+    geom_histogram(aes(x=quilate), fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    ggtitle("Intervalo de 0.05") +
+    facet_wrap(~corte)
+```
+
+É necessário utilizar variáveis categóricas para criar subgráficos. 
+
+## Facetas
+
+`facet_grid()`{style="color:#00589b"} é uma função para dividir seu gráfico em facetas a partir de uma combinação entre duas variáveis. 
+
+```{r}
+#| fig-align: "center"
+ggplot(diamante) +
+    geom_histogram(aes(x=quilate), fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    ggtitle("Intervalo de 0.05") +
+    facet_grid(cor ~ corte)
+```
+
+## Títulos e labels
+::: {.panel-tabset}
+
+### Plot
+```{r ref.label = "penguins", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+
+### Código
+```{r penguins, fig.show = "hide"}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie)) +
+  labs(title = "Comprimento e profundidade do bico",
+       subtitle = "Dimensões dos pinguins Adelie, Chinstrap e Gentoo",
+       x = "Profundidade bico (mm)", y = "Comprimento bico (mm)",
+       colour = "Especie",
+       caption = "Source: Palmer Station LTER / palmerpenguins package") +
+  scale_colour_viridis_d()
+```
+
+Os títulos e labels do gráfico também são considerados camadas e são criados ou modificados pela função `labs()`{style="color:#00589b"}.
+
+:::
+
+## Visualização de dados (ggplot2)
+
+<br>
+
+`ggplot2` é o pacote de visualização de dados que é carregado com o `tidyverse`
+
+a gramática dos dados gráficos mapeia os atributos estéticos dos pontos geométricos
+
+codificar dados em pistas visuais (por exemplo, comprimento, cor, posição, tamanho) é como significamos mudanças e comparações
+
+##
+> [Comece com o data frame *penguins*]{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column}
+```{r penguins-0, fig.show = "hide", warning = FALSE}
+ggplot(pinguins)
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-0", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+##
+> Comece com o data frame *penguins*, `mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica.`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column}
+```{r penguins-1, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico))
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-1", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+
+##
+> Comece com o data frame *penguins*, mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica. `Defina espécies para a cor de cada ponto.`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column width="45%"}
+```{r penguins-4, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie))
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-4", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+##
+> Comece com o data frame *penguins*, mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica. Defina espécies para a cor de cada ponto. `Intitule o gráfico`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column width="45%"}
+```{r penguins-5, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie)) +
+  labs(title = "Comprimento e profundidade do bico")
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-5", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+##
+> Comece com o data frame *penguins*, mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica. Defina espécies para a cor de cada ponto. Intitule o gráfico, ` adicione o subtitulo`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column width="45%"}
+```{r penguins-6, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie)) +
+  labs(title = "Comprimento e profundidade do bico",
+       subtitle = "Dimensões dos pinguins Adelie, Chinstrap e Gentoo")
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-6", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+##
+> Comece com o data frame *penguins*, mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica. Defina espécies para a cor de cada ponto. Intitule o gráfico, adicione o subtitulo, `rotule os eixos x e y`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column width="45%"}
+```{r penguins-7, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie)) +
+  labs(title = "Comprimento e profundidade do bico",
+       subtitle = "Dimensões dos pinguins Adelie, Chinstrap e Gentoo",
+       x = "Profundidade bico (mm)", y = "Comprimento bico (mm)")
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-7", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+##
+> Comece com o data frame *penguins*, mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica. Defina espécies para a cor de cada ponto. Intitule o gráfico, adicione o subtitulo, rotule os eixos x e y, `respectivamente, rotule a legenda`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column width="45%"}
+```{r penguins-8, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie)) +
+  labs(title = "Comprimento e profundidade do bico",
+       subtitle = "Dimensões dos pinguins Adelie, Chinstrap e Gentoo",
+       x = "Profundidade bico (mm)", y = "Comprimento bico (mm)",
+       colour = "Especie")
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-8", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+##
+> Comece com o data frame *penguins*, mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica. Defina espécies para a cor de cada ponto. Intitule o gráfico, adicione o subtitulo, rotule os eixos x e y, respectivamente, rotule a legenda `e adicione uma legenda para a fonte de dados.`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column width="45%"}
+```{r penguins-9, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie)) +
+  labs(title = "Comprimento e profundidade do bico",
+       subtitle = "Dimensões dos pinguins Adelie, Chinstrap e Gentoo",
+       x = "Profundidade bico (mm)", y = "Comprimento bico (mm)",
+       colour = "Especie",
+       caption = "Source: Palmer Station LTER / palmerpenguins package")
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-9", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+##
+> Comece com o data frame *penguins*, mapear profundidade_bico no eixo x e comprimento_bico no eixo y na forma geométrica. Defina espécies para a cor de cada ponto. Intitule o gráfico, adicione o subtitulo, rotule os eixos x e y, respectivamente, rotule a legenda e adicione uma legenda para a fonte de dados. `Por fim, mude a escala de cores.`{style="font-weight:bold;background-color:#ccddeb;"}
+
+::: columns
+::: {.column width="45%"}
+```{r penguins-10, fig.show = "hide", warning = FALSE}
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico,
+                 y = comprimento_bico,
+                 color = especie)) +
+  labs(title = "Comprimento e profundidade do bico",
+       subtitle = "Dimensões dos pinguins Adelie, Chinstrap e Gentoo",
+       x = "Profundidade bico (mm)", y = "Comprimento bico (mm)",
+       colour = "Especie",
+       caption = "Source: Palmer Station LTER / palmerpenguins package") +
+  scale_colour_viridis_d()
+```
+:::
+::: {.column}
+```{r ref.label = "penguins-10", echo = FALSE, warning = FALSE, out.width = "100%"}
+#| fig-align: "center"
+```
+:::
+:::
+
+## Escalas
+
+Com as funções `scale_`{style="color:#00589b"} modificarmos as propriedades referentes às escalas do gráfico.
+
+::: {.panel-tabset}
+
+### Eixos (x,y)
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+ggplot(data) +
+  geom_line(aes(x=xValue, y=yValue)) +
+  scale_x_continuous(breaks = seq(0, 10, 2)) +
+  scale_y_continuous(breaks = seq(0, 5, 1))
+```
+
+
+
+### Escolher cor
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+mtcarros  |> 
+  count(cilindros)  |> 
+  mutate(cilindros = as.factor(cilindros)) |> 
+  ggplot() +
+  geom_bar(aes(x = cilindros, y = n, fill= cilindros), stat = "identity") +
+  scale_fill_manual(values = c("red", "blue", "green"))
+```
+
+### Categorias
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico, y = comprimento_bico, color=sexo)) +
+  scale_color_discrete(labels = c("F", "M"))
+```
+
+:::
+
+## Temas
+
+::: {.panel-tabset}
+### minimal
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico, y = comprimento_bico,
+                     colour = especie)) +
+  theme_minimal()
+```
+
+### classic
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico, y = comprimento_bico,
+                     colour = especie)) +
+  theme_classic()
+```
+
+### dark
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico, y = comprimento_bico,
+                     colour = especie)) +
+  theme_dark()
+```
+
+### bw
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+ggplot(pinguins) +
+  geom_point(aes(x = profundidade_bico, y = comprimento_bico,
+                     colour = especie)) +
+  theme_bw()
+```
+
+:::
+
+## visualizações interativas
+
+O pacote `plotly`{style="color:#00589b"}, além de ser um ótimo pacote para produzir gráficos interativos em R ou Python, possui uma funcão chamada `ggplotly()`{style="color:#00589b"} que transforma um gráfico estático do ggplot2 em interativo.
+```{r}
+#| echo: true
+#| fig-height: 4
+#| fig-align: "center"
+ggplotly(ggplot(pinguins) +
+           geom_point(aes(x = profundidade_bico, y = comprimento_bico,
+                          colour = especie)))
+```
+
+## recursos ggplot2
+
+<br>
+
+base [R for Data Science](https://r4ds.had.co.nz/data-visualisation.html)
+
+[Ciência de Dados com R - Visualizações de dados (ggplot2)](https://cdr.ibpad.com.br/)
+
+<br>
+
+criando [custom themes](https://themockup.blog/posts/2020-12-26-creating-and-using-custom-ggplot2-themes/)
+
+<br>
+
+específico [ggplot2 book](https://ggplot2-book.org/)
+
+<br>
+
+referência [R graph gallery](https://r-graph-gallery.com/index.html)
+
+
