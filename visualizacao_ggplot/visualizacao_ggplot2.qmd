@@ -3,6 +3,7 @@ title: "Visualização de Dados com ggplot2"
 author: "Marcelo Honorio"
 format: 
   revealjs:
+    output-file: visualizacao_dados.html
     theme: custom.scss
     transition: fade
     background-transition: fade
