@@ -6,24 +6,12 @@
 
 #Pacotes e serem utilizados:
 
-install.packages(c("PerformanceAnalytics","plotly","reshape2","ggrepel","rgl",
-                   "car","sf","tmap","rgdal","esquisse"))
-
-library(PerformanceAnalytics)
-library(plotly)
-library(tidyverse)
-library(reshape2)
-library(ggrepel)
-library(rgl)
-library(car)
-library(sf)
-library(tmap)
-library(rgdal)
-library(esquisse)
+install.packages(c("plotly","sf", "brazilmaps", "esquisse"))
 
 ################################################################################
 #                                GRÁFICOS DE BARRAS                            #
 ################################################################################
+library(tidyverse)
 
 #Carregando a base de dados
 load("perfil_investidor.RData")
@@ -40,13 +28,7 @@ ggplot(data = perfil_investidor) +
 #alterar a situação, podemos utilizar a função factor():
 
 perfil_investidor <- perfil_investidor |> 
-  mutate(perfil = as.factor(perfil))
-
-#perfil_investidor$perfil <- factor(perfil_investidor$perfil,
-#                                   levels = c("Conservador", 
-#                                              "Moderado", 
-#                                              "Agressivo"))
-
+  mutate(perfil = factor(perfil, levels = c("Conservador", "Moderado", "Agressivo")))
 
 #Utilizando, mais uma vez, a sintaxe básica do ggplot2 à base de dados:
 ggplot(data = perfil_investidor) +
@@ -145,7 +127,7 @@ ggplot(data = perfil_investidor) +
   coord_flip() +
   theme_light()
 
-#Invertendo as ordens das categorias:
+#Invertendo as ordens das categorias (fct_rev()):
 ggplot(data = perfil_investidor) +
   geom_bar(aes(x = fct_rev(perfil)), color = "darkorchid", fill = "orange") +
   geom_text(aes(x = perfil, label = ..count..), stat = "count", hjust = -1) +
@@ -157,7 +139,7 @@ ggplot(data = perfil_investidor) +
   coord_flip() +
   theme_light()
 
-#colocar em ordem crescente de frequencia
+#colocar em ordem crescente de frequencia - fct_infreq()
 ggplot(data = perfil_investidor) +
   geom_bar(aes(x = fct_infreq(perfil)), color = "darkorchid", fill = "orange") +
   geom_text(aes(x = perfil, label = ..count..), stat = "count", hjust = -1) +
@@ -169,7 +151,7 @@ ggplot(data = perfil_investidor) +
   coord_flip() +
   theme_light()
 
-#colocar em ordem decrescente de frequencia
+#colocar em ordem decrescente de frequencia  - fct_inorder()
 ggplot(data = perfil_investidor) +
   geom_bar(aes(x = fct_inorder(perfil)), color = "darkorchid", fill = "orange") +
   geom_text(aes(x = perfil, label = ..count..), stat = "count", hjust = -1) +
@@ -186,7 +168,8 @@ ggplot(data = perfil_investidor) +
 ################################################################################
 
 #Carregando os dados:
-load("dados_sp.RData")
+#load("dados_sp.RData")
+
 
 #Observando os dados:
 glimpse(dados_sp)
@@ -223,7 +206,7 @@ ggplot(data = dados_sp) +
 ################################################################################
 
 #Carregando os dados
-load("atlas_ambiental.RData")
+#load("atlas_ambiental.RData")
 
 #Observando os dados:
 glimpse(atlas_ambiental)
@@ -266,22 +249,22 @@ ggplot(atlas_ambiental) +
 ################################################################################
 
 #Carregando a base de dados
-load("covid_23072020.RData")
+#load("covid_23072020.RData")
 
 #Observado os dados
-glimpse(covid_23072020)
+glimpse(dados_covid)
 
 #Aplicando a sintaxe básica do ggplot2:
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = cumulative_cases))
 
 #Note que não informamos para o ggplot2 que cada linha deveria representar um
 #país. Assim:
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = cumulative_cases, color = country))
 
 #Adicionando informações e deixando o gráfico mais elegante:
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = cumulative_cases, color = country)) +
   geom_point(aes(x = t, y = cumulative_cases, color = country)) +
   labs(x = "Tempo em dias desde o primeiro caso oficial do Sars-Cov-2 reportado",
@@ -295,10 +278,11 @@ ggplot(covid_23072020) +
 #seria a padronização da variável 'cumulative_cases'. No gráfico a seguir,
 #padronizamos os casos cumulativos de cada país numa escala log10:
 
-covid_23072020["log_ccases"] <- log10(covid_23072020$cumulative_cases)
+dados_covid <- dados_covid |> 
+  mutate(log_ccases = log(cumulative_cases))
 
 #O gráfico resultante é o seguinte:
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = log_ccases, color = country)) +
   geom_point(aes(x = t, y = log_ccases, color = country)) +
   labs(x = "Tempo em dias desde o primeiro caso oficial do Sars-Cov-2 reportado",
@@ -310,11 +294,11 @@ ggplot(covid_23072020) +
 #anterior, alguém poderia dizer que seria melhor, por exemplo, utilizar uma
 #proporção da população infectada em razão do tempo passado:
 
-covid_23072020["pop_ccases"] <- covid_23072020$cumulative_cases / 
-  covid_23072020$pop
+dados_covid <- dados_covid |> 
+  mutate(pop_ccases = cumulative_cases/pop)
 
 #O resultado visual vem abaixo:
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = pop_ccases, color = country)) +
   geom_point(aes(x = t, y = pop_ccases, color = country)) +
   labs(x = "Tempo em dias desde o primeiro caso oficial do Sars-Cov-2 reportado",
@@ -325,7 +309,7 @@ ggplot(covid_23072020) +
 #Ainda assim, os gráficos não trazem uma informação importante: os valores dos
 #casos cumulativos por dia e por país. Em regra, no ggplot, podemos utilizar
 #a geometria 'text' para isso:
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = cumulative_cases, color = country)) +
   geom_point(aes(x = t, y = cumulative_cases, color = country)) +
   geom_text(aes(x = t, y = cumulative_cases, label = cumulative_cases), 
@@ -336,7 +320,7 @@ ggplot(covid_23072020) +
   theme_bw()
 
 #E se deslocássemos as labels dos valores dos casos cumulativos?
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = cumulative_cases, color = country)) +
   geom_point(aes(x = t, y = cumulative_cases, color = country)) +
   geom_text(aes(x = t, y = cumulative_cases, label = cumulative_cases), 
@@ -347,23 +331,11 @@ ggplot(covid_23072020) +
   theme_bw()
 
 #Ainda está caótico, certo? E se alterássemos o ângulo de exibição das labels?
-ggplot(covid_23072020) +
+ggplot(dados_covid) +
   geom_line(aes(x = t, y = cumulative_cases, color = country)) +
   geom_point(aes(x = t, y = cumulative_cases, color = country)) +
   geom_text(aes(x = t, y = cumulative_cases, label = cumulative_cases), 
             color = "black", size = 2, vjust = -1, angle = 45) +
-  labs(x = "Tempo em dias desde o primeiro caso oficial do Sars-Cov-2 reportado",
-       y = "Casos Cumulativos",
-       color = "País") +
-  theme_bw()
-
-#Continua péssimo. São muitos dias e muitos países analisados ao mesmo tempo! 
-#A função geom_text_repel() do pacote 'ggrepel', por vezes resolve o problema:
-ggplot(covid_23072020) +
-  geom_line(aes(x = t, y = cumulative_cases, color = country)) +
-  geom_point(aes(x = t, y = cumulative_cases, color = country)) +
-  geom_text_repel(aes(x = t, y = cumulative_cases, label = cumulative_cases), 
-                  color = "black", size = 2) +
   labs(x = "Tempo em dias desde o primeiro caso oficial do Sars-Cov-2 reportado",
        y = "Casos Cumulativos",
        color = "País") +
@@ -374,7 +346,7 @@ ggplot(covid_23072020) +
 #com o usuário da informação. Podemos fazer isso com a função ggplotly() do
 #pacote 'plotly':
 ggplotly(
-  ggplot(covid_23072020) +
+  ggplot(dados_covid) +
     geom_line(aes(x = t, y = cumulative_cases, color = country)) +
     geom_point(aes(x = t, y = cumulative_cases, color = country)) +
     labs(x = "Tempo em dias desde o primeiro caso oficial do Sars-Cov-2 reportado",
@@ -390,113 +362,12 @@ ggplotly(
 #interesse:
 
 ggplotly(
-  ggplot(covid_23072020) +
+  ggplot(dados_covid) +
     geom_line(aes(x = t, y = daily_cases, color = country)) +
     geom_point(aes(x = t, y = daily_cases, color = country)) +
     labs(x = "Tempo em dias desde o primeiro caso oficial do Sars-Cov-2 reportado",
          y = "Casos Diários",
          color = "País") +
-    theme_bw()
-)
-
-
-################################################################################
-#                                GRÁFICOS DE CALOR                             #
-################################################################################
-
-#Carregando os dados
-load("atlas_ambiental.RData")
-
-#Nosso principal exemplo para gráficos de calor para hoje será a respeito da
-#relação entre variáveis. Assim, primeiro vamos observar alguns gráficos 
-#correlacionais com a função chart.Correlation() do pacote 
-#'PerformanceAnalytics":
-chart.Correlation(atlas_ambiental[, 3:11], histogram = T)
-
-#Para criarmos um gráfico de calor a respeito das correlações da nossa base de
-#dados, o primeiro passo é estabelecer uma Matriz de Correlações. Podemos fazer
-#isso utilizando a função cor() da linguagem básica do R:
-
-matriz_correlacoes <- cor(atlas_ambiental[, 3:11])
-
-matriz_correlacoes
-
-#Para o caso dos gráficos de calor, é melhor que a base de dados esteja no
-#formato long em vez do formato wide. Podemos alterar isso com a função melt()
-#do pacote 'reshape2'
-
-correlacoes <- melt(matriz_correlacoes)
-
-head(correlacoes)
-tail(correlacoes)
-
-#Aqui, nós vamos alterar os nomes das variáveis do nosso novo objeto que demos 
-# o nome de 'correlacoes':
-names(correlacoes) <- c("var1", "var2", "correlacao")
-
-#Agora sim, aplicando a sintaxe básica do ggplot2, temos:
-ggplot(correlacoes) +
-  geom_tile(aes(x = var1, y = var2, fill = correlacao))
-
-#Podemos remover os nomes dos eixos do gráfico da seguinte forma:
-ggplot(correlacoes) +
-  geom_tile(aes(x = var1, y = var2, fill = correlacao)) +
-  labs(x = NULL,
-       y = NULL,
-       fill = "Correlações")
-
-#Podemos criar um gradiente de cores, da seguinte maneira:
-ggplot(correlacoes) +
-  geom_tile(aes(x = var1, y = var2, fill = correlacao)) +
-  labs(x = NULL,
-       y = NULL,
-       fill = "Correlações") +
-  scale_fill_gradient2(low = "darkblue", 
-                       mid = "white", 
-                       high = "darkred",
-                       midpoint = 0)
-
-#Podemos incluir os valores de cada correlação em cada quadrícula:
-ggplot(correlacoes) +
-  geom_tile(aes(x = var1, y = var2, fill = correlacao)) +
-  geom_text(aes(x = var1, y = var2, label = correlacao), size = 2) +
-  labs(x = NULL,
-       y = NULL,
-       fill = "Correlações") +
-  scale_fill_gradient2(low = "darkblue", 
-                       mid = "white", 
-                       high = "darkred",
-                       midpoint = 0)
-
-#Os valores das correlações estão muito extensos, certo? Basta aplicarmos um
-#arredondamento a eles com a função round():
-ggplot(correlacoes) +
-  geom_tile(aes(x = var1, y = var2, fill = correlacao)) +
-  geom_text(aes(x = var1, y = var2, label = round(correlacao, digits = 3)), 
-            size = 3) +
-  labs(x = NULL,
-       y = NULL,
-       fill = "Correlações") +
-  scale_fill_gradient2(low = "darkblue", 
-                       mid = "white", 
-                       high = "darkred",
-                       midpoint = 0) +
-  theme_bw()
-
-#Lembra da ggplotly() do pacote 'plotly'? Pois é! Podemos aplicá-la aqui 
-#também!
-ggplotly(
-  ggplot(correlacoes) +
-    geom_tile(aes(x = var1, y = var2, fill = correlacao)) +
-    geom_text(aes(x = var1, y = var2, label = round(correlacao, digits = 3)), 
-              size = 3) +
-    labs(x = NULL,
-         y = NULL,
-         fill = "Correlações") +
-    scale_fill_gradient2(low = "darkblue", 
-                         mid = "white", 
-                         high = "darkred",
-                         midpoint = 0) +
     theme_bw()
 )
 
@@ -507,14 +378,16 @@ ggplotly(
 #No R, para construir alguns boxplots, é melhor que utilizemos nossas bases de
 #dados no formato long. Basta utilizarmos a função melt() do pacote 'reshape2':
 
-atlas_long <- melt(atlas_ambiental[, 2:11], id.vars = "distritos")
+atlas_long <- atlas_ambiental |> 
+  select(2:11) |> 
+  pivot_longer(!distritos, values_to = 'value')
 
 head(atlas_long)
 tail(atlas_long)
 
 #Agora sim, podemos plotar nossos dados:
 ggplot(atlas_long) +
-  geom_boxplot(aes(x = variable, y = value, fill = variable))
+  geom_boxplot(aes(x = name , y = value, fill = name))
 
 #A visualização ficou diferente do esperado, não é? Você consegue dizer a
 #razão disso?
@@ -523,7 +396,9 @@ ggplot(atlas_long) +
 #Podemos resolver a situação padronizando as variáveis com o procedimento
 #zscores, por exemplo:
 
-atlas_padronizado <- atlas_ambiental
+atlas_padronizado <- atlas_ambiental |> 
+  mutate(across(c(renda:denspop), scale))
+
 
 atlas_padronizado[, 3:11] <- scale(atlas_padronizado[, 3:11])
 
@@ -531,7 +406,9 @@ head(atlas_padronizado)
 tail(atlas_padronizado)
 
 #Como já visto, devemos transformar nossa base de dados em formato long:
-atlas_padronizado_long <- melt(atlas_padronizado[, 2:11], id.vars = "distritos")
+atlas_padronizado_long <- atlas_padronizado |> 
+  select(2:11) |> 
+  pivot_longer(!distritos, values_to = 'value')
 
 head(atlas_padronizado_long)
 tail(atlas_padronizado_long)
@@ -539,12 +416,12 @@ tail(atlas_padronizado_long)
 #Vamos tentar, mais uma vez, utilizar a sintaxe básica do ggplot2 para a 
 #construção de boxplots:
 ggplot(atlas_padronizado_long) +
-  geom_boxplot(aes(x = variable, y = value, fill = variable))
+  geom_boxplot(aes(x = name, y = value, fill = name))
 
 #Podemos deixar o gráfico mais elegante nomeando os eixos e alterando o plano
 #de fundo:
 ggplot(atlas_padronizado_long) +
-  geom_boxplot(aes(x = variable, y = value, fill = variable)) +
+  geom_boxplot(aes(x = name, y = value, fill = name)) +
   labs(x = "Variáveis",
        y = "Valores") +
   theme_bw()
@@ -552,8 +429,8 @@ ggplot(atlas_padronizado_long) +
 #Com objetivos puramente didáticos, podemos visualizar cada observação de cada
 #variável padronizada da seguinte maneira:
 ggplot(atlas_padronizado_long) +
-  geom_boxplot(aes(x = variable, y = value, fill = variable)) +
-  geom_point(aes(x = variable, y = value), alpha = 0.1) +
+  geom_boxplot(aes(x = name, y = value, fill = name)) +
+  geom_point(aes(x = name, y = value), alpha = 0.1) +
   labs(x = "Variáveis",
        y = "Valores") +
   theme_bw()
@@ -561,13 +438,39 @@ ggplot(atlas_padronizado_long) +
 #E sim! Podemos deixas nossos boxplots interativos com ajuda do pacote 'plotly'
 ggplotly(
   ggplot(atlas_padronizado_long) +
-    geom_boxplot(aes(x = variable, y = value, fill = variable)) +
+    geom_boxplot(aes(x = name, y = value, fill = name)) +
     labs(x = "Variáveis",
          y = "Valores") +
     theme_bw()
 )
+################################################################################
+#                                       MAPAS                                  #
+################################################################################
+library(brazilmaps)
+library(sf)
+  
+#obtendo o mapa das cidades de SP
+map_sp <- get_brmap(geo = "City",
+                    geo.filter = list(State = 35),
+                    class = "sf")
 
+# join dados e shapes das cidades
+dados_sp_map <- dados_sp |> 
+  left_join(map_sp, by = c("codigo" = "City"))
+
+
+# plotando o mapa
+dados_sp_map |> 
+  st_as_sf() |> 
+  ggplot() +
+  geom_sf(aes(fill = idh), colour = "black", size = 0.3) +
+  theme(legend.position = c(.85,.8)) +
+  theme_void(14) +
+  labs(fill = "IDH")
+  
 ################################################################################
 #                               FERRAMENTA ESQUISSER                           #
 ################################################################################
+library(esquisse)
+
 esquisser(atlas_ambiental)
