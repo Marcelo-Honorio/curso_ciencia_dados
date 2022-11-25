@@ -206,7 +206,7 @@ ggplot(data = dados_sp) +
 ################################################################################
 
 #Carregando os dados
-#load("atlas_ambiental.RData")
+load("atlas_ambiental.RData")
 
 #Observando os dados:
 glimpse(atlas_ambiental)
@@ -386,8 +386,11 @@ head(atlas_long)
 tail(atlas_long)
 
 #Agora sim, podemos plotar nossos dados:
-ggplot(atlas_long) +
-  geom_boxplot(aes(x = name , y = value, fill = name))
+atlas_long |> 
+  mutate(name = factor(name)) |> 
+  ggplot() +
+  geom_boxplot(aes(x = name , y = value, fill = name)) + 
+  facet_wrap(~name)
 
 #A visualização ficou diferente do esperado, não é? Você consegue dizer a
 #razão disso?

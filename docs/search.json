@@ -397,5 +397,537 @@
     "title": "Visualização de Dados com ggplot2",
     "section": "Histogramas",
     "text": "Histogramas\nPara definir o tamanho de cada intervalo, podemos utilizar o argumento bindwidth\n\nggplot(diamante) +\n    geom_histogram(aes(x=quilate), binwidth=0.05, fill=\"#69b3a2\", color=\"#e9ecef\", alpha=0.9) +\n    ggtitle(\"Intervalo de 0.05\")"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#tipos-de-dados",
+    "href": "explorando_dados/explorando_dados.html#tipos-de-dados",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tipos de Dados",
+    "text": "Tipos de Dados"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#estimativas-de-localização",
+    "href": "explorando_dados/explorando_dados.html#estimativas-de-localização",
+    "title": "Análise Exploratória de Dados",
+    "section": "Estimativas de Localização",
+    "text": "Estimativas de Localização"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#média",
+    "href": "explorando_dados/explorando_dados.html#média",
+    "title": "Análise Exploratória de Dados",
+    "section": "Média",
+    "text": "Média\nEstimativa de localização mais básica é a média, ou valor médio.\n\\[\\displaystyle_ M ={\\frac {1}{n}}\\sum_{i=1}^{n}x_{i}={\\frac {x_{1}+x_{2}+\\cdots+x_{n}}{n}}\\]\n\nmean(diamante$preco)\n\n[1] 3932.8"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#média-aparada",
+    "href": "explorando_dados/explorando_dados.html#média-aparada",
+    "title": "Análise Exploratória de Dados",
+    "section": "Média aparada",
+    "text": "Média aparada\nSe calcula excluindo um número fixado de valores selecionados em cada ponta, e então tirando uma média dos valores restantes.\n\\[\\displaystyle MAP ={\\frac {1}{n-2p}}\\sum_{i= p+1^x_{(i)}}^{n-p}x_{i}={\\frac {x_{1}+x_{2}+\\cdots+x_{n}}{n}}\\] Uma média aparada elimina a influência dos valores extremos."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#média-ponderada",
+    "href": "explorando_dados/explorando_dados.html#média-ponderada",
+    "title": "Análise Exploratória de Dados",
+    "section": "Média ponderada",
+    "text": "Média ponderada\nCalcula a multiplicação de cada valor de dado \\(x_{i}\\) por um peso \\(w_{i}\\) e dividindo sua somatória pela soma de todos os pesos.\n\\[\\displaystyle MP ={\\frac {\\sum_{i=1}^{n}w_{i}x_{i}}{\\sum_{i}^{n}w_{i}}}\\]"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#mediana-e-estimativas-robustas",
+    "href": "explorando_dados/explorando_dados.html#mediana-e-estimativas-robustas",
+    "title": "Análise Exploratória de Dados",
+    "section": "Mediana e estimativas robustas",
+    "text": "Mediana e estimativas robustas\nA mediana é o número central em uma lista de dados classificada.\nÉ chamada de estimativa robusta de localização, pois não é influenciada por outliers(casos extremos), que podem enviesar os resultados."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#estimativas-de-variabilidade",
+    "href": "explorando_dados/explorando_dados.html#estimativas-de-variabilidade",
+    "title": "Análise Exploratória de Dados",
+    "section": "Estimativas de variabilidade",
+    "text": "Estimativas de variabilidade\nOutra dimessão da sumarização de uma caracteristica. Uma segunda dimensão, variabilidade, também chamada de dispersão, mede se os valores de dados estão compactados ou espalhados."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#desvio-absoluto-médio",
+    "href": "explorando_dados/explorando_dados.html#desvio-absoluto-médio",
+    "title": "Análise Exploratória de Dados",
+    "section": "Desvio absoluto médio",
+    "text": "Desvio absoluto médio\nDiz o quanto os dados estão dispersos em torno do valor central.\n\\[\\displaystyle DAM ={\\frac {\\sum_{i=1}^{n} |x_{i} - m|}{n}}\\] em que \\(m\\) é a média da amostra"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#variância-e-desvio-padrão",
+    "href": "explorando_dados/explorando_dados.html#variância-e-desvio-padrão",
+    "title": "Análise Exploratória de Dados",
+    "section": "Variância e desvio-padrão",
+    "text": "Variância e desvio-padrão\nSão as estimativas de variabilidade mais conhecidas e são baseados em desvio quadrático. A variância é uma média dos desvios quadráticos e o desvio-padrão é a raiz quadrada da variância.\n\\[\\displaystyle variance ={\\frac {\\sum(x_{i} - m)^2}{n - 1}}\\] \\[\\displaystyle DP ={\\sqrt {variance}}\\]"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#desvio-absoluto-mediano",
+    "href": "explorando_dados/explorando_dados.html#desvio-absoluto-mediano",
+    "title": "Análise Exploratória de Dados",
+    "section": "Desvio absoluto mediano",
+    "text": "Desvio absoluto mediano\nUma estimativa da variabilidade robusta é o desvio absoluto mediano da mediana ou MAD:\n\\[\\displaystyle MAD ={Median ({|x_1 - md|, |x_1 - md|,..,|x_N - md|})}\\] Desvio-padrão é sempre maior do que o desvio absoluto médio, que é mior do que o desvio absoluto mediano."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#estimativas-baseadas-em-percentis",
+    "href": "explorando_dados/explorando_dados.html#estimativas-baseadas-em-percentis",
+    "title": "Análise Exploratória de Dados",
+    "section": "Estimativas baseadas em percentis",
+    "text": "Estimativas baseadas em percentis\nUma abordagem diferente para estimar dispersão é com base na observação da distribuição dos dados classificados."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#percentis-e-boxplots",
+    "href": "explorando_dados/explorando_dados.html#percentis-e-boxplots",
+    "title": "Análise Exploratória de Dados",
+    "section": "Percentis e Boxplots",
+    "text": "Percentis e Boxplots\nPercentis são especialmente valiosos para resumir as caudas(a amplitude externa) da distribuição.\n\nquantile(diamante$preco, p = c(.05, .25, .5, .75, .95))\n\n      5%      25%      50%      75%      95% \n  544.00   950.00  2401.00  5324.25 13107.10"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#percentis-e-boxplots-1",
+    "href": "explorando_dados/explorando_dados.html#percentis-e-boxplots-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Percentis e Boxplots",
+    "text": "Percentis e Boxplots\nOs boxplots são baseados em percentis e são um modo rápido de visualizar a distribuição dos dados.\n\nPor predefinição, a função estende os whiskers até o ponto mais longe além da caixa, porém não vai além de 1.5 vez o IQR."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#tabela-de-frequência-e-histogramas",
+    "href": "explorando_dados/explorando_dados.html#tabela-de-frequência-e-histogramas",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tabela de Frequência e Histogramas",
+    "text": "Tabela de Frequência e Histogramas\nUma tabela de frequência de uma variável divide a amplitude variável em segmentos igualmente espaçados e nos diz quantos valores caem em cada segmento.\n\nbreaks <- seq(from = min(diamante$preco),\n              to = max(diamante$preco), length=10)\n\npre_freq <- cut(diamante$preco, breaks = breaks,\n                right = T, include.lowest = T)\n\ntable(pre_freq)\n\npre_freq\n     [326,2.38e+03] (2.38e+03,4.44e+03] (4.44e+03,6.49e+03] (6.49e+03,8.55e+03] \n              26778                9912                6901                3418 \n(8.55e+03,1.06e+04] (1.06e+04,1.27e+04] (1.27e+04,1.47e+04] (1.47e+04,1.68e+04] \n               2278                1651                1222                 962 \n(1.68e+04,1.88e+04] \n                818 \n\n\nÉ uma versão tabular das contagens de frequência encontradas em um histograma."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#tabela-de-frequência-e-histogramas-1",
+    "href": "explorando_dados/explorando_dados.html#tabela-de-frequência-e-histogramas-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tabela de Frequência e Histogramas",
+    "text": "Tabela de Frequência e Histogramas\nUm Histograma é um jeito de visualizar um tabela frequência, com as colunas no eixo x e a contagem de dados no eixo y.\n\nIsso dá uma ideia da distribuição dos dados de forma rápida."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#estimativas-de-densidade",
+    "href": "explorando_dados/explorando_dados.html#estimativas-de-densidade",
+    "title": "Análise Exploratória de Dados",
+    "section": "Estimativas de densidade",
+    "text": "Estimativas de densidade\nUm gráfico de densidade corresponde à representação do histograma como uma proporção, em vez de contagens."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#frequência",
+    "href": "explorando_dados/explorando_dados.html#frequência",
+    "title": "Análise Exploratória de Dados",
+    "section": "Frequência",
+    "text": "Frequência"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#correlação",
+    "href": "explorando_dados/explorando_dados.html#correlação",
+    "title": "Análise Exploratória de Dados",
+    "section": "Correlação",
+    "text": "Correlação\nA análise exploratória de dados, em muitos projetos de modelagem, envolve o estudo da correlação entre preditores, e entre preditores e uma variável-alvo.\n\\[\\displaystyle r_{i}={\\frac {\\sum_ {i = 1}^{N} (x_{i} - \\bar x)(y_{i} - \\bar y)}{(N - 1)s_x s_y}}\\] O coeficiente de correlação sempre fica entre +1(correlação positiva perfeita) e -1(correlação negativa perfeita). O 0 indica ausência de correlação."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#matriz-de-correlação",
+    "href": "explorando_dados/explorando_dados.html#matriz-de-correlação",
+    "title": "Análise Exploratória de Dados",
+    "section": "Matriz de correlação",
+    "text": "Matriz de correlação\nComumente desenhada de modo a expor visualmente o relacionamento entre múltiplas variáveis.\n\n\n                 milhas_por_galao cilindros cilindrada cavalos_forca  eixo\nmilhas_por_galao             1.00     -0.85      -0.85         -0.78  0.68\ncilindros                   -0.85      1.00       0.90          0.83 -0.70\ncilindrada                  -0.85      0.90       1.00          0.79 -0.71\ncavalos_forca               -0.78      0.83       0.79          1.00 -0.45\neixo                         0.68     -0.70      -0.71         -0.45  1.00\npeso                        -0.87      0.78       0.89          0.66 -0.71\nvelocidade                   0.42     -0.59      -0.43         -0.71  0.09\nforma                        0.66     -0.81      -0.71         -0.72  0.44\n                  peso velocidade forma\nmilhas_por_galao -0.87       0.42  0.66\ncilindros         0.78      -0.59 -0.81\ncilindrada        0.89      -0.43 -0.71\ncavalos_forca     0.66      -0.71 -0.72\neixo             -0.71       0.09  0.44\npeso              1.00      -0.17 -0.55\nvelocidade       -0.17       1.00  0.74\nforma            -0.55       0.74  1.00"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#matriz-de-correlação-1",
+    "href": "explorando_dados/explorando_dados.html#matriz-de-correlação-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Matriz de correlação",
+    "text": "Matriz de correlação"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#gráficos-de-dispersão",
+    "href": "explorando_dados/explorando_dados.html#gráficos-de-dispersão",
+    "title": "Análise Exploratória de Dados",
+    "section": "Gráficos de dispersão",
+    "text": "Gráficos de dispersão\nO modo-padrão de visualizar o relacionamento entre duas variáveis de dados mensudaras é com um gráfico de dispersão."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#compartimentação-hexagonal-e-contornos",
+    "href": "explorando_dados/explorando_dados.html#compartimentação-hexagonal-e-contornos",
+    "title": "Análise Exploratória de Dados",
+    "section": "Compartimentação Hexagonal e Contornos",
+    "text": "Compartimentação Hexagonal e Contornos"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#outliers",
+    "href": "explorando_dados/explorando_dados.html#outliers",
+    "title": "Análise Exploratória de Dados",
+    "section": "Outliers",
+    "text": "Outliers\nA definição exata de um autlier é bastante subjetiva, apesar de algumas convenções serem utilizadas em diversos sumários e gráficos de dados.\n\nSer um outlier por si só não torna um valor de dado inválido ou errado. Ainda assim, os autliers costumam ser o resultado de erros de dados, como mistura de dados de dados diferentes ou leituras ruins de um sensor."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#encontrar-outliers",
+    "href": "explorando_dados/explorando_dados.html#encontrar-outliers",
+    "title": "Análise Exploratória de Dados",
+    "section": "Encontrar outliers",
+    "text": "Encontrar outliers\nO método mais comum para encontrar outliers usa o famoso z-score. \\[\\displaystyle Z_{score}(X)={\\frac {x_{i} - \\bar x}{DesvioPadrão}}\\] Uma estratégia para encontrar outliers, então, é marcar aqueles pontos que, nessa escala, estão muito discrepantes. Normalmente se adota um ponto de corte pequeno, como -2 e 2 ou no máximo -3 e 3."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#encontrar-outliers-1",
+    "href": "explorando_dados/explorando_dados.html#encontrar-outliers-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Encontrar outliers",
+    "text": "Encontrar outliers\nPor conta desse comportamento baseado em estatísticas de ordem, o z-score robusto se comporta muito melhor do que o z-score comum, principalmente quando o assunto é encontrar outliers. \\[\\displaystyle Z_{score}ROBUSTO ={\\frac {x_{i} - mediana}{MAD}}\\]\nSe você comparar essa fórmula com a outra que postamos lá em cima, duas coisas mudaram: a média virou mediana e o desvio padrão virou MAD."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#valores-ausentes",
+    "href": "explorando_dados/explorando_dados.html#valores-ausentes",
+    "title": "Análise Exploratória de Dados",
+    "section": "Valores ausentes",
+    "text": "Valores ausentes\nO R referência os dados ausentes como NA, que quer dizer Not Available(indisponível). Em aplicações estatísticas, dados NA podem ser dados inexistentes ou dados que existem, porém não foram observados."
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#valores-ausentes-1",
+    "href": "explorando_dados/explorando_dados.html#valores-ausentes-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Valores ausentes",
+    "text": "Valores ausentes\nO que fazer com os dados ausentes?\n\nRetirar toda a linha com valores NA:\n\n\n\n[1] 344\n\n\n[1] 333\n\n\n\nSelecionar colunas:\n\n\n\n\n\nImputação de Tendência Central:\n\n\n\n\n\nDeterminando o valor:"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#dados-desbalanceados",
+    "href": "explorando_dados/explorando_dados.html#dados-desbalanceados",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados\nDados desbalanceados podem ser definidos pela pequena incidência de uma categoria dentro de um dataset.\n\nDetecção de fraude;\nPrevisão de inadimplência;\nIdentificador de spam;\nBusca por anomalias/outliers;\nDetecção de possíveis roubos/furtos/vulnerabilidades;\netc"
+  },
+  {
+    "objectID": "explorando_dados/explorando_dados.html#dados-desbalanceados-1",
+    "href": "explorando_dados/explorando_dados.html#dados-desbalanceados-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados\nE isso é um grande problema pois normalmente estamos interessados em prever a classe minoritária.\n\nUndersampling: envolve a exclusão aleatória de algumas instâncias de classe majoritária.\n\n\n\n\n\nOversampling: Consiste em criar sinteticamente novas observações da classe minoritária, com o objetivo de igualar a proporção das categorias.\n\n\n\n\n-SMOTE: Consiste em criar observações intermediárias entre dados parecidos.Não relaciona necessáriamente a média entre ambas."
+  },
+  {
+    "objectID": "explorando_dados.html#tipos-de-dados",
+    "href": "explorando_dados.html#tipos-de-dados",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tipos de Dados",
+    "text": "Tipos de Dados"
+  },
+  {
+    "objectID": "explorando_dados.html#média",
+    "href": "explorando_dados.html#média",
+    "title": "Análise Exploratória de Dados",
+    "section": "Média",
+    "text": "Média\n\nA média é a estimativa de localização mais básica.\n\\[\\displaystyle mean ={\\frac {1}{n}}\\sum_{i=1}^{n}x_{i}={\\frac {x_{1}+x_{2}+\\cdots+x_{n}}{n}}\\]\n\nmean(diamante$preco)\n\n[1] 3932.8\n\n\n\nMédia é uma medida sensível a valores extremos.\nPara valores discretos a média pode não pertencer ao conjuto da amostra."
+  },
+  {
+    "objectID": "explorando_dados.html#média-aparada",
+    "href": "explorando_dados.html#média-aparada",
+    "title": "Análise Exploratória de Dados",
+    "section": "Média aparada",
+    "text": "Média aparada\nCalcular a média depois de excluir um número fixado de valores selecionados em cada ponta.\n\\[\\displaystyle MAP ={\\frac {1}{n-2p}}\\sum_{i= p+1^x_{(i)}}^{n-p}\\]\n\nElimina a influência dos valores extremos."
+  },
+  {
+    "objectID": "explorando_dados.html#média-ponderada",
+    "href": "explorando_dados.html#média-ponderada",
+    "title": "Análise Exploratória de Dados",
+    "section": "Média ponderada",
+    "text": "Média ponderada\nFórmula:\n\\[\\displaystyle weighted.mean ={\\frac {\\sum_{i=1}^{n}w_{i}x_{i}}{\\sum_{i}^{n}w_{i}}}\\]\n\n\nTem o poder de diminuir o peso de observações altamente variáveis.\nPode aumentar a representação de grupos subrepresentados.\n\n\nweighted.mean(diamante$preco)\n\n[1] 3932.8"
+  },
+  {
+    "objectID": "explorando_dados.html#mediana-e-estimativas-robustas",
+    "href": "explorando_dados.html#mediana-e-estimativas-robustas",
+    "title": "Análise Exploratória de Dados",
+    "section": "Mediana e estimativas robustas",
+    "text": "Mediana e estimativas robustas\n\nÉ o número central em uma lista de dados classificada.\n\nmedian(diamante$preco)\n\n[1] 2401\n\n\nÉ chamada de estimativa robusta de localização, pois não é influenciada por outliers(casos extremos), que podem enviesar os resultados."
+  },
+  {
+    "objectID": "explorando_dados.html#variabilidade",
+    "href": "explorando_dados.html#variabilidade",
+    "title": "Análise Exploratória de Dados",
+    "section": "Variabilidade",
+    "text": "Variabilidade\nUma segunda dimensão, variabilidade, também chamada de dispersão, mede se os valores de dados estão compactados ou espalhados."
+  },
+  {
+    "objectID": "explorando_dados.html#desvio-absoluto-médio",
+    "href": "explorando_dados.html#desvio-absoluto-médio",
+    "title": "Análise Exploratória de Dados",
+    "section": "Desvio absoluto médio",
+    "text": "Desvio absoluto médio\n\nDiz o quanto os dados estão dispersos em torno do valor médio.\n\\[\\displaystyle meanAD ={\\frac {\\sum_{i=1}^{n} |x_{i} - \\bar x|}{n}}\\]\nem que \\(\\bar x\\) é a média da amostra\n\n\ndiamante |> \n  filter(!is.na(preco)) |> \n  mutate(numerador = abs(preco - mean(preco))) |> \n  summarise(sum(numerador)/length(numerador))\n\n# A tibble: 1 × 1\n  `sum(numerador)/length(numerador)`\n                               <dbl>\n1                              3032."
+  },
+  {
+    "objectID": "explorando_dados.html#variância-e-desvio-padrão",
+    "href": "explorando_dados.html#variância-e-desvio-padrão",
+    "title": "Análise Exploratória de Dados",
+    "section": "Variância e desvio-padrão",
+    "text": "Variância e desvio-padrão\n\nSão as estimativas de variabilidade mais conhecidas e são baseados em desvio quadrático.\n\\[\\displaystyle var ={\\frac {\\sum(x_{i} - \\bar x)^2}{n - 1}}\\] \\[\\displaystyle sd ={\\sqrt {var}}\\] A variância é uma média dos desvios quadráticos e o desvio-padrão é a raiz quadrada da variância."
+  },
+  {
+    "objectID": "explorando_dados.html#desvio-absoluto-mediano",
+    "href": "explorando_dados.html#desvio-absoluto-mediano",
+    "title": "Análise Exploratória de Dados",
+    "section": "Desvio absoluto mediano",
+    "text": "Desvio absoluto mediano\n\nUma estimativa da variabilidade robusta é o desvio absoluto mediano da mediana ou MAD:\n\\[\\displaystyle mad ={Median ({|x_1 - md|, |x_2 - md|,..,|x_N - md|})}\\] Desvio-padrão é sempre maior do que o desvio absoluto médio, que é maior do que o desvio absoluto mediano.\n\n\nmad(diamante$preco)\n\n[1] 2475.942"
+  },
+  {
+    "objectID": "explorando_dados.html#estimativas-baseadas-em-percentis",
+    "href": "explorando_dados.html#estimativas-baseadas-em-percentis",
+    "title": "Análise Exploratória de Dados",
+    "section": "Estimativas baseadas em percentis",
+    "text": "Estimativas baseadas em percentis\n\nUma abordagem diferente para estimar dispersão é com base na observação da distribuição dos dados classificados.\n\nAmplitude interquartil(IQR): a medida mais famosa é a diferença entre o 25º percentil e o 75º percentil"
+  },
+  {
+    "objectID": "explorando_dados.html#percentis-e-boxplots",
+    "href": "explorando_dados.html#percentis-e-boxplots",
+    "title": "Análise Exploratória de Dados",
+    "section": "Percentis e Boxplots",
+    "text": "Percentis e Boxplots\n\nPercentis são especialmente valiosos para resumir as caudas(a amplitude externa) da distribuição.\n\nquantile(diamante$preco, p = c(.05, .25, .5, .75, .95))\n\n      5%      25%      50%      75%      95% \n  544.00   950.00  2401.00  5324.25 13107.10 \n\n\n\nPara conjuntos de dados muito grandes, calcular os percentis pode ser muito caro computacionalmente."
+  },
+  {
+    "objectID": "explorando_dados.html#percentis-e-boxplots-1",
+    "href": "explorando_dados.html#percentis-e-boxplots-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Percentis e Boxplots",
+    "text": "Percentis e Boxplots\nOs boxplots são baseados em percentis e são um modo rápido de visualizar a distribuição dos dados."
+  },
+  {
+    "objectID": "explorando_dados.html#tabela-de-frequência-e-histogramas",
+    "href": "explorando_dados.html#tabela-de-frequência-e-histogramas",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tabela de Frequência e Histogramas",
+    "text": "Tabela de Frequência e Histogramas\n\nÉ uma versão tabular das contagens de frequência encontradas em um histograma.\n\nbreaks <- seq(from = 0, \n              to = max(diamante$preco), by = sd(diamante$preco, na.rm = T))\n\nbreaks <- c(breaks, max(breaks) + sd(diamante$preco, na.rm = T))\n\ndiamante_freq <- diamante |> \n  filter(!is.na(preco)) |> \n  mutate(pre_freq = cut(preco, breaks = breaks,\n                        labels = c(\"1d\",\"2d\", \"3d\", \"4d\", \"5d\"))) |> \n  count(pre_freq)\n\n\n\ndiamante_freq\n\n# A tibble: 5 × 2\n  pre_freq     n\n  <fct>    <int>\n1 1d       34500\n2 2d       11804\n3 3d        4152\n4 4d        2312\n5 5d        1172"
+  },
+  {
+    "objectID": "explorando_dados.html#tabela-de-frequência-e-histogramas-1",
+    "href": "explorando_dados.html#tabela-de-frequência-e-histogramas-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tabela de Frequência e Histogramas",
+    "text": "Tabela de Frequência e Histogramas\nUm Histograma é um jeito de visualizar um tabela frequência.\n\nIsso dá uma ideia da distribuição dos dados de forma rápida."
+  },
+  {
+    "objectID": "explorando_dados.html#estimativas-de-densidade",
+    "href": "explorando_dados.html#estimativas-de-densidade",
+    "title": "Análise Exploratória de Dados",
+    "section": "Estimativas de densidade",
+    "text": "Estimativas de densidade\n\nUm gráfico de densidade corresponde à representação do histograma como uma proporção, em vez de contagens."
+  },
+  {
+    "objectID": "explorando_dados.html#frequência",
+    "href": "explorando_dados.html#frequência",
+    "title": "Análise Exploratória de Dados",
+    "section": "Frequência",
+    "text": "Frequência\nUma tabela contendo as frequências (absolutas e/ou relativas) de unidades de investigação para cada categoria do atributo avaliado por uma variável qualitativa é chamada de distribuição de frequências dessa variável.\n\n\n\n\n \n  \n    corte \n    quantidade \n  \n \n\n  \n    Justo \n    1610 \n  \n  \n    Bom \n    4906 \n  \n  \n    Muito Bom \n    12082 \n  \n  \n    Premium \n    13791 \n  \n  \n    Ideal \n    21551"
+  },
+  {
+    "objectID": "explorando_dados.html#correlação",
+    "href": "explorando_dados.html#correlação",
+    "title": "Análise Exploratória de Dados",
+    "section": "Correlação",
+    "text": "Correlação\nA análise exploratória de dados, em muitos projetos de modelagem, envolve o estudo da correlação entre preditores, e entre preditores e uma variável-alvo.\n\\[\\displaystyle cor_{i}={\\frac {\\sum_ {i = 1}^{N} (x_{i} - \\bar x)(y_{i} - \\bar y)}{(N - 1)s_x s_y}}\\] O coeficiente de correlação sempre fica entre +1(correlação positiva perfeita) e -1(correlação negativa perfeita). O 0 indica ausência de correlação."
+  },
+  {
+    "objectID": "explorando_dados.html#matriz-de-correlação",
+    "href": "explorando_dados.html#matriz-de-correlação",
+    "title": "Análise Exploratória de Dados",
+    "section": "Matriz de correlação",
+    "text": "Matriz de correlação\n\nComumente desenhada de modo a expor visualmente o relacionamento entre múltiplas variáveis.\n\n\n                 milhas_por_galao cilindros cilindrada cavalos_forca  eixo\nmilhas_por_galao             1.00     -0.85      -0.85         -0.78  0.68\ncilindros                   -0.85      1.00       0.90          0.83 -0.70\ncilindrada                  -0.85      0.90       1.00          0.79 -0.71\ncavalos_forca               -0.78      0.83       0.79          1.00 -0.45\neixo                         0.68     -0.70      -0.71         -0.45  1.00\n\n\n\nObserve a diagonal de 1s e a redundância das informações acima e abaixo da diagonal."
+  },
+  {
+    "objectID": "explorando_dados.html#matriz-de-correlação-1",
+    "href": "explorando_dados.html#matriz-de-correlação-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Matriz de correlação",
+    "text": "Matriz de correlação"
+  },
+  {
+    "objectID": "explorando_dados.html#gráficos-de-dispersão",
+    "href": "explorando_dados.html#gráficos-de-dispersão",
+    "title": "Análise Exploratória de Dados",
+    "section": "Gráficos de dispersão",
+    "text": "Gráficos de dispersão\n\nO modo-padrão de visualizar o relacionamento entre duas variáveis."
+  },
+  {
+    "objectID": "explorando_dados.html#compartimentação-hexagonal-e-contornos",
+    "href": "explorando_dados.html#compartimentação-hexagonal-e-contornos",
+    "title": "Análise Exploratória de Dados",
+    "section": "Compartimentação Hexagonal e Contornos",
+    "text": "Compartimentação Hexagonal e Contornos"
+  },
+  {
+    "objectID": "explorando_dados.html#outliers",
+    "href": "explorando_dados.html#outliers",
+    "title": "Análise Exploratória de Dados",
+    "section": "Outliers",
+    "text": "Outliers\nA definição exata de um autlier é bastante subjetiva, apesar de algumas convenções serem utilizadas em diversos sumários e gráficos de dados.\n\nSer um outlier por si só não torna um valor de dado inválido ou errado. Ainda assim, os autliers costumam ser o resultado de erros de dados, como mistura de dados diferentes ou leituras ruins de um sensor."
+  },
+  {
+    "objectID": "explorando_dados.html#encontrar-outliers",
+    "href": "explorando_dados.html#encontrar-outliers",
+    "title": "Análise Exploratória de Dados",
+    "section": "Encontrar outliers",
+    "text": "Encontrar outliers\nO método mais comum para encontrar outliers usa o famoso z-score. \\[\\displaystyle Z_{score}(X)={\\frac {x_{i} - \\bar x}{DesvioPadrão}}\\] Uma estratégia para encontrar outliers, então, é marcar aqueles pontos que, nessa escala, estão muito discrepantes. Normalmente se adota um ponto de corte pequeno, como -2 e 2 ou no máximo -3 e 3."
+  },
+  {
+    "objectID": "explorando_dados.html#encontrar-outliers-1",
+    "href": "explorando_dados.html#encontrar-outliers-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Encontrar outliers",
+    "text": "Encontrar outliers"
+  },
+  {
+    "objectID": "explorando_dados.html#valores-ausentes",
+    "href": "explorando_dados.html#valores-ausentes",
+    "title": "Análise Exploratória de Dados",
+    "section": "Valores ausentes",
+    "text": "Valores ausentes\n\nO R referência os dados ausentes como NA, que quer dizer Not Available(indisponível).\n\nidade_ana <- 30\nidade_beto <- NA\nidade_carla <- NA\n\nidade_ana == idade_beto\n## [1] NA\n\nidade_beto == idade_carla\n## [1] NA\n\nEm aplicações estatísticas, dados NA podem ser dados inexistentes ou dados que existem, porém não foram observados."
+  },
+  {
+    "objectID": "explorando_dados.html#valores-ausentes-1",
+    "href": "explorando_dados.html#valores-ausentes-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Valores ausentes",
+    "text": "Valores ausentes\n\nO que fazer com os dados ausentes?\n\n\nRetirar toda a linha com valores NA:\n\n\npinguins_sna <- pinguins |> \n  drop_na()\n\nnrow(pinguins)\n\n[1] 344\n\nnrow(pinguins_sna)\n\n[1] 333\n\n\n\n\n\nSelecionar colunas:\n\n\nsummary(pinguins)"
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados",
+    "href": "explorando_dados.html#dados-desbalanceados",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados\nDados desbalanceados podem ser definidos pela pequena incidência de uma categoria dentro de um dataset.\n\nDetecção de fraude;\nPrevisão de inadimplência;\nIdentificador de spam;\nBusca por anomalias/outliers;\nDetecção de possíveis roubos/furtos/vulnerabilidades; etc.."
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-1",
+    "href": "explorando_dados.html#dados-desbalanceados-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados\nDados desbalanceados podem ser definidos pela pequena incidência de uma categoria dentro de um dataset.\n\nDetecção de fraude;\nPrevisão de inadimplência;\nIdentificador de spam;\nBusca por anomalias/outliers;\nDetecção de possíveis roubos/furtos/vulnerabilidades; etc.."
+  },
+  {
+    "objectID": "explorando_dados.html#encontrar-outliers-2",
+    "href": "explorando_dados.html#encontrar-outliers-2",
+    "title": "Análise Exploratória de Dados",
+    "section": "Encontrar outliers",
+    "text": "Encontrar outliers\nO z-score robusto se comporta muito melhor do que o z-score comum, principalmente quando o assunto é encontrar outliers. \\[\\displaystyle Z_{score}ROBUSTO ={\\frac {x_{i} - mediana}{MAD}}\\]\nDuas coisas mudaram: a média virou mediana e o desvio padrão virou MAD."
+  },
+  {
+    "objectID": "explorando_dados.html#encontrar-outliers-3",
+    "href": "explorando_dados.html#encontrar-outliers-3",
+    "title": "Análise Exploratória de Dados",
+    "section": "Encontrar outliers",
+    "text": "Encontrar outliers"
+  },
+  {
+    "objectID": "explorando_dados.html#valores-ausentes-2",
+    "href": "explorando_dados.html#valores-ausentes-2",
+    "title": "Análise Exploratória de Dados",
+    "section": "Valores ausentes",
+    "text": "Valores ausentes\n\nO que fazer com os dados ausentes?\n\n\nImputação de Tendência Central:\n\n\npinguins_sna <- pinguins |> \n  mutate(massa_corporal = ifelse(is.na(massa_corporal),\n                                 mean(massa_corporal), \n                                 massa_corporal))\n\n\n\n\nDeterminando o valor:\n\n\npinguins2 <-  pinguins |> \n  replace_na(list(massa_corporal = 0))\n\nsummary(pinguins2)"
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-2",
+    "href": "explorando_dados.html#dados-desbalanceados-2",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados"
+  },
+  {
+    "objectID": "explorando_dados.html#percentis-e-boxplots-2",
+    "href": "explorando_dados.html#percentis-e-boxplots-2",
+    "title": "Análise Exploratória de Dados",
+    "section": "Percentis e Boxplots",
+    "text": "Percentis e Boxplots\nPor predefinição, a função estende os whiskers até o ponto mais longe além da caixa, porém não vai além de 1.5 vez o IQR."
+  },
+  {
+    "objectID": "explorando_dados.html#compartimentação-hexagonal",
+    "href": "explorando_dados.html#compartimentação-hexagonal",
+    "title": "Análise Exploratória de Dados",
+    "section": "Compartimentação Hexagonal",
+    "text": "Compartimentação Hexagonal\nAgrupa as observações em compartimentos hexagonais e com uma cor indica o número de registros naquele compartimento."
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-3",
+    "href": "explorando_dados.html#dados-desbalanceados-3",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados\n\nE isso é um grande problema pois normalmente estamos interessados em prever a classe minoritária.\n\nUndersampling: envolve a exclusão aleatória de algumas instâncias de classe majoritária.\n\n\nlibrary(ROSE)\n\nunder <- ovun.sample(rebatedor~., data=teste, method = \"under\")$data"
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-4",
+    "href": "explorando_dados.html#dados-desbalanceados-4",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados"
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-5",
+    "href": "explorando_dados.html#dados-desbalanceados-5",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados\n\n\nOversampling: Consiste em criar sinteticamente novas observações da classe minoritária, com o objetivo de igualar a proporção das categorias.\n\n\nlibrary(ROSE)\n\nover <- ovun.sample(rebatedor~., data=pessoas, method = \"over\")$data"
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-6",
+    "href": "explorando_dados.html#dados-desbalanceados-6",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados"
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-7",
+    "href": "explorando_dados.html#dados-desbalanceados-7",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados\n\nSMOTE: Consiste em criar observações intermediárias entre dados parecidos.Não relaciona necessáriamente a média entre ambas.\n\n\nlibrary(smotefamily)\n\nSMOTE <- SMOTE(pessoas[, -3], pessoas$rebatedor, K = 7)$data"
+  },
+  {
+    "objectID": "explorando_dados.html#tabela-de-frequência-e-histogramas-2",
+    "href": "explorando_dados.html#tabela-de-frequência-e-histogramas-2",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tabela de Frequência e Histogramas",
+    "text": "Tabela de Frequência e Histogramas\nCom uma linnha vertical na média"
+  },
+  {
+    "objectID": "explorando_dados.html#tabela-de-frequência-e-histogramas-3",
+    "href": "explorando_dados.html#tabela-de-frequência-e-histogramas-3",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tabela de Frequência e Histogramas",
+    "text": "Tabela de Frequência e Histogramas\nCom uma linnha vertical na média e mediana"
+  },
+  {
+    "objectID": "explorando_dados.html#tabela-de-frequência",
+    "href": "explorando_dados.html#tabela-de-frequência",
+    "title": "Análise Exploratória de Dados",
+    "section": "Tabela de Frequência",
+    "text": "Tabela de Frequência\n\nÉ uma versão tabular das contagens de frequência encontradas em um histograma.\n\nbreaks <- seq(from = 0, \n              to = max(diamante$preco), by = sd(diamante$preco, na.rm = T))\n\nbreaks <- c(breaks, max(breaks) + sd(diamante$preco, na.rm = T))\n\ndiamante_freq <- diamante |> \n  filter(!is.na(preco)) |> \n  mutate(pre_freq = cut(preco, breaks = breaks,\n                        labels = c(\"1d\",\"2d\", \"3d\", \"4d\", \"5d\"))) |> \n  count(pre_freq)\n\n\n\ndiamante_freq\n\n# A tibble: 5 × 2\n  pre_freq     n\n  <fct>    <int>\n1 1d       34500\n2 2d       11804\n3 3d        4152\n4 4d        2312\n5 5d        1172"
+  },
+  {
+    "objectID": "explorando_dados.html#histogramas",
+    "href": "explorando_dados.html#histogramas",
+    "title": "Análise Exploratória de Dados",
+    "section": "Histogramas",
+    "text": "Histogramas\nUm Histograma é um jeito de visualizar um tabela frequência.\n\nIsso dá uma ideia da distribuição dos dados de forma rápida."
+  },
+  {
+    "objectID": "explorando_dados.html#histogramas-1",
+    "href": "explorando_dados.html#histogramas-1",
+    "title": "Análise Exploratória de Dados",
+    "section": "Histogramas",
+    "text": "Histogramas\nCom uma linha vertical na média"
+  },
+  {
+    "objectID": "explorando_dados.html#histogramas-2",
+    "href": "explorando_dados.html#histogramas-2",
+    "title": "Análise Exploratória de Dados",
+    "section": "Histogramas",
+    "text": "Histogramas\nCom uma linha vertical na média e mediana"
+  },
+  {
+    "objectID": "explorando_dados.html#section",
+    "href": "explorando_dados.html#section",
+    "title": "Análise Exploratória de Dados",
+    "section": "",
+    "text": "A definição exata de um autlier é bastante subjetiva, apesar de algumas convenções serem utilizadas em diversos sumários e gráficos de dados.\n\nSer um outlier por si só não torna um valor de dado inválido ou errado. Ainda assim, os autliers costumam ser o resultado de erros de dados, como mistura de dados diferentes ou leituras ruins de um sensor."
+  },
+  {
+    "objectID": "explorando_dados.html#dados-desbalanceados-8",
+    "href": "explorando_dados.html#dados-desbalanceados-8",
+    "title": "Análise Exploratória de Dados",
+    "section": "Dados Desbalanceados",
+    "text": "Dados Desbalanceados"
   }
 ]

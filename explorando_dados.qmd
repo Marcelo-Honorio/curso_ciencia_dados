@@ -1,0 +1,629 @@
+---
+title: "Análise Exploratória de Dados"
+author: "Marcelo Honorio"
+format: 
+  revealjs:
+    output-file: explorando_dados.html
+    theme: custom.scss
+    transition: fade
+    background-transition: fade
+    highlight-style: ayu-mirage
+    slide-number: c/t
+    show-slide-number: all
+editor: visual
+---
+
+
+
+## Tipos de Dados
+```{r, echo=FALSE}
+library(dados)
+library(tidyverse)
+library(hrbrthemes)
+library(corrplot)
+library(workflowsets)
+library(knitr)
+library(kableExtra)
+library(ROSE)
+library(smotefamily)
+```
+
+<br>
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/tipo_dados.png")
+```
+
+
+
+# Estimativas de Localização
+
+## Média
+
+<br>
+
+A média é a estimativa de localização mais básica.
+
+$$\displaystyle mean ={\frac {1}{n}}\sum_{i=1}^{n}x_{i}={\frac {x_{1}+x_{2}+\cdots+x_{n}}{n}}$$
+
+```{r, echo=TRUE}
+mean(diamante$preco)
+```
+
+- Média é uma medida sensível a valores extremos.
+- Para valores discretos a média pode não pertencer ao conjuto da amostra.
+
+## Média aparada
+
+Calcular a média depois de excluir um número fixado de valores selecionados em cada ponta.
+
+$$\displaystyle MAP ={\frac {1}{n-2p}}\sum_{i= p+1^x_{(i)}}^{n-p}$$ 
+
+. . .
+
+Elimina a influência dos valores extremos.
+```{r echo=FALSE, out.width="70%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/media_aparada.png")
+```
+
+## Média ponderada
+
+Fórmula:
+
+$$\displaystyle weighted.mean ={\frac {\sum_{i=1}^{n}w_{i}x_{i}}{\sum_{i}^{n}w_{i}}}$$
+
+. . .
+
+-   Tem o poder de diminuir o peso de observações altamente variáveis.
+
+-   Pode aumentar a representação de grupos subrepresentados.
+```{r, echo=TRUE}
+weighted.mean(diamante$preco)
+```
+
+## Mediana e estimativas robustas
+
+<br>
+
+É o número central em uma lista de dados classificada.
+```{r, echo=TRUE}
+median(diamante$preco)
+```
+
+É chamada de estimativa **robusta** de localização, pois não é influenciada por **outliers**(casos extremos), que podem enviesar os resultados.
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/mediana.png")
+```
+
+# Estimativas de variabilidade
+
+## Variabilidade
+
+Uma segunda dimensão, variabilidade, também chamada de dispersão, mede se os valores de dados estão compactados ou espalhados.
+
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/medida_variabilidade.png")
+```
+
+
+## Desvio absoluto médio
+
+<br>
+
+Diz o quanto os dados estão dispersos em torno do valor médio.
+
+$$\displaystyle meanAD ={\frac {\sum_{i=1}^{n} |x_{i} - \bar x|}{n}}$$ 
+
+em que $\bar x$ é a média da amostra
+
+. . .
+```{r, echo=TRUE}
+diamante |> 
+  filter(!is.na(preco)) |> 
+  mutate(numerador = abs(preco - mean(preco))) |> 
+  summarise(sum(numerador)/length(numerador))
+
+```
+
+
+## Variância e desvio-padrão
+
+<br>
+
+São as estimativas de variabilidade mais conhecidas e são baseados em desvio quadrático.
+
+$$\displaystyle var ={\frac {\sum(x_{i} - \bar x)^2}{n - 1}}$$ $$\displaystyle sd ={\sqrt {var}}$$
+A variância é uma média dos desvios quadráticos e o desvio-padrão é a raiz quadrada da variância.
+
+
+## Desvio absoluto mediano
+
+<br>
+
+Uma estimativa da variabilidade robusta é o desvio absoluto mediano da mediana ou MAD:
+
+$$\displaystyle mad ={Median ({|x_1 - md|, |x_2 - md|,..,|x_N - md|})}$$ 
+Desvio-padrão é sempre maior do que o desvio absoluto médio, que é maior do que o desvio absoluto mediano.
+
+. . .
+```{r, echo=T}
+mad(diamante$preco)
+```
+
+
+## Estimativas baseadas em percentis
+
+<br>
+
+Uma abordagem diferente para estimar dispersão é com base na observação da distribuição dos dados **classificados**.
+
+- **Amplitude interquartil(IQR)**: a medida mais famosa é a diferença entre o 25º percentil e o 75º percentil
+
+## Percentis e Boxplots
+
+<br>
+
+
+
+Percentis são especialmente valiosos para resumir as `caudas`(a amplitude externa) da distribuição.
+
+```{r, echo=T}
+quantile(diamante$preco, p = c(.05, .25, .5, .75, .95))
+```
+
+<br>
+
+Para conjuntos de dados muito grandes, calcular os percentis pode ser muito caro computacionalmente.
+
+
+## Percentis e Boxplots
+
+Os boxplots são baseados em percentis e são um modo rápido de visualizar a distribuição dos dados.
+
+```{r, echo=FALSE}
+#| fig-align: center
+ggplot(diamante) +
+  geom_boxplot(aes(x=corte, y = preco, fill = corte), alpha = 0.3, 
+               outlier.colour="red",
+               outlier.fill="red",
+               outlier.size=1) +
+  theme(legend.position="none") +
+  scale_fill_brewer(palette="BuPu") +
+  xlab("")
+
+```
+
+## Percentis e Boxplots
+
+Por predefinição, a função estende os **whiskers** até o ponto mais longe além da caixa, porém não vai além de 1.5 vez o IQR.
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/box_plot.png")
+```
+
+
+# Tabela de Frequência e Histogramas
+
+## Tabela de Frequência
+
+<br>
+
+É uma versão tabular das contagens de frequência encontradas em um histograma.
+
+```{r echo=TRUE}
+
+breaks <- seq(from = 0, 
+              to = max(diamante$preco), by = sd(diamante$preco, na.rm = T))
+
+breaks <- c(breaks, max(breaks) + sd(diamante$preco, na.rm = T))
+
+diamante_freq <- diamante |> 
+  filter(!is.na(preco)) |> 
+  mutate(pre_freq = cut(preco, breaks = breaks,
+                        labels = c("1d","2d", "3d", "4d", "5d"))) |> 
+  count(pre_freq)
+
+
+
+diamante_freq
+```
+
+
+
+## Histogramas
+
+Um **Histograma** é um jeito de visualizar um tabela frequência.
+
+```{r, echo=FALSE}
+#| fig-align: "center"
+ggplot(diamante) +
+  geom_histogram(aes(x=preco), color="#e9ecef", fill="#69b3a2", alpha=0.6, position = 'identity') +
+  theme_ipsum()
+```
+
+Isso dá uma ideia da distribuição dos dados de forma rápida.
+
+## Histogramas
+
+
+Com uma linha vertical na `média`{style="color:blue"}
+```{r, echo=FALSE}
+#| fig-align: "center"
+ggplot(diamante) +
+  geom_histogram(aes(x=preco), color="#e9ecef", fill="#69b3a2", alpha=0.6, position = 'identity') +
+  geom_vline(aes(xintercept = mean(preco)),linewidth = 1.2, color = "blue") +
+  theme_ipsum()
+```
+
+## Histogramas
+
+Com uma linha vertical na `média`{style="color:blue"} e `mediana`{style="color:red"}
+```{r, echo=FALSE}
+#| fig-align: "center"
+ggplot(diamante) +
+  geom_histogram(aes(x=preco), color="#e9ecef", fill="#69b3a2", alpha=0.6, position = 'identity') +
+  geom_vline(aes(xintercept = mean(preco)),linewidth = 1.2) +
+  geom_vline(aes(xintercept = median(preco)),linewidth = 1.2, color = "red") +
+  theme_ipsum() 
+```
+
+## Estimativas de densidade
+
+<br>
+
+Um gráfico de densidade corresponde à representação do histograma como uma proporção, em vez de contagens.
+
+```{r}
+#| fig-align: "center"
+ggplot(diamante) +
+  geom_density(aes(x=preco), fill="#69b3a2", color="#e9ecef", alpha=0.8, adjust=1.5)
+
+```
+
+# Explorando Dados Binários e Categóricos
+
+## Frequência
+
+Uma tabela contendo as frequências (absolutas e/ou relativas) de unidades de investigação para cada categoria do atributo avaliado por uma variável qualitativa é chamada de distribuição de frequências dessa variável.
+
+```{r}
+diamante |> 
+    select(corte) |> 
+    count(corte) |>
+    rename(`quantidade` = n) |> 
+    kable(align = 'c', format.args = list(decimal.mark = ",", digits = NULL, preserve.width = 'individual'), row_label_position = 'c') |> 
+    kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'),  full_width = F, row_label_position = "c")  |> 
+    row_spec(0, color = 'white', background = '#243654', font_size = 30, monospace = F)  |> 
+    row_spec(1:5, font_size = 25,color = 'black')
+```
+
+
+# Correlação e compartimentação Hexagonal
+
+## Correlação
+
+A análise exploratória de dados, em muitos projetos de modelagem, envolve o estudo da correlação entre preditores, e entre preditores e uma variável-alvo.
+
+$$\displaystyle cor_{i}={\frac {\sum_ {i = 1}^{N} (x_{i} - \bar x)(y_{i} - \bar y)}{(N - 1)s_x s_y}}$$ O coeficiente de correlação sempre fica entre +1(correlação positiva perfeita) e -1(correlação negativa perfeita). O 0 indica ausência de correlação.
+
+## Matriz de correlação
+
+<br>
+
+Comumente desenhada de modo a expor visualmente o relacionamento entre múltiplas variáveis.
+
+```{r}
+#| fig-align: "center"
+res <- cor(mtcarros[1:5])
+round(res, 2)
+```
+
+<br>
+
+Observe a diagonal de **1s** e a redundância das informações acima e abaixo da diagonal.
+
+## Matriz de correlação
+
+::: columns
+::: {.column }
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/corrplot1.png")
+```
+:::
+::: {.column}
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/corrplot2.png")
+```
+:::
+:::
+## Gráficos de dispersão
+
+<br>
+
+O modo-padrão de visualizar o relacionamento entre duas variáveis.
+```{r}
+#| fig-align: "center"
+ggplot(diamante) +
+  geom_point(aes(x=quilate, y=preco)) +
+  theme_bw() +
+  labs(x = "Quilate", y = "Preço")
+              
+```
+
+
+## Compartimentação Hexagonal
+
+Agrupa as observações em compartimentos hexagonais e com uma cor indica o número de registros naquele compartimento.
+
+```{r}
+#| fig-align: "center"
+ggplot(diamante) +
+  geom_hex(aes(x=quilate, y=preco)) +
+  scale_fill_continuous(type = "viridis") +
+  theme_bw()
+```
+
+# Outliers e Valores ausentes
+
+##
+A definição exata de um autlier é bastante subjetiva, apesar de algumas convenções serem utilizadas em diversos sumários e gráficos de dados.
+
+```{r, echo=FALSE}
+#| fig-align: center
+ggplot(diamante) +
+  geom_boxplot(aes(x=corte, y = preco, fill = corte), alpha = 0.3, 
+               outlier.colour="red",
+               outlier.fill="red",
+               outlier.size=1) +
+  theme(legend.position="none") +
+  scale_fill_brewer(palette="BuPu") +
+  xlab("")
+
+```
+
+Ser um outlier por si só não torna um valor de dado inválido ou errado. Ainda assim, os autliers costumam ser o resultado de erros de dados, como mistura de dados diferentes ou leituras ruins de um sensor.
+
+## Encontrar outliers
+
+O método mais comum para encontrar outliers usa o famoso z-score. $$\displaystyle Z_{score}(X)={\frac {x_{i} - \bar x}{DesvioPadrão}}$$ Uma estratégia para encontrar outliers, então, é marcar aqueles pontos que, nessa escala, estão muito discrepantes. Normalmente se adota um ponto de corte pequeno, como -2 e 2 ou no máximo -3 e 3.
+
+## Encontrar outliers
+```{r}
+diamante%>% 
+  mutate(
+    z_score_mpg = (preco-mean(preco))/sd(preco),
+    e_outlier_mpg = if_else(abs(z_score_mpg) > 3, "É outlier", "Não é outlier")
+  ) %>% 
+  ggplot(ggplot2::aes(x = quilate, y = preco, color = e_outlier_mpg)) +
+  geom_point(size = 3) +
+  theme_minimal(15) +
+  labs(title = "Z-score > 3",x = "Quilate", y = "Preço", color = "")
+```
+
+
+## Encontrar outliers
+
+O z-score robusto se comporta muito melhor do que o z-score comum, principalmente quando o assunto é encontrar outliers. $$\displaystyle Z_{score}ROBUSTO ={\frac {x_{i} - mediana}{MAD}}$$
+
+Duas coisas mudaram: a média virou mediana e o desvio padrão virou MAD.
+
+## Encontrar outliers
+```{r}
+diamante%>% 
+  mutate(
+    z_score_mpg = (preco-median(preco))/mad(preco),
+    e_outlier_mpg = if_else(abs(z_score_mpg) > 3, "É outlier", "Não é outlier")
+  ) %>% 
+  ggplot(ggplot2::aes(x = quilate, y = preco, color = e_outlier_mpg)) +
+  geom_point(size = 3) +
+  theme_minimal(15) +
+  labs(title = "Z-score ROBUSTO > 3", x = "Quilate", y = "Preço", color = "")
+```
+
+## Valores ausentes
+
+<br>
+
+O R referência os dados ausentes como `NA`{style="color:red"}, que quer dizer Not Available(indisponível).
+
+```{r, echo=TRUE, eval=FALSE}
+idade_ana <- 30
+idade_beto <- NA
+idade_carla <- NA
+
+idade_ana == idade_beto
+## [1] NA
+
+idade_beto == idade_carla
+## [1] NA
+```
+
+Em aplicações estatísticas, dados `NA`{style="color:red"} podem ser dados inexistentes ou dados que existem, porém não foram observados.
+
+## Valores ausentes
+
+<br>
+
+O que fazer com os dados ausentes?
+
+. . .
+
+-   Retirar toda a linha com valores `NA`{style="color:red"}:
+```{r, echo=TRUE}
+pinguins_sna <- pinguins |> 
+  drop_na()
+
+nrow(pinguins)
+nrow(pinguins_sna)
+```
+
+. . .
+
+-   Selecionar colunas:
+```{r, echo=TRUE, eval=FALSE}
+summary(pinguins)
+
+```
+
+## Valores ausentes
+
+<br>
+
+O que fazer com os dados ausentes?
+
+. . .
+
+-   Imputação de Tendência Central:
+```{r, echo=TRUE, eval=FALSE}
+pinguins_sna <- pinguins |> 
+  mutate(massa_corporal = ifelse(is.na(massa_corporal),
+                                 mean(massa_corporal), 
+                                 massa_corporal))
+```
+
+. . .
+
+-   Determinando o valor:
+```{r, echo=TRUE, eval=FALSE}
+pinguins2 <-  pinguins |> 
+  replace_na(list(massa_corporal = 0))
+
+summary(pinguins2)
+```
+
+# Dados Desbalanceados
+
+## Dados Desbalanceados
+
+Dados desbalanceados podem ser definidos pela pequena incidência de uma categoria dentro de um dataset.
+
+-   Detecção de fraude;
+-   Previsão de inadimplência;
+-   Identificador de spam;
+-   Busca por anomalias/outliers;
+-   Detecção de possíveis roubos/furtos/vulnerabilidades; etc..
+
+## Dados Desbalanceados
+
+<br>
+
+```{r, echo=FALSE}
+teste <-  pessoas |> 
+  select(peso, altura, rebatedor) |> 
+  filter(rebatedor != "B") |> 
+  drop_na() |> 
+  mutate(across(1:2, as.numeric))
+
+teste |> 
+  ggplot() + 
+  geom_bar(aes(x=rebatedor, fill = rebatedor)) + 
+  theme_bw()
+```
+
+
+## Dados Desbalanceados
+
+<br>
+
+E isso é um grande problema pois normalmente estamos interessados em prever a classe minoritária.
+
+-   **Undersampling**: envolve a exclusão aleatória de algumas instâncias de classe majoritária.
+
+```{r, echo=TRUE, eval=FALSE}
+library(ROSE)
+
+under <- ovun.sample(rebatedor~., data=teste, method = "under")$data
+
+```
+
+## Dados Desbalanceados
+
+<br>
+
+```{r, echo=FALSE}
+teste <-  pessoas |> 
+  select(peso, altura, rebatedor) |> 
+  filter(rebatedor != "B") |> 
+  drop_na() |> 
+  mutate(across(1:2, as.numeric))
+
+ovun.sample(rebatedor~., data=teste, method = "under")$data |> 
+  ggplot() + 
+  geom_bar(aes(x=rebatedor, fill = rebatedor)) + 
+  theme_bw() +
+  labs(title = "Undersampling")
+```
+
+
+## Dados Desbalanceados
+
+<br>
+
+-   **Oversampling**: Consiste em criar sinteticamente novas observações da classe minoritária, com o objetivo de igualar a proporção das categorias.
+
+```{r, echo=TRUE, eval=FALSE}
+library(ROSE)
+
+over <- ovun.sample(rebatedor~., data=pessoas, method = "over")$data
+
+```
+
+## Dados Desbalanceados
+
+<br>
+
+```{r, echo=FALSE}
+teste <-  pessoas |> 
+  select(peso, altura, rebatedor) |> 
+  filter(rebatedor != "B") |> 
+  drop_na() |> 
+  mutate(across(1:2, as.numeric))
+
+ovun.sample(rebatedor~., data=teste, method = "over")$data |> 
+  ggplot() + 
+  geom_bar(aes(x=rebatedor, fill = rebatedor)) + 
+  theme_bw() +
+  labs(title = "Oversampling")
+```
+
+
+
+## Dados Desbalanceados
+
+- **SMOTE**: Consiste em criar observações intermediárias entre dados parecidos.Não relaciona necessáriamente a média entre ambas.
+
+```{r, echo=TRUE, eval=FALSE}
+library(smotefamily)
+
+SMOTE <- SMOTE(pessoas[, -3], pessoas$rebatedor, K = 7)$data
+
+```
+
+## Dados Desbalanceados
+
+<br>
+
+```{r, echo=FALSE}
+teste <-  pessoas |> 
+  select(peso, altura, rebatedor) |> 
+  filter(rebatedor != "B") |> 
+  drop_na() |> 
+  mutate(across(1:2, as.numeric),
+         rebatedor = as.character(rebatedor))
+
+SMOTE(teste[, -3], teste$rebatedor, K = 7)$data |> 
+  ggplot() + 
+  geom_bar(aes(x=class, fill = class)) + 
+  theme_bw() +
+  labs(title = "SMOTE")
+```
+
