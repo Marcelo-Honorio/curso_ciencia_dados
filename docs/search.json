@@ -774,7 +774,7 @@
     "href": "explorando_dados.html#valores-ausentes",
     "title": "Análise Exploratória de Dados",
     "section": "Valores ausentes",
-    "text": "Valores ausentes\n\nO R referência os dados ausentes como NA, que quer dizer Not Available(indisponível).\n\nidade_ana <- 30\nidade_beto <- NA\nidade_carla <- NA\n\nidade_ana == idade_beto\n## [1] NA\n\nidade_beto == idade_carla\n## [1] NA\n\nEm aplicações estatísticas, dados NA podem ser dados inexistentes ou dados que existem, porém não foram observados."
+    "text": "Valores ausentes\n\nO R referencia os dados ausentes como NA, que quer dizer Not Available(indisponível).\n\nidade_ana <- 30\nidade_beto <- NA\nidade_carla <- NA\n\nidade_ana == idade_beto\n## [1] NA\n\nidade_beto == idade_carla\n## [1] NA\n\nEm aplicações estatísticas, dados NA podem ser dados inexistentes ou dados que existem, porém não foram observados."
   },
   {
     "objectID": "explorando_dados.html#valores-ausentes-1",
@@ -900,7 +900,7 @@
     "href": "explorando_dados.html#histogramas",
     "title": "Análise Exploratória de Dados",
     "section": "Histogramas",
-    "text": "Histogramas\nUm Histograma é um jeito de visualizar um tabela frequência.\n\nIsso dá uma ideia da distribuição dos dados de forma rápida."
+    "text": "Histogramas\nUm Histograma é um jeito de visualizar uma tabela de frequência.\n\nIsso dá uma ideia da distribuição dos dados de forma rápida."
   },
   {
     "objectID": "explorando_dados.html#histogramas-1",
