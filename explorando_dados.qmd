@@ -239,7 +239,7 @@ diamante_freq
 
 ## Histogramas
 
-Um **Histograma** é um jeito de visualizar um tabela frequência.
+Um **Histograma** é um jeito de visualizar uma tabela de frequência.
 
 ```{r, echo=FALSE}
 #| fig-align: "center"
@@ -269,7 +269,7 @@ Com uma linha vertical na `média`{style="color:blue"} e `mediana`{style="color:
 #| fig-align: "center"
 ggplot(diamante) +
   geom_histogram(aes(x=preco), color="#e9ecef", fill="#69b3a2", alpha=0.6, position = 'identity') +
-  geom_vline(aes(xintercept = mean(preco)),linewidth = 1.2) +
+  geom_vline(aes(xintercept = mean(preco)),linewidth = 1.2, color = "blue") +
   geom_vline(aes(xintercept = median(preco)),linewidth = 1.2, color = "red") +
   theme_ipsum() 
 ```
@@ -433,7 +433,7 @@ diamante%>%
 
 <br>
 
-O R referência os dados ausentes como `NA`{style="color:red"}, que quer dizer Not Available(indisponível).
+O R referencia os dados ausentes como `NA`{style="color:red"}, que quer dizer Not Available(indisponível).
 
 ```{r, echo=TRUE, eval=FALSE}
 idade_ana <- 30
