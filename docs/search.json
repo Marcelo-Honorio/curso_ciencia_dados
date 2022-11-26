@@ -606,7 +606,7 @@
     "href": "explorando_dados.html#tipos-de-dados",
     "title": "Análise Exploratória de Dados",
     "section": "Tipos de Dados",
-    "text": "Tipos de Dados"
+    "text": "Tipos de Dados\n\n\n\n Primeiro passo para escolher um modelo:"
   },
   {
     "objectID": "explorando_dados.html#média",
@@ -711,7 +711,7 @@
     "href": "explorando_dados.html#frequência",
     "title": "Análise Exploratória de Dados",
     "section": "Frequência",
-    "text": "Frequência\nUma tabela contendo as frequências (absolutas e/ou relativas) de unidades de investigação para cada categoria do atributo avaliado por uma variável qualitativa é chamada de distribuição de frequências dessa variável.\n\n\n\n\n \n  \n    corte \n    quantidade \n  \n \n\n  \n    Justo \n    1610 \n  \n  \n    Bom \n    4906 \n  \n  \n    Muito Bom \n    12082 \n  \n  \n    Premium \n    13791 \n  \n  \n    Ideal \n    21551"
+    "text": "Frequência\nUma tabela contendo as frequências (absolutas e/ou relativas) de unidades de investigação para cada categoria do atributo avaliado por uma variável qualitativa é chamada de distribuição de frequências dessa variável.\n\n\n\n\n \n  \n    corte \n    quantidade \n  \n \n\n  \n    Justo \n    1610 \n  \n  \n    Bom \n    4906 \n  \n  \n    Muito Bom \n    12082 \n  \n  \n    Premium \n    13791 \n  \n  \n    Ideal \n    21551 \n  \n\n\n\n\n\n\nCUIDADO com a ponderação arbitrária"
   },
   {
     "objectID": "explorando_dados.html#correlação",

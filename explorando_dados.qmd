@@ -29,13 +29,11 @@ library(smotefamily)
 ```
 
 <br>
-
+Primeiro passo para escolher um modelo:
 ```{r echo=FALSE, out.width="100%"}
 #| fig-align: "center"
 knitr::include_graphics("imagens/tipo_dados.png")
 ```
-
-
 
 # Estimativas de Localização
 
@@ -304,6 +302,9 @@ diamante |>
     row_spec(1:5, font_size = 25,color = 'black')
 ```
 
+. . .
+
+[**CUIDADO**]{style="color:red"} com a ponderação arbitrária
 
 # Correlação e compartimentação Hexagonal
 
