@@ -271,7 +271,7 @@ knitr::kable(round(d[2:6, 1:5], 4), align = "lccrr", booktabs = T, escape = F) |
 
 <br>
 
-Inicialmente cada obsercação é considerada um cluster individual, ou
+Inicialmente cada observação é considerada um cluster individual, ou
 seja, no estágio 0, temos 6 clusters.
 
 ## Matriz de Distância
@@ -666,7 +666,7 @@ $$\small min(\sum_{i=1}^{n} W(C_k))$$ onde $C_k$ é o 𝑘 cluster e
 $𝑊(C_k)$ é a variação dentro do cluster.
 
 Então, o total da soma dos quadrados dentro do cluster $(wss)$ mede a
-homegenidade do cluster e queremos que seja tão pequeno quanto possível.
+homogeneidade do cluster e queremos que seja tão pequeno quanto possível.
 
 ## Método Elbow
 

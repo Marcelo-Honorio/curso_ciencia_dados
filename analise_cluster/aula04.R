@@ -14,7 +14,6 @@ library(gridExtra)
 
 #LEITURA DOS DADOS
 alunos <- readxl::read_excel("alunos_pap.xlsx")
-alunos <- read.table("alunos_pap.csv", sep = ";", header = T, dec = ",")
 
 #EXPLORANDO OS DADOS
 glimpse(alunos)
@@ -35,20 +34,20 @@ hc3 <- hclust(d, method = "average" ) #media
 
 
 #DESENHANDO O DENDOGRAMA
-plot(hc1, cex = 0.6, hang = -1)
-plot(hc2, cex = 0.6, hang = -1)
-plot(hc3, cex = 0.6, hang = -1)
+plot(hc1, cex = 0.8, hang = -1)
+plot(hc2, cex = 0.8, hang = -1)
+plot(hc3, cex = 0.8, hang = -1)
 
 
 #BRINCANDO COM O DENDOGRAMA PARA 2 GRUPOS
-plot(hc1, cex = 0.6, hang = -1)
+plot(hc1, cex = 0.8, hang = -1)
 rect.hclust(hc1, k = 3)
 
 #COMPARANDO DENDOGRAMAS
 #comparando o metodo complete e average
-dend3 <- as.dendrogram(hc2)
-dend4 <- as.dendrogram(hc3)
-dend_list <- dendlist(dend3, dend4) 
+dend2 <- as.dendrogram(hc2)
+dend3 <- as.dendrogram(hc3)
+dend_list <- dendlist(dend2, dend3) 
 
 #EMARANHADO, quanto menor, mais iguais os dendogramas sao
 tanglegram(dend3, dend4, main = paste("Emaranhado =", round(entanglement(dend_list),2)))
@@ -86,9 +85,14 @@ cluster.hierarquico <- hclust(distancia, method = "single" )
 # Dendrograma
 plot(cluster.hierarquico, cex = 0.6, hang = -1)
 
+# Aqui foi utilizado o pacote factoextra e sua função
+# fviz_dend para a criação do dendograma
+fviz_dend(cluster.hierarquico, cex = 0.5)
+
 ## QUANTOS GRUPOS VOCES VEM?
 
 #Criar o grafico e destacar os grupos
+plot(cluster.hierarquico, cex = 0.6, hang = -1)
 rect.hclust(cluster.hierarquico, k = 4)
 
 #VERIFICANDO ELBOW E SILHOUTTE (para definir o número de clusters)
@@ -109,10 +113,9 @@ mcdonalds_final <- mcdonalds |>
 #                           DENDROGRAMAS PERSONALIZADOS                        #
 #                                                                              #
 ################################################################################
-
 #Visualizando os clusters formados
-fviz_dend(cluster_hortifruti, 
-          k = 3,
+fviz_dend(cluster.hierarquico, 
+          k = 4,
           k_colors = c("orange", "darkorchid", "bisque4"),
           color_labels_by_k = F,
           rect = T, 
@@ -120,7 +123,22 @@ fviz_dend(cluster_hortifruti,
           lwd = 1,
           ggtheme = theme_bw())
 
+dend <- as.dendrogram(cluster.hierarquico)
 
+# gráfico (left)
+dend  |>  
+  set("labels_col", value = c("skyblue", "orange", "grey"), k=3) |> 
+  set("branches_k_color", value = c("skyblue", "orange", "grey"), k = 3) |> 
+  plot(horiz=TRUE, axes=FALSE)
+abline(v = 350, lty = 2)
+
+# Highlight a cluster with rectangle
+par(mar=c(9,1,1,1))
+dend |> 
+  set("labels_col", value = c("skyblue", "orange", "grey"), k=3) |> 
+  set("branches_k_color", value = c("skyblue", "orange", "grey"), k = 3) |> 
+  plot(axes=FALSE)
+rect.dendrogram(dend, k=3, lty = 5, lwd = 0, x=1, col=rgb(0.1, 0.2, 0.4, 0.1) ) 
 
 ################################################################################
 #                                                                              #
@@ -153,8 +171,19 @@ fviz_nbclust(mcdonalds.padronizado, kmeans, method = "wss")
 fviz_nbclust(mcdonalds.padronizado, kmeans, method = "silhouette")
 
 #adicionando uma variável que informa os respectivos cluster
-mcdonalds_final <- mcdonalds_final |> 
+mcdonalds_final <- mcdonalds |> 
   mutate(cluster_kmeans = mcdonalds.k2$cluster)
+
+# Cálculo da média utilizando a função aggregate
+aggregate(mcdonalds, by=list(cluster=mcdonalds.k2$cluster), mean)
+
+#plot k-means personalizados
+fviz_cluster(mcdonalds.k2, data=mcdonalds_final,
+             palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"),
+             ellipse.type="euclid",
+             star.plot=TRUE,
+             repel=TRUE,
+             ggtheme=theme_minimal())
 
 ################################################################################
 #                                                                              #
@@ -163,19 +192,27 @@ mcdonalds_final <- mcdonalds_final |>
 ################################################################################
 
 #carregar base municipio
-municipios <- read.table("municipios.csv", sep = ";", header = T, dec = ",")
+municipios <- read_delim("municipios.csv", delim = ';', 
+                         locale=locale(encoding="latin1", decimal_mark = ","))
 
 
 ################################################################################
 #                                                                              #
-#                               FOTO                                     #
+#                               k-means FOTO                                   #
 #                                                                              #
 ################################################################################
-
 library(jpeg)
 
-## carregando JPEG
+# Neste exemplo iremos utilizar o K-médias para fazer um agrupamento de pixels 
+# de uma imagem. O agrupamento será feito de acordo com as cores do pixel. Cada 
+# pixel passará então a ser representado pelo centróide do cluster. Assim, 
+# o número de clusters será o número de cores de cada imagem.
+
+## carregando JPEG - a imagem é um array 588x880x3 
 imagem <- readJPEG('foto.jpg')
+
+# As duas primeira dimensões indicam o tamanho da imagem e a última dimensão
+# indica as camadas de cor (red/green/blue)
 
 ## organizando a imagem em data frame
 imagemRGB <- tibble(
