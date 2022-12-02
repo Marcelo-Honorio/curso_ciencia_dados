@@ -929,5 +929,915 @@
     "title": "Análise Exploratória de Dados",
     "section": "Dados Desbalanceados",
     "text": "Dados Desbalanceados"
+  },
+  {
+    "objectID": "n_supervisionado.html#método-de-agrupamento",
+    "href": "n_supervisionado.html#método-de-agrupamento",
+    "title": "Análise de Agrupamento",
+    "section": "Método de Agrupamento",
+    "text": "Método de Agrupamento\n\n\n\n\nO objetivo da análise de cluster é agrupar as observações em grupos de tal forma que dentro de cada grupo as observações são semelhantes e distintas entre os grupos. \nDentro de cada grupo a variabilidade deve ser mínima e a variabilidade entre os grupos deve ser máxima."
+  },
+  {
+    "objectID": "n_supervisionado.html#section",
+    "href": "n_supervisionado.html#section",
+    "title": "Analise de Agrupamento",
+    "section": "",
+    "text": "Agrupar pessoas que sejam parecidas.\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\nVamos supor que queremos formar grupos de alunos:\nQuantos grupos?\nComo vamos determinar os grupos?"
+  },
+  {
+    "objectID": "n_supervisionado.html#distância-euclidiana",
+    "href": "n_supervisionado.html#distância-euclidiana",
+    "title": "Analise de Agrupamento",
+    "section": "Distância Euclidiana",
+    "text": "Distância Euclidiana\n\\[\\displaystyle D_E ={||x -  w||=\\sqrt{\\sum_{i=1}^{k} (x_i - w_i)^2}}\\] - A distância Euclidiana gera a distância linear entre quaisquer dois pontos em um campo com k dimensões.\n\nÉ uma generalização do Teorema de Pitágoras"
+  },
+  {
+    "objectID": "n_supervisionado.html#section-1",
+    "href": "n_supervisionado.html#section-1",
+    "title": "Analise de Agrupamento",
+    "section": "",
+    "text": "Qual a distância entre os individuos B e D.\n\\[\\displaystyle D^2 ={(x_{12} - x_{14} )^2 + (x_{22} - x_{24})^2}\\] \\[\\displaystyle D^2 ={(170 - 175 )^2 + (70 - 72)^2 = 5^2 + 2^2 = 29}\\] - Existe um erro"
+  },
+  {
+    "objectID": "n_supervisionado.html#section-2",
+    "href": "n_supervisionado.html#section-2",
+    "title": "Analise de Agrupamento",
+    "section": "",
+    "text": "Qual a distância entre os individuos B e D.\n\\[\\displaystyle D^2 ={(x_{12} - x_{14} )^2 + (x_{22} - x_{24})^2}\\] \\[\\displaystyle D^2 ={(170 - 175 )^2 + (70 - 72)^2 = 5^2 + 2^2 = 29}\\] - Existe um erro"
+  },
+  {
+    "objectID": "n_supervisionado.html#medidas-de-distância",
+    "href": "n_supervisionado.html#medidas-de-distância",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de distância",
+    "text": "Medidas de distância\n\nDistância Euclidiana: \\[\\displaystyle D_E ={||x -  w||=\\sqrt{\\sum_{i=1}^{k} (x_i - w_i)^2}}\\]\nA distância Euclidiana gera a distância linear entre quaisquer dois pontos em um campo com k dimensões.\nÉ uma generalização do Teorema de Pitágoras"
+  },
+  {
+    "objectID": "n_supervisionado.html#medidas-de-distância-1",
+    "href": "n_supervisionado.html#medidas-de-distância-1",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de distância",
+    "text": "Medidas de distância\n\nDistância Minkowsky: \\[\\displaystyle D_p (x_i, x_j) = \\left({\\sum_{k=1}^{d} |x_{ik} - x_{jk}|^p} \\right)^{\\frac{1}{p}}\\]\nPode criar pesos para cada variável, quando necessário.\nÉ uma medida menos afetada pela presença de outliers (comparada a distância euclidiana)."
+  },
+  {
+    "objectID": "n_supervisionado.html#padronização",
+    "href": "n_supervisionado.html#padronização",
+    "title": "Análise de Agrupamento",
+    "section": "Padronização",
+    "text": "Padronização\n\nÉ necessário padronizar variáveis em unidades distintas. O médoto mais comumente utilizado para padronização de variáveis é conhecido por procedimento Zscore \\[\\displaystyle Z_{score}(X)={\\frac {x_{i} - \\bar x}{DesvioPadrão}}\\]"
+  },
+  {
+    "objectID": "n_supervisionado.html#exemplo-distâncias-euclidiana",
+    "href": "n_supervisionado.html#exemplo-distâncias-euclidiana",
+    "title": "Analise de Agrupamento",
+    "section": "Exemplo Distâncias Euclidiana",
+    "text": "Exemplo Distâncias Euclidiana\n\n\n\n\n\n\n \n  \n    indivíduo \n    altura \n    peso \n    idade \n    sexo \n  \n \n\n  \n    A \n    0.53 \n    0.72 \n    0.38 \n    M \n  \n  \n    B \n    -0.57 \n    -0.13 \n    -0.02 \n    F \n  \n  \n    C \n    -1.12 \n    -0.97 \n    -1.61 \n    F \n  \n  \n    D \n    -0.02 \n    0.21 \n    -0.61 \n    M \n  \n  \n    E \n    1.63 \n    1.23 \n    -0.02 \n    M \n  \n  \n    F \n    1.08 \n    1.23 \n    0.38 \n    M \n  \n  \n    G \n    -1.66 \n    -1.48 \n    -0.02 \n    F \n  \n  \n    H \n    -0.57 \n    -0.97 \n    -1.81 \n    F \n  \n  \n    I \n    -0.02 \n    -0.47 \n    -0.22 \n    M \n  \n  \n    J \n    0.53 \n    1.23 \n    1.38 \n    M \n  \n  \n    K \n    1.08 \n    0.55 \n    1.38 \n    M \n  \n  \n    L \n    -0.90 \n    -1.14 \n    0.78 \n    F \n  \n\n\n\n\n\n\nDistância entre B e D \\[\\displaystyle D^2 ={(x_{12} - x_{14} )^2 + (x_{22} - x_{24})^2}\\] \\[\\displaystyle D^2 ={(170 - 175 )^2 + (70 - 72)^2 = 5^2 + 2^2 = 29}\\]"
+  },
+  {
+    "objectID": "n_supervisionado.html#distância-entre-b-e-d",
+    "href": "n_supervisionado.html#distância-entre-b-e-d",
+    "title": "Análise de Agrupamento",
+    "section": "Distância entre B e D",
+    "text": "Distância entre B e D\nAgrupar alunos que sejam parecidos, com relação as notas em matemática e portugês.\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9"
+  },
+  {
+    "objectID": "n_supervisionado.html#matriz-de-distância",
+    "href": "n_supervisionado.html#matriz-de-distância",
+    "title": "Análise de Agrupamento",
+    "section": "Matriz de Distância",
+    "text": "Matriz de Distância\nA matriz \\(D_0\\) composta pelas distâncias euclidianas entre cada par de observações, conforme segue:\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n  \n \n\n  \n    B \n    5.0000 \n    0.0000 \n    2.2361 \n    6.4031 \n    1.0000 \n  \n  \n    C \n    3.1623 \n    2.2361 \n    0.0000 \n    4.4721 \n    2.8284 \n  \n  \n    D \n    1.4142 \n    6.4031 \n    4.4721 \n    0.0000 \n    7.2111 \n  \n  \n    E \n    5.8310 \n    1.0000 \n    2.8284 \n    7.2111 \n    0.0000 \n  \n  \n    F \n    5.3852 \n    5.0990 \n    3.6056 \n    6.0828 \n    5.0000 \n  \n\n\n\n\n\n\nInicialmente cada obsercação é considerada um cluster individual, ou seja, no estágio 0, temos 6 clusters."
+  },
+  {
+    "objectID": "n_supervisionado.html#primeiro-estágio",
+    "href": "n_supervisionado.html#primeiro-estágio",
+    "title": "Análise de Agrupamento",
+    "section": "Primeiro estágio",
+    "text": "Primeiro estágio\nA menor distância entre todas as observações e, portanto, serão inicialmente agrupadas formando um novo cluster.\n\n\nComo vamos calcular a distância entre o cluster B-E e as demais observações?"
+  },
+  {
+    "objectID": "n_supervisionado.html#métodos-de-agrupamento",
+    "href": "n_supervisionado.html#métodos-de-agrupamento",
+    "title": "Análise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nHierárquico\n\n\n\n\n\n\nNão Hierárquico"
+  },
+  {
+    "objectID": "n_supervisionado.html#técnicas-de-agrupamentos---hierárquico",
+    "href": "n_supervisionado.html#técnicas-de-agrupamentos---hierárquico",
+    "title": "Analise de Agrupamento",
+    "section": "Técnicas de Agrupamentos - Hierárquico",
+    "text": "Técnicas de Agrupamentos - Hierárquico\nA escolha do método de aglomeração é tão importante quanto a definição da medida de distância.\n\nSingle Linkage - Vizinho mais próximo\nComplete Linkage - Vizinho mais longe\nAvarage Linkage - Média\nCentroid Méthod - Centroíde"
+  },
+  {
+    "objectID": "n_supervisionado.html#técnicas-de-agrupamentos",
+    "href": "n_supervisionado.html#técnicas-de-agrupamentos",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\n\nA escolha do método de aglomeração é tão importante quanto a definição da medida de distância.\n\nSingle Linkage - Vizinho mais próximo\nComplete Linkage - Vizinho mais longe\nAvarage Linkage - Média\nCentroid Méthod - Centroíde"
+  },
+  {
+    "objectID": "n_supervisionado.html#técnicas-de-agrupamentos-1",
+    "href": "n_supervisionado.html#técnicas-de-agrupamentos-1",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\nA escolha do método de aglomeração é tão importante quanto a definição da medida de distância."
+  },
+  {
+    "objectID": "n_supervisionado.html#supervisionado-e-não-supervisionado",
+    "href": "n_supervisionado.html#supervisionado-e-não-supervisionado",
+    "title": "Análise de Agrupamento",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "n_supervisionado.html#outras-medidas-de-dissemelhança",
+    "href": "n_supervisionado.html#outras-medidas-de-dissemelhança",
+    "title": "Analise de Agrupamento",
+    "section": "Outras medidas de dissemelhança",
+    "text": "Outras medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "n_supervisionado.html#outras-medidas-de-dissemelhança-1",
+    "href": "n_supervisionado.html#outras-medidas-de-dissemelhança-1",
+    "title": "Analise de Agrupamento",
+    "section": "Outras medidas de dissemelhança",
+    "text": "Outras medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "n_supervisionado.html#medidas-de-dissemelhança",
+    "href": "n_supervisionado.html#medidas-de-dissemelhança",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de dissemelhança",
+    "text": "Medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "n_supervisionado.html#medidas-de-dissemelhança-1",
+    "href": "n_supervisionado.html#medidas-de-dissemelhança-1",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de dissemelhança",
+    "text": "Medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "n_supervisionado.html#supervisionado-e-não-supervisionado-1",
+    "href": "n_supervisionado.html#supervisionado-e-não-supervisionado-1",
+    "title": "Análise de Agrupamento",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "n_supervisionado.html#similaridade-e-dissimilaridade",
+    "href": "n_supervisionado.html#similaridade-e-dissimilaridade",
+    "title": "Análise de Agrupamento",
+    "section": "Similaridade e Dissimilaridade",
+    "text": "Similaridade e Dissimilaridade\n\nDois objetos são próximos quando a sua dissemelhança ou distância é pequena ou a semelhança é grande.\n\nSemelhança: Quando queremos agrupar dados qualitativos."
+  },
+  {
+    "objectID": "n_supervisionado.html#similaridade-e-dissimilaridade-1",
+    "href": "n_supervisionado.html#similaridade-e-dissimilaridade-1",
+    "title": "Análise de Agrupamento",
+    "section": "Similaridade e Dissimilaridade",
+    "text": "Similaridade e Dissimilaridade\n\nDois objetos são próximos quando a sua dissemelhança ou distância é pequena ou a semelhança é grande.\n\nDissemelhança: Quando queremos agrupar dados quantitativos"
+  },
+  {
+    "objectID": "n_supervisionado.html#agrupar-observações-quantitativas",
+    "href": "n_supervisionado.html#agrupar-observações-quantitativas",
+    "title": "Análise de Agrupamento",
+    "section": "Agrupar observações quantitativas",
+    "text": "Agrupar observações quantitativas\n Vamos supor que queremos formar grupos de alunos:\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\n\nQuantos grupos?\nComo vamos determinar os grupos?"
+  },
+  {
+    "objectID": "n_supervisionado.html#distância-entre-b-e-d-1",
+    "href": "n_supervisionado.html#distância-entre-b-e-d-1",
+    "title": "Análise de Agrupamento",
+    "section": "Distância entre B e D",
+    "text": "Distância entre B e D\nAgrupar alunos que sejam parecidos, com relação as notas em matemática e portugês.\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\n\\[\\displaystyle D^2 ={(x_{14} - x_{12} )^2 + (x_{24} - x_{22})^2}\\] \\[\\displaystyle D^2 ={(5 - 10 )^2 + (4 - 8)^2}\\] \\[\\displaystyle D^2 ={5^2 + 4^2 = 41}\\]\n\\[\\displaystyle D ={\\sqrt{41}} = 6,40\\]"
+  },
+  {
+    "objectID": "n_supervisionado.html#métodos-de-agrupamento-1",
+    "href": "n_supervisionado.html#métodos-de-agrupamento-1",
+    "title": "Análise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nHierárquico\n\n\n\n\n\n\n\npositivo: conseguimos acompanhar a formação dos grupos.\nnegativo: é menos eficiente em grande volume de dados."
+  },
+  {
+    "objectID": "n_supervisionado.html#métodos-de-agrupamento-2",
+    "href": "n_supervisionado.html#métodos-de-agrupamento-2",
+    "title": "Análise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nNão Hierárquico\n\n\n\n\n\n\n\n\n\n\n\n\npositivo: trabalha bem com grande volume de dados.\nnegativo: a quantidade de cluster deve ser decidida antes."
+  },
+  {
+    "objectID": "n_supervisionado.html#técnicas-de-agrupamentos-2",
+    "href": "n_supervisionado.html#técnicas-de-agrupamentos-2",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\nCalculadas as distâncias entre o cluster (B-E) e os demais alunos.\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n  \n \n\n  \n    B \n    5.0000 \n    0.0000 \n    2.2361 \n    6.4031 \n    1.0000 \n  \n  \n    C \n    3.1623 \n    2.2361 \n    0.0000 \n    4.4721 \n    2.8284 \n  \n  \n    D \n    1.4142 \n    6.4031 \n    4.4721 \n    0.0000 \n    7.2111 \n  \n  \n    E \n    5.8310 \n    1.0000 \n    2.8284 \n    7.2111 \n    0.0000 \n  \n  \n    F \n    5.3852 \n    5.0990 \n    3.6056 \n    6.0828 \n    5.0000 \n  \n\n\n\n\n\n\nA distância de (B-E) para C é 2.2360 e 2.8284:\n\n\n\nsingle: 2.2360\ncomplete: 2.8284"
+  },
+  {
+    "objectID": "n_supervisionado.html#técnicas-de-agrupamentos-3",
+    "href": "n_supervisionado.html#técnicas-de-agrupamentos-3",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos"
+  },
+  {
+    "objectID": "n_supervisionado.html#segundo-estágio",
+    "href": "n_supervisionado.html#segundo-estágio",
+    "title": "Análise de Agrupamento",
+    "section": "Segundo estágio",
+    "text": "Segundo estágio\nPortando, no segundo estágio, um segundo cluster será formado (A-D)\n\nOs alunos C e F permanecem ainda isolados"
+  },
+  {
+    "objectID": "n_supervisionado.html#terceiro-estágio",
+    "href": "n_supervisionado.html#terceiro-estágio",
+    "title": "Análise de Agrupamento",
+    "section": "Terceiro estágio",
+    "text": "Terceiro estágio\nNeste estágio C é inserido no cluster já formado (E-B)\n\nO aluno F permanece ainda isolado"
+  },
+  {
+    "objectID": "n_supervisionado.html#dendrograma",
+    "href": "n_supervisionado.html#dendrograma",
+    "title": "Análise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\nComo base nesse esquema de aglomeração, podemos construir um gráfico em formato de árvore, conhecido como dendrograma"
+  },
+  {
+    "objectID": "n_supervisionado.html#dendrograma-1",
+    "href": "n_supervisionado.html#dendrograma-1",
+    "title": "Análise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\n\n\n\nSingle\n\n\n\n\n\n\n\n\n\n\nComplete"
+  },
+  {
+    "objectID": "n_supervisionado.html#dendrograma-2",
+    "href": "n_supervisionado.html#dendrograma-2",
+    "title": "Análise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\n\n\n\nAverage\n\n\n\n\n\n\n\n\n\n\nCentroid"
+  },
+  {
+    "objectID": "n_supervisionado.html#número-de-cluster",
+    "href": "n_supervisionado.html#número-de-cluster",
+    "title": "Análise de Agrupamento",
+    "section": "Número de Cluster",
+    "text": "Número de Cluster\nComo você decidiria o número de cluster?"
+  },
+  {
+    "objectID": "n_supervisionado.html#número-de-cluster-1",
+    "href": "n_supervisionado.html#número-de-cluster-1",
+    "title": "Análise de Agrupamento",
+    "section": "Número de Cluster",
+    "text": "Número de Cluster\nComo você decidiria o número de cluster?"
+  },
+  {
+    "objectID": "n_supervisionado.html#técnicas-para-escolher-o-número-de-cluster",
+    "href": "n_supervisionado.html#técnicas-para-escolher-o-número-de-cluster",
+    "title": "Analise de Agrupamento",
+    "section": "Técnicas para escolher o número de cluster",
+    "text": "Técnicas para escolher o número de cluster\nCoeficiente \\(R^2\\)\n\nSoma de quadrados total \\(\\displaystyle SSTc ={\\sum_{i=1}^{g*} \\sum_{j=1}^{n_i}(X_{ij} - \\bar X)^2}\\)\nSoma de quadrados total intragrupo \\(\\displaystyle SSR ={\\sum_{i=1}^{g*} \\sum_{j=1}^{n_i}(X_{ij} - \\bar X_i)^2}\\)\nSoma de quadrados total intergrupos \\(\\displaystyle SSR ={\\sum_{i=1}^{g*} n_i (\\bar X_{i} - \\bar X)^2}\\)"
+  },
+  {
+    "objectID": "n_supervisionado.html#coeficiente-r2",
+    "href": "n_supervisionado.html#coeficiente-r2",
+    "title": "Analise de Agrupamento",
+    "section": "Coeficiente \\(R^2\\)",
+    "text": "Coeficiente \\(R^2\\)\n\nSoma de quadrados total \\(\\scriptsize SSTc ={\\sum_{i=1}^{g*} \\sum_{j=1}^{n_i}(X_{ij} - \\bar X)^2}\\)\nSoma de quadrados total intragrupo \\(\\scriptsize SSR ={\\sum_{i=1}^{g*} \\sum_{j=1}^{n_i}(X_{ij} - \\bar X_i)^2}\\)\nSoma de quadrados total intergrupos \\(\\scriptsize SSB ={\\sum_{i=1}^{g*} n_i (\\bar X_{i} - \\bar X)^2}\\)\n\\[R^2 ={\\frac {SSB}{SSTc}}\\]\n\n\\(\\uparrow R^2 \\Rightarrow \\uparrow SSB\\) e \\(\\downarrow SSR\\). Procure se há algum ‘salto’\nObserve a \\(\\uparrow R^2\\) quando \\(\\uparrow\\) grupos"
+  },
+  {
+    "objectID": "explorando_dados.html#supervisionado-e-não-supervisionado",
+    "href": "explorando_dados.html#supervisionado-e-não-supervisionado",
+    "title": "Analise de Agrupamento",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "explorando_dados.html#supervisionado-e-não-supervisionado-1",
+    "href": "explorando_dados.html#supervisionado-e-não-supervisionado-1",
+    "title": "Analise de Agrupamento",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "explorando_dados.html#método-de-agrupamento",
+    "href": "explorando_dados.html#método-de-agrupamento",
+    "title": "Analise de Agrupamento",
+    "section": "Método de Agrupamento",
+    "text": "Método de Agrupamento\n\n\n\n\nO objetivo da análise de cluster é agrupar as observações em grupos de tal forma que dentro de cada grupo as observações são semelhantes e distintas entre os grupos.\nDentro de cada grupo a variabilidade deve ser mínima e a variabilidade entre os grupos deve ser máxima."
+  },
+  {
+    "objectID": "explorando_dados.html#similaridade-e-dissimilaridade",
+    "href": "explorando_dados.html#similaridade-e-dissimilaridade",
+    "title": "Analise de Agrupamento",
+    "section": "Similaridade e Dissimilaridade",
+    "text": "Similaridade e Dissimilaridade\n\nDois objetos são próximos quando a sua dissemelhança ou distância é pequena ou a semelhança é grande.\n\nSemelhança: Quando queremos agrupar dados qualitativos."
+  },
+  {
+    "objectID": "explorando_dados.html#similaridade-e-dissimilaridade-1",
+    "href": "explorando_dados.html#similaridade-e-dissimilaridade-1",
+    "title": "Analise de Agrupamento",
+    "section": "Similaridade e Dissimilaridade",
+    "text": "Similaridade e Dissimilaridade\n\nDois objetos são próximos quando a sua dissemelhança ou distância é pequena ou a semelhança é grande.\n\nDissemelhança: Quando queremos agrupar dados quantitativos"
+  },
+  {
+    "objectID": "explorando_dados.html#agrupar-observações-quantitativas",
+    "href": "explorando_dados.html#agrupar-observações-quantitativas",
+    "title": "Analise de Agrupamento",
+    "section": "Agrupar observações quantitativas",
+    "text": "Agrupar observações quantitativas\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\nVamos supor que queremos formar grupos de alunos:\n\nQuantos grupos?\nComo vamos determinar os grupos?"
+  },
+  {
+    "objectID": "explorando_dados.html#medidas-de-dissemelhança",
+    "href": "explorando_dados.html#medidas-de-dissemelhança",
+    "title": "Analise de Agrupamento",
+    "section": "Medidas de dissemelhança",
+    "text": "Medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "explorando_dados.html#medidas-de-dissemelhança-1",
+    "href": "explorando_dados.html#medidas-de-dissemelhança-1",
+    "title": "Analise de Agrupamento",
+    "section": "Medidas de dissemelhança",
+    "text": "Medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "explorando_dados.html#medidas-de-distância",
+    "href": "explorando_dados.html#medidas-de-distância",
+    "title": "Analise de Agrupamento",
+    "section": "Medidas de distância",
+    "text": "Medidas de distância\n\nDistância Euclidiana: \\[\\displaystyle D_E ={||x -  w||=\\sqrt{\\sum_{i=1}^{k} (x_i - w_i)^2}}\\]\nA distância Euclidiana gera a distância linear entre quaisquer dois pontos em um campo com k dimensões.\nÉ uma generalização do Teorema de Pitágoras"
+  },
+  {
+    "objectID": "explorando_dados.html#medidas-de-distância-1",
+    "href": "explorando_dados.html#medidas-de-distância-1",
+    "title": "Analise de Agrupamento",
+    "section": "Medidas de distância",
+    "text": "Medidas de distância\n\nDistância Minkowsky: \\[\\displaystyle D_p (x_i, x_j) = \\left({\\sum_{k=1}^{d} |x_{ik} - x_{jk}|^p} \\right)^{\\frac{1}{p}}\\]\nPode criar pesos para cada variável, quando necessário.\nÉ uma medida menos afetada pela presença de outliers (comparada a distância euclidiana)."
+  },
+  {
+    "objectID": "explorando_dados.html#distância-entre-b-e-d",
+    "href": "explorando_dados.html#distância-entre-b-e-d",
+    "title": "Analise de Agrupamento",
+    "section": "Distância entre B e D",
+    "text": "Distância entre B e D\nAgrupar alunos que sejam parecidos, com relação as notas em matemática e portugês.\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9"
+  },
+  {
+    "objectID": "explorando_dados.html#distância-entre-b-e-d-1",
+    "href": "explorando_dados.html#distância-entre-b-e-d-1",
+    "title": "Analise de Agrupamento",
+    "section": "Distância entre B e D",
+    "text": "Distância entre B e D\nAgrupar alunos que sejam parecidos, com relação as notas em matemática e portugês.\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\n\\[\\displaystyle D^2 ={(x_{14} - x_{12} )^2 + (x_{24} - x_{22})^2}\\] \\[\\displaystyle D^2 ={(5 - 10 )^2 + (4 - 8)^2}\\] \\[\\displaystyle D^2 ={5^2 + 4^2 = 41}\\]\n\\[\\displaystyle D ={\\sqrt{41}} = 6,40\\]"
+  },
+  {
+    "objectID": "explorando_dados.html#matriz-de-distância",
+    "href": "explorando_dados.html#matriz-de-distância",
+    "title": "Analise de Agrupamento",
+    "section": "Matriz de Distância",
+    "text": "Matriz de Distância\nA matriz \\(D_0\\) composta pelas distâncias euclidianas entre cada par de observações, conforme segue:\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n    F \n  \n \n\n  \n    B \n    5.000000 \n    0.000000 \n    2.236068 \n    6.403124 \n    1.000000 \n    5.099019 \n  \n  \n    C \n    3.162278 \n    2.236068 \n    0.000000 \n    4.472136 \n    2.828427 \n    3.605551 \n  \n  \n    D \n    1.414214 \n    6.403124 \n    4.472136 \n    0.000000 \n    7.211103 \n    6.082763 \n  \n  \n    E \n    5.830952 \n    1.000000 \n    2.828427 \n    7.211103 \n    0.000000 \n    5.000000 \n  \n  \n    F \n    5.385165 \n    5.099019 \n    3.605551 \n    6.082763 \n    5.000000 \n    0.000000 \n  \n\n\n\n\n\n\nInicialmente cada obsercação é considerada um cluster individual, ou seja, no estágio 0, temos 6 clusters."
+  },
+  {
+    "objectID": "explorando_dados.html#métodos-de-agrupamento",
+    "href": "explorando_dados.html#métodos-de-agrupamento",
+    "title": "Analise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nHierárquico\n\n\n\n\n\n\nNão Hierárquico"
+  },
+  {
+    "objectID": "explorando_dados.html#métodos-de-agrupamento-1",
+    "href": "explorando_dados.html#métodos-de-agrupamento-1",
+    "title": "Analise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nHierárquico\n\n\n\n\n\n\n\npositivo: conseguimos acompanhar a formação dos grupos.\nnegativo: é menos eficiente em grange volume de dados."
+  },
+  {
+    "objectID": "explorando_dados.html#métodos-de-agrupamento-2",
+    "href": "explorando_dados.html#métodos-de-agrupamento-2",
+    "title": "Analise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nNão Hierárquico\n\n\n\n\n\n\n\n\n\n\n\n\npositivo: trabalha bem com grande volume de dados.\nnegativo: a quantidade de cluster deve ser decidida antes."
+  },
+  {
+    "objectID": "explorando_dados.html#primeiro-estágio",
+    "href": "explorando_dados.html#primeiro-estágio",
+    "title": "Analise de Agrupamento",
+    "section": "Primeiro estágio",
+    "text": "Primeiro estágio\nA menor distância entre todas as observações e, portanto, serão inicialmente agrupadas formando um novo cluster.\n\nPara construir a matriz \\(D_1\\) devemos calcular a distância entre o cluster B-E e as demais observações, ainda isoladas."
+  },
+  {
+    "objectID": "explorando_dados.html#técnicas-de-agrupamentos",
+    "href": "explorando_dados.html#técnicas-de-agrupamentos",
+    "title": "Analise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos"
+  },
+  {
+    "objectID": "explorando_dados.html#técnicas-de-agrupamentos-1",
+    "href": "explorando_dados.html#técnicas-de-agrupamentos-1",
+    "title": "Analise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\n\nA escolha do método de aglomeração é tão importante quanto a definição da medida de distância.\n\nSingle Linkage - Vizinho mais próximo\nComplete Linkage - Vizinho mais longe\nAvarage Linkage - Média\nCentroid Méthod - Centroíde"
+  },
+  {
+    "objectID": "explorando_dados.html#técnicas-de-agrupamentos-2",
+    "href": "explorando_dados.html#técnicas-de-agrupamentos-2",
+    "title": "Analise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\nA escolha do método de aglomeração é tão importante quanto a definição da medida de distância."
+  },
+  {
+    "objectID": "explorando_dados.html#técnicas-de-agrupamentos-3",
+    "href": "explorando_dados.html#técnicas-de-agrupamentos-3",
+    "title": "Analise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\n\nCalculadas as distâncias entre o cluster (B-E) e os demais alunos.\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n    F \n  \n \n\n  \n    B \n    5.000000 \n    0.000000 \n    2.236068 \n    6.403124 \n    1.000000 \n    5.099019 \n  \n  \n    C \n    3.162278 \n    2.236068 \n    0.000000 \n    4.472136 \n    2.828427 \n    3.605551 \n  \n  \n    D \n    1.414214 \n    6.403124 \n    4.472136 \n    0.000000 \n    7.211103 \n    6.082763 \n  \n  \n    E \n    5.830952 \n    1.000000 \n    2.828427 \n    7.211103 \n    0.000000 \n    5.000000 \n  \n  \n    F \n    5.385165 \n    5.099019 \n    3.605551 \n    6.082763 \n    5.000000 \n    0.000000 \n  \n\n\n\n\n\n\nmin(2.2360; 2.8284) = 2.2360\nmax(2.2360; 2.8284) = 2.8284\nmean(2.2360; 2.8284) = 2.8284"
+  },
+  {
+    "objectID": "explorando_dados.html#segundo-estágio",
+    "href": "explorando_dados.html#segundo-estágio",
+    "title": "Analise de Agrupamento",
+    "section": "Segundo estágio",
+    "text": "Segundo estágio\n\nPortando, no segundo estágio, um segundo cluster será formado (A-D)\n\nOs alunos C e F permanecem ainda isolados"
+  },
+  {
+    "objectID": "explorando_dados.html#terceiro-estágio",
+    "href": "explorando_dados.html#terceiro-estágio",
+    "title": "Analise de Agrupamento",
+    "section": "Terceiro estágio",
+    "text": "Terceiro estágio\n\nNeste estágio C é inserido no cluster já formado (E-B)\n\nO aluno F permanece ainda isolado"
+  },
+  {
+    "objectID": "explorando_dados.html#dendrograma",
+    "href": "explorando_dados.html#dendrograma",
+    "title": "Analise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\n\nComo base nesse esquema de aglomeração, podemos construir um gráfico em formato de árvore, conhecido como dendrograma"
+  },
+  {
+    "objectID": "explorando_dados.html#dendrograma-1",
+    "href": "explorando_dados.html#dendrograma-1",
+    "title": "Analise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\n\n\n\nSingle\n\n\n\n\n\n\n\n\n\n\nComplete"
+  },
+  {
+    "objectID": "explorando_dados.html#dendrograma-2",
+    "href": "explorando_dados.html#dendrograma-2",
+    "title": "Analise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\n\n\n\nAverage\n\n\n\n\n\n\n\n\n\n\nCentroid"
+  },
+  {
+    "objectID": "explorando_dados.html#número-de-cluster",
+    "href": "explorando_dados.html#número-de-cluster",
+    "title": "Analise de Agrupamento",
+    "section": "Número de Cluster",
+    "text": "Número de Cluster\n\n\n\n\nComo você decidiria o número de cluster?"
+  },
+  {
+    "objectID": "explorando_dados.html#número-de-cluster-1",
+    "href": "explorando_dados.html#número-de-cluster-1",
+    "title": "Analise de Agrupamento",
+    "section": "Número de Cluster",
+    "text": "Número de Cluster\n\n\n\nComo você decidiria o número de cluster?\n\n3º estágio"
+  },
+  {
+    "objectID": "explorando_dados.html#coeficiente-r2",
+    "href": "explorando_dados.html#coeficiente-r2",
+    "title": "Analise de Agrupamento",
+    "section": "Coeficiente \\(R^2\\)",
+    "text": "Coeficiente \\(R^2\\)\n\nSoma de quadrados total \\(\\scriptsize SSTc ={\\sum_{i=1}^{g*} \\sum_{j=1}^{n_i}(X_{ij} - \\bar X)^2}\\)\nSoma de quadrados total intragrupo \\(\\scriptsize SSR ={\\sum_{i=1}^{g*} \\sum_{j=1}^{n_i}(X_{ij} - \\bar X_i)^2}\\)\nSoma de quadrados total intergrupos \\(\\scriptsize SSB ={\\sum_{i=1}^{g*} n_i (\\bar X_{i} - \\bar X)^2}\\)\n\\[R^2 ={\\frac {SSB}{SSTc}}\\]"
+  },
+  {
+    "objectID": "explorando_dados.html#padronização",
+    "href": "explorando_dados.html#padronização",
+    "title": "Analise de Agrupamento",
+    "section": "Padronização",
+    "text": "Padronização\n\nAlém da escolha da medida de distância, o pesquisador também deve verificar se os dados precisam de tratamento.\nÉ necessário padronizar variáveis em unidades distintas. O médoto mais comumente utilizado para padronização de variáveis é conhecido por procedimento Zscore \\[\\displaystyle Z_{score}(X)={\\frac {x_{i} - \\bar x}{DesvioPadrão}}\\]"
+  },
+  {
+    "objectID": "explorando_dados.html#coeficiente-r2-1",
+    "href": "explorando_dados.html#coeficiente-r2-1",
+    "title": "Analise de Agrupamento",
+    "section": "Coeficiente \\(R^2\\)",
+    "text": "Coeficiente \\(R^2\\)\n\nQuanto maior o \\(R^2\\), maior o SSB, consequentemente menor o SSR (que é o que nos importa, pouca variabilidade dentro dos clusters).\nProcuramos sempre por algum salto! É possível notar que quanto menor o número de grupos (maior a variabilidade entre), menor o \\(R^2\\).\n\\[\\small R^2 ={\\frac {SSB}{SSTc}}\\]"
+  },
+  {
+    "objectID": "explorando_dados.html#ccc-cubic-clustering-criterion",
+    "href": "explorando_dados.html#ccc-cubic-clustering-criterion",
+    "title": "Analise de Agrupamento",
+    "section": "CCC (Cubic Clustering Criterion)",
+    "text": "CCC (Cubic Clustering Criterion)\ncompara o \\(R^2\\) calculado com o seu esperado, 𝐸[\\(R^2\\)], supondo que os clusters são gerados por uma distribuição uniforme. Se CCC \\(> 3\\) (o que é bom), \\(R^2 > E[R^2]\\) , isto é, a estrutura de cluster é diferente da partição uniforme."
+  },
+  {
+    "objectID": "n_supervisionado.html#coeficiente-r2-1",
+    "href": "n_supervisionado.html#coeficiente-r2-1",
+    "title": "Analise de Agrupamento",
+    "section": "Coeficiente \\(R^2\\)",
+    "text": "Coeficiente \\(R^2\\)\n\nQuanto maior o \\(R^2\\), maior o SSB, consequentemente menor o SSR (que é o que nos importa, pouca variabilidade dentro dos clusters).\nProcuramos sempre por algum salto! É possível notar que quanto menor o número de grupos (maior a variabilidade entre), menor o \\(R^2\\).\n\\[\\small R^2 ={\\frac {SSB}{SSTc}}\\]"
+  },
+  {
+    "objectID": "n_supervisionado.html#ccc-cubic-clustering-criterion",
+    "href": "n_supervisionado.html#ccc-cubic-clustering-criterion",
+    "title": "Analise de Agrupamento",
+    "section": "CCC (Cubic Clustering Criterion)",
+    "text": "CCC (Cubic Clustering Criterion)\ncompara o \\(R^2\\) calculado com o seu esperado, 𝐸[\\(R^2\\)], supondo que os clusters são gerados por uma distribuição uniforme. Se CCC \\(> 3\\) (o que é bom), \\(R^2 > E[R^2]\\) , isto é, a estrutura de cluster é diferente da partição uniforme."
+  },
+  {
+    "objectID": "n_supervisionado.html#método-elbow",
+    "href": "n_supervisionado.html#método-elbow",
+    "title": "Análise de Agrupamento",
+    "section": "Método Elbow",
+    "text": "Método Elbow\nAssim como no princípio de cluster, a ideia do método é minimizar a variabilidade dentro do cluster, ou seja:\n\\[\\small min(\\sum_{i=1}^{n} W(C_k))\\] onde \\(C_k\\) é o 𝑘 cluster e \\(𝑊(C_k)\\) é a variação dentro do cluster.\nEntão, o total da soma dos quadrados dentro do cluster \\((wss)\\) mede a homegenidade do cluster e queremos que seja tão pequeno quanto possível."
+  },
+  {
+    "objectID": "n_supervisionado.html#método-elbow-1",
+    "href": "n_supervisionado.html#método-elbow-1",
+    "title": "Análise de Agrupamento",
+    "section": "Método Elbow",
+    "text": "Método Elbow\nDe acordo com o método, o número ideal de grupos se dá quando o ponto forma uma curva semelhante de um cotovelo, que é o ponto considerado ideal."
+  },
+  {
+    "objectID": "n_supervisionado.html#método-silhueta",
+    "href": "n_supervisionado.html#método-silhueta",
+    "title": "Análise de Agrupamento",
+    "section": "Método Silhueta",
+    "text": "Método Silhueta\n\nDetermina o quão bem cada objeto está alocado em um grupo, ou seja, a homogeneidade de um grupo.\n\\[\\small s_i = \\frac {\\bar x_i - \\bar y_i}{max(\\bar y_i, \\bar x_i)}\\]\n\\(\\bar y_i\\) é a distância média entre o ponto e todos os demais pontos do cluster. \\(\\bar x_i\\) é a distância média entre o ponto e todos os pontos do cluster vizinho mais próximo."
+  },
+  {
+    "objectID": "n_supervisionado.html#método-silhueta-1",
+    "href": "n_supervisionado.html#método-silhueta-1",
+    "title": "Análise de Agrupamento",
+    "section": "Método Silhueta",
+    "text": "Método Silhueta\nO índice de Silhueta varia de -1 a 1. Valores próximos a 1 indicam que o objeto possui semelhança com objetos de seu grupo e dessemelhança com objetos de outros grupos."
+  },
+  {
+    "objectID": "n_supervisionado.html#agrupar-observações-quantitativas-1",
+    "href": "n_supervisionado.html#agrupar-observações-quantitativas-1",
+    "title": "Análise de Agrupamento",
+    "section": "Agrupar observações quantitativas",
+    "text": "Agrupar observações quantitativas\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9"
+  },
+  {
+    "objectID": "n_supervisionado.html#agrupar-observações-quantitativas-2",
+    "href": "n_supervisionado.html#agrupar-observações-quantitativas-2",
+    "title": "Análise de Agrupamento",
+    "section": "Agrupar observações quantitativas",
+    "text": "Agrupar observações quantitativas\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComo podemos medir a dissemelhença ou distância entre os alunos?"
+  },
+  {
+    "objectID": "n_supervisionado.html#não-hierárquico-1",
+    "href": "n_supervisionado.html#não-hierárquico-1",
+    "title": "Análise de Agrupamento",
+    "section": "Não Hierárquico",
+    "text": "Não Hierárquico\n\no Metodo hierárquico é menos eficiente com grande volume de dados"
+  },
+  {
+    "objectID": "n_supervisionado.html#k-means",
+    "href": "n_supervisionado.html#k-means",
+    "title": "Análise de Agrupamento",
+    "section": "k-means",
+    "text": "k-means\n\nO método K-means classifica os objetos dentro de múltiplos grupos, de forma que a variação intra-cluster seja minimizada pela soma dos quadrados das distâncias Euclidianas entre os itens e seus centroides.\n\\[\\small W(C_k) = \\sum_{x_i \\in C_k}^{n} (x_i - \\bar x_k)^2\\]"
+  },
+  {
+    "objectID": "n_supervisionado.html#k-means-1",
+    "href": "n_supervisionado.html#k-means-1",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means"
+  },
+  {
+    "objectID": "n_supervisionado.html#k-means-2",
+    "href": "n_supervisionado.html#k-means-2",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means"
+  },
+  {
+    "objectID": "n_supervisionado.html#k-means-3",
+    "href": "n_supervisionado.html#k-means-3",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means"
+  },
+  {
+    "objectID": "n_supervisionado.html#k-means-4",
+    "href": "n_supervisionado.html#k-means-4",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means"
+  },
+  {
+    "objectID": "n_supervisionado.html#k-means-5",
+    "href": "n_supervisionado.html#k-means-5",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means\n\nA metodologia k-means segue 4 passos:\n\nSeleciona randomicamente os centróides iniciais (sementes).\nCalcula distância Euclidiana em relação aos seus centróides\nAtualiza os centróides, esse processo é repetido até a convergência.\nUma leitura final dos dados assinala cada observação ao centróide mais próximo."
+  },
+  {
+    "objectID": "n_supervisionado.html#k-means-6",
+    "href": "n_supervisionado.html#k-means-6",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means\n\nA metodologia k-means segue 4 passos:\n\n\nAtualiza os centróides, esse processo é repetido até a convergência.\n\n\n\n\nUma leitura final dos dados assinala cada observação ao centróide mais próximo."
+  },
+  {
+    "objectID": "clustering.html#supervisionado-e-não-supervisionado",
+    "href": "clustering.html#supervisionado-e-não-supervisionado",
+    "title": "Análise de Agrupamento",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "clustering.html#supervisionado-e-não-supervisionado-1",
+    "href": "clustering.html#supervisionado-e-não-supervisionado-1",
+    "title": "Análise de Agrupamento",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "clustering.html#método-de-agrupamento",
+    "href": "clustering.html#método-de-agrupamento",
+    "title": "Análise de Agrupamento",
+    "section": "Método de Agrupamento",
+    "text": "Método de Agrupamento\n\n\n\n\nO objetivo da análise de cluster é agrupar as observações em grupos de tal forma que dentro de cada grupo as observações são semelhantes e distintas entre os grupos. \nDentro de cada grupo a variabilidade deve ser mínima e a variabilidade entre os grupos deve ser máxima."
+  },
+  {
+    "objectID": "clustering.html#similaridade-e-dissimilaridade",
+    "href": "clustering.html#similaridade-e-dissimilaridade",
+    "title": "Análise de Agrupamento",
+    "section": "Similaridade e Dissimilaridade",
+    "text": "Similaridade e Dissimilaridade\n\nDois objetos são próximos quando a sua dissemelhança ou distância é pequena ou a semelhança é grande.\n\nSemelhança: Quando queremos agrupar dados qualitativos."
+  },
+  {
+    "objectID": "clustering.html#similaridade-e-dissimilaridade-1",
+    "href": "clustering.html#similaridade-e-dissimilaridade-1",
+    "title": "Análise de Agrupamento",
+    "section": "Similaridade e Dissimilaridade",
+    "text": "Similaridade e Dissimilaridade\n\nDois objetos são próximos quando a sua dissemelhança ou distância é pequena ou a semelhança é grande.\n\nDissemelhança: Quando queremos agrupar dados quantitativos"
+  },
+  {
+    "objectID": "clustering.html#agrupar-observações-quantitativas",
+    "href": "clustering.html#agrupar-observações-quantitativas",
+    "title": "Análise de Agrupamento",
+    "section": "Agrupar observações quantitativas",
+    "text": "Agrupar observações quantitativas\n Vamos supor que queremos formar grupos de alunos:\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\n\nQuantos grupos?\nComo vamos determinar os grupos?"
+  },
+  {
+    "objectID": "clustering.html#agrupar-observações-quantitativas-1",
+    "href": "clustering.html#agrupar-observações-quantitativas-1",
+    "title": "Análise de Agrupamento",
+    "section": "Agrupar observações quantitativas",
+    "text": "Agrupar observações quantitativas\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9"
+  },
+  {
+    "objectID": "clustering.html#agrupar-observações-quantitativas-2",
+    "href": "clustering.html#agrupar-observações-quantitativas-2",
+    "title": "Análise de Agrupamento",
+    "section": "Agrupar observações quantitativas",
+    "text": "Agrupar observações quantitativas\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComo podemos medir a dissemelhença ou distância entre os alunos?"
+  },
+  {
+    "objectID": "clustering.html#medidas-de-dissemelhança",
+    "href": "clustering.html#medidas-de-dissemelhança",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de dissemelhança",
+    "text": "Medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "clustering.html#medidas-de-dissemelhança-1",
+    "href": "clustering.html#medidas-de-dissemelhança-1",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de dissemelhança",
+    "text": "Medidas de dissemelhança\n\nOs coeficientes de dissemelhança para dados quantitativos mais utilizados são:"
+  },
+  {
+    "objectID": "clustering.html#medidas-de-distância",
+    "href": "clustering.html#medidas-de-distância",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de distância",
+    "text": "Medidas de distância\n\nDistância Euclidiana: \\[\\displaystyle D_E ={||x -  w||=\\sqrt{\\sum_{i=1}^{k} (x_i - w_i)^2}}\\]\nA distância Euclidiana gera a distância linear entre quaisquer dois pontos em um campo com k dimensões.\nÉ uma generalização do Teorema de Pitágoras"
+  },
+  {
+    "objectID": "clustering.html#medidas-de-distância-1",
+    "href": "clustering.html#medidas-de-distância-1",
+    "title": "Análise de Agrupamento",
+    "section": "Medidas de distância",
+    "text": "Medidas de distância\n\nDistância Minkowsky: \\[\\displaystyle D_p (x_i, x_j) = \\left({\\sum_{k=1}^{d} |x_{ik} - x_{jk}|^p} \\right)^{\\frac{1}{p}}\\]\nPode criar pesos para cada variável, quando necessário.\nÉ uma medida menos afetada pela presença de outliers (comparada a distância euclidiana)."
+  },
+  {
+    "objectID": "clustering.html#distância-entre-b-e-d",
+    "href": "clustering.html#distância-entre-b-e-d",
+    "title": "Análise de Agrupamento",
+    "section": "Distância entre B e D",
+    "text": "Distância entre B e D\nAgrupar alunos que sejam parecidos, com relação as notas em matemática e portugês.\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9"
+  },
+  {
+    "objectID": "clustering.html#distância-entre-b-e-d-1",
+    "href": "clustering.html#distância-entre-b-e-d-1",
+    "title": "Análise de Agrupamento",
+    "section": "Distância entre B e D",
+    "text": "Distância entre B e D\nAgrupar alunos que sejam parecidos, com relação as notas em matemática e portugês.\n\n\n\n\n\n\n\n \n  \n    Aluno \n    Matematica \n    Portugues \n  \n \n\n  \n    A \n    9 \n    7 \n  \n  \n    B \n    5 \n    4 \n  \n  \n    C \n    6 \n    6 \n  \n  \n    D \n    10 \n    8 \n  \n  \n    E \n    4 \n    4 \n  \n  \n    F \n    4 \n    9 \n  \n\n\n\n\n\n\n\\[\\displaystyle D^2 ={(x_{14} - x_{12} )^2 + (x_{24} - x_{22})^2}\\] \\[\\displaystyle D^2 ={(5 - 10 )^2 + (4 - 8)^2}\\] \\[\\displaystyle D^2 ={5^2 + 4^2 = 41}\\]\n\\[\\displaystyle D ={\\sqrt{41}} = 6,40\\]"
+  },
+  {
+    "objectID": "clustering.html#matriz-de-distância",
+    "href": "clustering.html#matriz-de-distância",
+    "title": "Análise de Agrupamento",
+    "section": "Matriz de Distância",
+    "text": "Matriz de Distância\nA matriz \\(D_0\\) composta pelas distâncias euclidianas entre cada par de observações, conforme segue:\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n  \n \n\n  \n    B \n    5.0000 \n    0.0000 \n    2.2361 \n    6.4031 \n    1.0000 \n  \n  \n    C \n    3.1623 \n    2.2361 \n    0.0000 \n    4.4721 \n    2.8284 \n  \n  \n    D \n    1.4142 \n    6.4031 \n    4.4721 \n    0.0000 \n    7.2111 \n  \n  \n    E \n    5.8310 \n    1.0000 \n    2.8284 \n    7.2111 \n    0.0000 \n  \n  \n    F \n    5.3852 \n    5.0990 \n    3.6056 \n    6.0828 \n    5.0000 \n  \n\n\n\n\n\n\nInicialmente cada obsercação é considerada um cluster individual, ou seja, no estágio 0, temos 6 clusters."
+  },
+  {
+    "objectID": "clustering.html#métodos-de-agrupamento",
+    "href": "clustering.html#métodos-de-agrupamento",
+    "title": "Análise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nHierárquico\n\n\n\n\n\n\nNão Hierárquico"
+  },
+  {
+    "objectID": "clustering.html#métodos-de-agrupamento-1",
+    "href": "clustering.html#métodos-de-agrupamento-1",
+    "title": "Análise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nHierárquico\n\n\n\n\n\n\n\npositivo: conseguimos acompanhar a formação dos grupos.\nnegativo: é menos eficiente em grande volume de dados."
+  },
+  {
+    "objectID": "clustering.html#métodos-de-agrupamento-2",
+    "href": "clustering.html#métodos-de-agrupamento-2",
+    "title": "Análise de Agrupamento",
+    "section": "Métodos de agrupamento",
+    "text": "Métodos de agrupamento\n\n\n\nNão Hierárquico\n\n\n\n\n\n\n\n\n\n\n\n\npositivo: trabalha bem com grande volume de dados.\nnegativo: a quantidade de cluster deve ser decidida antes."
+  },
+  {
+    "objectID": "clustering.html#primeiro-estágio",
+    "href": "clustering.html#primeiro-estágio",
+    "title": "Análise de Agrupamento",
+    "section": "Primeiro estágio",
+    "text": "Primeiro estágio\nA menor distância entre todas as observações e, portanto, serão inicialmente agrupadas formando um novo cluster.\n\n\nComo vamos calcular a distância entre o cluster B-E e as demais observações?"
+  },
+  {
+    "objectID": "clustering.html#técnicas-de-agrupamentos",
+    "href": "clustering.html#técnicas-de-agrupamentos",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\n\nA escolha do método de aglomeração é tão importante quanto a definição da medida de distância.\n\nSingle Linkage - Vizinho mais próximo\nComplete Linkage - Vizinho mais longe\nAvarage Linkage - Média\nCentroid Méthod - Centroíde"
+  },
+  {
+    "objectID": "clustering.html#técnicas-de-agrupamentos-1",
+    "href": "clustering.html#técnicas-de-agrupamentos-1",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\nA escolha do método de aglomeração é tão importante quanto a definição da medida de distância."
+  },
+  {
+    "objectID": "clustering.html#técnicas-de-agrupamentos-2",
+    "href": "clustering.html#técnicas-de-agrupamentos-2",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos\nCalculadas as distâncias entre o cluster (B-E) e os demais alunos.\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n  \n \n\n  \n    B \n    5.0000 \n    0.0000 \n    2.2361 \n    6.4031 \n    1.0000 \n  \n  \n    C \n    3.1623 \n    2.2361 \n    0.0000 \n    4.4721 \n    2.8284 \n  \n  \n    D \n    1.4142 \n    6.4031 \n    4.4721 \n    0.0000 \n    7.2111 \n  \n  \n    E \n    5.8310 \n    1.0000 \n    2.8284 \n    7.2111 \n    0.0000 \n  \n  \n    F \n    5.3852 \n    5.0990 \n    3.6056 \n    6.0828 \n    5.0000 \n  \n\n\n\n\n\n\nA distância de (B-E) para C é 2.2360 e 2.8284:\n\n\n\nsingle: 2.2360\ncomplete: 2.8284"
+  },
+  {
+    "objectID": "clustering.html#técnicas-de-agrupamentos-3",
+    "href": "clustering.html#técnicas-de-agrupamentos-3",
+    "title": "Análise de Agrupamento",
+    "section": "Técnicas de Agrupamentos",
+    "text": "Técnicas de Agrupamentos"
+  },
+  {
+    "objectID": "clustering.html#segundo-estágio",
+    "href": "clustering.html#segundo-estágio",
+    "title": "Análise de Agrupamento",
+    "section": "Segundo estágio",
+    "text": "Segundo estágio\nPortando, no segundo estágio, um segundo cluster será formado (A-D)\n\nOs alunos C e F permanecem ainda isolados"
+  },
+  {
+    "objectID": "clustering.html#terceiro-estágio",
+    "href": "clustering.html#terceiro-estágio",
+    "title": "Análise de Agrupamento",
+    "section": "Terceiro estágio",
+    "text": "Terceiro estágio\nNeste estágio C é inserido no cluster já formado (E-B)\n\nO aluno F permanece ainda isolado"
+  },
+  {
+    "objectID": "clustering.html#dendrograma",
+    "href": "clustering.html#dendrograma",
+    "title": "Análise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\nComo base nesse esquema de aglomeração, podemos construir um gráfico em formato de árvore, conhecido como dendrograma"
+  },
+  {
+    "objectID": "clustering.html#dendrograma-1",
+    "href": "clustering.html#dendrograma-1",
+    "title": "Análise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\n\n\n\nSingle\n\n\n\n\n\n\n\n\n\n\nComplete"
+  },
+  {
+    "objectID": "clustering.html#dendrograma-2",
+    "href": "clustering.html#dendrograma-2",
+    "title": "Análise de Agrupamento",
+    "section": "Dendrograma",
+    "text": "Dendrograma\n\n\n\nAverage\n\n\n\n\n\n\n\n\n\n\nCentroid"
+  },
+  {
+    "objectID": "clustering.html#número-de-cluster",
+    "href": "clustering.html#número-de-cluster",
+    "title": "Análise de Agrupamento",
+    "section": "Número de Cluster",
+    "text": "Número de Cluster\nComo você decidiria o número de cluster?"
+  },
+  {
+    "objectID": "clustering.html#número-de-cluster-1",
+    "href": "clustering.html#número-de-cluster-1",
+    "title": "Análise de Agrupamento",
+    "section": "Número de Cluster",
+    "text": "Número de Cluster\nComo você decidiria o número de cluster?"
+  },
+  {
+    "objectID": "clustering.html#número-de-cluster-2",
+    "href": "clustering.html#número-de-cluster-2",
+    "title": "Análise de Agrupamento",
+    "section": "Número de Cluster",
+    "text": "Número de Cluster\n3 grupos é uma boa solução?"
+  },
+  {
+    "objectID": "clustering.html#método-elbow",
+    "href": "clustering.html#método-elbow",
+    "title": "Análise de Agrupamento",
+    "section": "Método Elbow",
+    "text": "Método Elbow\nAssim como no princípio de cluster, a ideia do método é minimizar a variabilidade dentro do cluster, ou seja:\n\\[\\small min(\\sum_{i=1}^{n} W(C_k))\\] onde \\(C_k\\) é o 𝑘 cluster e \\(𝑊(C_k)\\) é a variação dentro do cluster.\nEntão, o total da soma dos quadrados dentro do cluster \\((wss)\\) mede a homegenidade do cluster e queremos que seja tão pequeno quanto possível."
+  },
+  {
+    "objectID": "clustering.html#método-elbow-1",
+    "href": "clustering.html#método-elbow-1",
+    "title": "Análise de Agrupamento",
+    "section": "Método Elbow",
+    "text": "Método Elbow\nDe acordo com o método, o número ideal de grupos se dá quando o ponto forma uma curva semelhante de um cotovelo, que é o ponto considerado ideal."
+  },
+  {
+    "objectID": "clustering.html#método-silhueta",
+    "href": "clustering.html#método-silhueta",
+    "title": "Análise de Agrupamento",
+    "section": "Método Silhueta",
+    "text": "Método Silhueta\n\nDetermina o quão bem cada objeto está alocado em um grupo, ou seja, a homogeneidade de um grupo.\n\\[\\small s_i = \\frac {\\bar x_i - \\bar y_i}{max(\\bar y_i, \\bar x_i)}\\]\n\\(\\bar y_i\\) é a distância média entre o ponto e todos os demais pontos do cluster. \\(\\bar x_i\\) é a distância média entre o ponto e todos os pontos do cluster vizinho mais próximo."
+  },
+  {
+    "objectID": "clustering.html#método-silhueta-1",
+    "href": "clustering.html#método-silhueta-1",
+    "title": "Análise de Agrupamento",
+    "section": "Método Silhueta",
+    "text": "Método Silhueta\nO índice de Silhueta varia de -1 a 1. Valores próximos a 1 indicam que o objeto possui semelhança com objetos de seu grupo e dessemelhança com objetos de outros grupos."
+  },
+  {
+    "objectID": "clustering.html#padronização",
+    "href": "clustering.html#padronização",
+    "title": "Análise de Agrupamento",
+    "section": "Padronização",
+    "text": "Padronização\n\nÉ necessário padronizar variáveis em unidades distintas. O médoto mais comumente utilizado para padronização de variáveis é conhecido por procedimento Zscore \\[\\displaystyle Z_{score}(X)={\\frac {x_{i} - \\bar x}{DesvioPadrão}}\\]"
+  },
+  {
+    "objectID": "clustering.html#não-hierárquico-1",
+    "href": "clustering.html#não-hierárquico-1",
+    "title": "Análise de Agrupamento",
+    "section": "Não Hierárquico",
+    "text": "Não Hierárquico\n\no Metodo hierárquico é menos eficiente com grande volume de dados"
+  },
+  {
+    "objectID": "clustering.html#k-means",
+    "href": "clustering.html#k-means",
+    "title": "Análise de Agrupamento",
+    "section": "k-means",
+    "text": "k-means\n\nO método K-means classifica os objetos dentro de múltiplos grupos, de forma que a variação intra-cluster seja minimizada pela soma dos quadrados das distâncias Euclidianas entre os itens e seus centroides.\n\\[\\small W(C_k) = \\sum_{x_i \\in C_k}^{n} (x_i - \\bar x_k)^2\\]"
+  },
+  {
+    "objectID": "clustering.html#k-means-1",
+    "href": "clustering.html#k-means-1",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means\nO método k-means utiliza a distância Euclidiana como medida de dissimilaridade."
+  },
+  {
+    "objectID": "clustering.html#k-means-2",
+    "href": "clustering.html#k-means-2",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means\nÉ necessário avisar de antemão o valor de k."
+  },
+  {
+    "objectID": "clustering.html#k-means-3",
+    "href": "clustering.html#k-means-3",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means\nO objetivo é minimizar a soma dos quadrados intra-cluster"
+  },
+  {
+    "objectID": "clustering.html#k-means-4",
+    "href": "clustering.html#k-means-4",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means\nO objetivo é minimizar a soma dos quadrados intra-cluster"
+  },
+  {
+    "objectID": "clustering.html#k-means-5",
+    "href": "clustering.html#k-means-5",
+    "title": "Análise de Agrupamento",
+    "section": "K-means",
+    "text": "K-means\n\nA metodologia k-means segue 4 passos:\n\nSeleciona randomicamente os centróides iniciais (sementes).\nCalcula distância Euclidiana em relação aos seus centróides\nAtualiza os centróides, esse processo é repetido até a convergência.\nUma leitura final dos dados assinala cada observação ao centróide mais próximo."
   }
 ]

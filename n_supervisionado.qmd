@@ -1,0 +1,759 @@
+---
+title: "Análise de Agrupamento"
+author: "Marcelo Honorio"
+format: 
+  revealjs:
+    output-file: clustering.html
+    theme: custom.scss
+    transition: fade
+    background-transition: fade
+    highlight-style: ayu-mirage
+    slide-number: c/t
+    show-slide-number: all
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Supervisionado e Não Supervisionado
+
+```{r echo=FALSE, out.width="40%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/sup-uns-learning2.jpg")
+```
+
+## Supervisionado e Não Supervisionado
+
+```{r echo=FALSE, out.width="40%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/sup-uns-learning.jpg")
+```
+
+## Método de Agrupamento
+
+```{r echo=FALSE}
+library(tidyverse)
+library(dados)
+library(kableExtra)
+aluno <- readxl::read_excel('alunos_pap.xlsx')
+```
+
+<br>
+
+O objetivo da análise de cluster é agrupar as observações em grupos de
+tal forma que dentro de cada grupo as observações são semelhantes e
+distintas entre os grupos. <br>
+
+Dentro de cada grupo a variabilidade deve ser mínima e a variabilidade
+entre os grupos deve ser máxima.
+
+## Similaridade e Dissimilaridade
+
+<br>
+
+Dois objetos são próximos quando a sua dissemelhança ou distância é
+pequena ou a semelhança é grande.
+
+-   **Semelhança**: Quando queremos agrupar dados qualitativos.
+
+```{r echo=FALSE, out.width="5%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/art_similaridade.png")
+```
+
+## Similaridade e Dissimilaridade
+
+<br>
+
+Dois objetos são próximos quando a sua dissemelhança ou distância é
+pequena ou a semelhança é grande.
+
+-   **Dissemelhança**: Quando queremos agrupar dados quantitativos
+
+```{r echo=FALSE, out.width="5%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/art_dissemelhanca.png")
+```
+
+## Agrupar observações quantitativas
+<br>
+Vamos supor que queremos formar grupos de alunos:
+
+```{r, echo=FALSE}
+#| fig-align: center
+knitr::kable(aluno, col.names = gsub("[.]", " ", names(aluno)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 25)
+```
+
+. . .
+
+-   Quantos grupos?
+
+-   Como vamos determinar os grupos?
+
+
+
+
+## Agrupar observações quantitativas
+
+::::{.columns}
+::: {.column width="30%"}
+<br>
+```{r, echo=FALSE}
+knitr::kable(aluno, col.names = gsub("[.]", " ", names(aluno)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 20)
+```
+:::
+
+::: {.column width="70%"}
+```{r echo=FALSE}
+#| fig-align: center
+ggplot(aluno) + 
+  geom_point(aes(x = Matematica, y = Portugues), size = 4) + 
+  geom_label(aes(x = Matematica, y = Portugues, label = Aluno), 
+             fill= c('white', 'white', 'white', 'white', 'white', 'white')) +
+  scale_x_continuous(limits = c(0, 10)) +
+  scale_y_continuous(limits = c(0, 10)) +
+  theme_classic()
+```
+:::
+::::
+
+## Agrupar observações quantitativas
+
+::::{.columns}
+::: {.column width="30%"}
+<br>
+```{r, echo=FALSE}
+knitr::kable(aluno, col.names = gsub("[.]", " ", names(aluno)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 20)
+```
+:::
+
+::: {.column width="70%"}
+```{r echo=FALSE}
+#| fig-align: center
+ggplot(aluno) + 
+  geom_point(aes(x = Matematica, y = Portugues), size = 4) + 
+  geom_label(aes(x = Matematica, y = Portugues, label = Aluno), 
+             fill= c('white', 'white', 'white', 'white', 'white', 'white')) +
+  geom_line(aes(x = c(NA, NA, 6, NA, 4, NA), y = c(NA, NA, 6, NA, 4, NA)), color = 'red', linetype = 2, linewidth = 1.2) +
+  geom_text(aes(x = Matematica, y = Portugues), 
+            label=c('', '?', '', '', '', ''), 
+            size = 10 ,hjust = 2, vjust = -2, color="red") +
+  scale_x_continuous(limits = c(0, 10)) +
+  scale_y_continuous(limits = c(0, 10)) +
+  theme_classic()
+```
+:::
+::::
+
+
+Como podemos medir a dissemelhença ou distância entre os alunos?
+
+## Medidas de dissemelhança
+
+<br>
+
+Os coeficientes de dissemelhança para dados quantitativos mais
+utilizados são:
+
+```{r echo=FALSE, out.width="10%"}
+#| fig-align: "center"
+#| fig-width: 10
+#| fig-height: 6
+knitr::include_graphics("imagens/dissemelhanca1.png")
+```
+
+## Medidas de dissemelhança
+
+<br>
+
+Os coeficientes de dissemelhança para dados quantitativos mais
+utilizados são:
+
+```{r echo=FALSE, out.width="10%"}
+#| fig-align: "center"
+#| fig-width: 10
+#| fig-height: 6
+knitr::include_graphics("imagens/dissemelhanca2.png")
+```
+
+## Medidas de distância
+
+-   Distância Euclidiana:
+    $$\displaystyle D_E ={||x -  w||=\sqrt{\sum_{i=1}^{k} (x_i - w_i)^2}}$$
+
+-   A distância Euclidiana gera a distância linear entre quaisquer dois
+    pontos em um campo com k dimensões.
+
+-   É uma generalização do Teorema de Pitágoras
+
+## Medidas de distância
+
+-   Distância Minkowsky:
+    $$\displaystyle D_p (x_i, x_j) = \left({\sum_{k=1}^{d} |x_{ik} - x_{jk}|^p} \right)^{\frac{1}{p}}$$
+
+-   Pode criar pesos para cada variável, quando necessário.
+
+-   É uma medida menos afetada pela presença de outliers (comparada a
+    distância euclidiana).
+
+# Distância Euclidiana
+
+## Distância entre **B** e **D**
+
+Agrupar alunos que sejam parecidos, com relação as notas em matemática e
+portugês.
+
+::: columns
+::: {.column width="40%"}
+<br>
+
+```{r echo=FALSE}
+#| fig-align: "center"
+knitr::kable(aluno, col.names = gsub("[.]", " ", names(aluno)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 25)
+```
+:::
+
+::: {.column width="60%"}
+<br>
+
+```{r echo=FALSE, out.width="80%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/distecludiana.jpg")
+```
+:::
+:::
+
+## Distância entre **B** e **D**
+
+Agrupar alunos que sejam parecidos, com relação as notas em matemática e
+portugês.
+
+::: columns
+::: {.column width="40%"}
+<br>
+
+```{r echo=FALSE}
+#| fig-align: "center"
+knitr::kable(aluno, col.names = gsub("[.]", " ", names(aluno)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 25)
+```
+:::
+
+::: {.column width="60%"}
+$$\displaystyle D^2 ={(x_{14} - x_{12} )^2 + (x_{24} - x_{22})^2}$$
+$$\displaystyle D^2 ={(5 - 10 )^2 + (4 - 8)^2}$$
+$$\displaystyle D^2 ={5^2 + 4^2 = 41}$$
+
+$$\displaystyle D ={\sqrt{41}} = 6,40$$
+:::
+:::
+
+## Matriz de Distância
+
+A matriz $D_0$ composta pelas distâncias euclidianas entre cada par de
+observações, conforme segue:
+
+```{r}
+d <- as.matrix(dist(aluno[2:3]))
+d <- data.frame(d, row.names = LETTERS[1:6])
+colnames(d) <- LETTERS[1:6]
+
+knitr::kable(round(d[2:6, 1:5], 4), align = "lccrr", booktabs = T, escape = F) |> 
+  kable_styling("striped", full_width = F)  |> 
+  row_spec(0, font_size = 25, monospace = F)  |> 
+  row_spec(1:5, font_size = 25, color = 'black') |> 
+  column_spec(1, bold = T)
+```
+
+<br>
+
+Inicialmente cada obsercação é considerada um cluster individual, ou
+seja, no estágio 0, temos 6 clusters.
+
+## Métodos de agrupamento
+
+<br>
+
+::: columns
+::: column
+**Hierárquico**
+
+```{r echo=FALSE}
+data <- matrix( sample(seq(1,2000),200), ncol = 10 )
+rownames(data) <- paste0("sample_" , seq(1,20))
+colnames(data) <- paste0("variable",seq(1,10))
+
+# Euclidean distance
+dist <- dist(data[ , c(4:8)] , diag=TRUE)
+
+# Hierarchical Clustering with hclust
+hc <- hclust(dist)
+
+# Plot the result
+plot(hc)
+```
+:::
+
+::: column
+**Não Hierárquico**
+
+```{r echo=FALSE, out.width="80%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/k-means.png")
+```
+:::
+:::
+
+## Métodos de agrupamento
+
+<br>
+
+::: columns
+:::{.column width="40%"}
+**Hierárquico**
+
+```{r echo=FALSE}
+data <- matrix( sample(seq(1,2000),200), ncol = 10 )
+rownames(data) <- paste0("sample_" , seq(1,20))
+colnames(data) <- paste0("variable",seq(1,10))
+
+# Euclidean distance
+dist <- dist(data[ , c(4:8)] , diag=TRUE)
+
+# Hierarchical Clustering with hclust
+hc <- hclust(dist)
+
+# Plot the result
+plot(hc)
+```
+:::
+
+::: column
+-   **positivo**: conseguimos acompanhar a formação dos grupos.
+-   **negativo**: é menos eficiente em grande volume de dados.
+:::
+:::
+
+## Métodos de agrupamento
+
+<br>
+
+::: columns
+::: {.column width="40%"}
+**Não Hierárquico**
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/k-means.png")
+```
+:::
+
+::: column
+<br>
+
+-   **positivo**: trabalha bem com grande volume de dados.
+-   **negativo**: a quantidade de cluster deve ser decidida antes.
+:::
+:::
+
+# Hierárquico
+
+## Primeiro estágio
+
+A menor distância entre todas as observações e, portanto, serão
+inicialmente agrupadas formando um novo *cluster*.
+
+```{r echo=FALSE}
+#| fig-align: center
+ggplot(aluno) + 
+  geom_point(aes(x = Matematica, y = Portugues)) + 
+  geom_label(aes(x = Matematica, y = Portugues, label = Aluno), label.size = .6,
+             fill= c('white', 'red', 'white', 'white', 'red', 'white')) +
+  geom_line(aes(x = c(NA, 5, NA, NA, 4, NA), y = c(NA, 4, NA, NA, 4, NA)), color = 'red', linetype = 2, linewidth = 1.2) +
+  scale_x_continuous(limits = c(0, 10)) +
+  scale_y_continuous(limits = c(0, 10)) +
+  theme_classic()
+  
+```
+
+. . .
+
+Como vamos calcular a distância entre o *cluster* **B-E** e as demais observações?
+
+## Técnicas de Agrupamentos
+
+<br>
+
+A escolha do método de aglomeração é tão importante quanto a definição
+da medida de distância.
+
+-   **Single Linkage** - Vizinho mais próximo
+-   **Complete Linkage** - Vizinho mais longe
+-   **Avarage Linkage** - Média
+-   **Centroid Méthod** - Centroíde
+
+## Técnicas de Agrupamentos
+
+A escolha do método de aglomeração é tão importante quanto a definição
+da medida de distância.
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/met_encadeamento.png")
+```
+
+## Técnicas de Agrupamentos
+
+Calculadas as distâncias entre o cluster (**B-E**) e os demais alunos.
+
+```{r}
+knitr::kable(round(d[2:6, 1:5], 4), align = "lccrr", booktabs = T, escape = F) |> 
+  kable_styling("striped", full_width = F)  |> 
+  row_spec(0, font_size = 20, monospace = F)  |> 
+  row_spec(1:5, font_size = 20, color = 'black') |> 
+  column_spec(1, bold = T)
+```
+
+. . .
+
+A distância de (**B-E**) para C é 2.2360 e 2.8284:
+
+. . .
+
+- single: 2.2360
+- complete: 2.8284
+
+## Técnicas de Agrupamentos
+
+```{r echo=FALSE, out.width="70%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/tec_agrupamento.png")
+```
+
+
+## Segundo estágio
+
+Portando, no segundo estágio, um segundo cluster será formado (**A-D**)
+
+```{r echo=FALSE}
+#| fig-align: center
+ggplot(aluno) + 
+  geom_point(aes(x = Matematica, y = Portugues)) + 
+  geom_label(aes(x = Matematica, y = Portugues, label = Aluno), label.size = .6,
+             fill= c('green', 'red', 'white', 'green', 'red', 'white')) +
+  geom_line(aes(x = c(NA, 5, NA, NA, 4, NA), y = c(NA, 4, NA, NA, 4, NA)), color = 'red', linetype = 2, linewidth = 1.2) +
+  geom_line(aes(x = c(9, NA, NA, 10, NA, NA), y = c(7, NA, NA, 8, NA, NA)), color = 'green', linetype = 2, linewidth = 1.2) +
+  scale_x_continuous(limits = c(0, 10)) +
+  scale_y_continuous(limits = c(0, 10)) +
+  theme_classic()
+  
+```
+
+Os alunos **C** e **F** permanecem ainda isolados
+
+## Terceiro estágio
+
+Neste estágio C é inserido no cluster já formado (**E-B**)
+
+```{r echo=FALSE}
+#| fig-align: center
+ggplot(aluno) + 
+  geom_point(aes(x = Matematica, y = Portugues)) + 
+  geom_label(aes(x = Matematica, y = Portugues, label = Aluno), label.size = .6,
+             fill= c('green', 'red', 'red', 'green', 'red', 'white')) +
+  geom_line(aes(x = c(NA, 5, 6, NA, 4, NA), y = c(NA, 4, 6, NA, 4, NA)), color = 'red', linetype = 2, linewidth = 1.2) +
+  geom_line(aes(x = c(9, NA, NA, 10, NA, NA), y = c(7, NA, NA, 8, NA, NA)), color = 'green', linetype = 2, linewidth = 1.2) +
+  scale_x_continuous(limits = c(0, 10)) +
+  scale_y_continuous(limits = c(0, 10)) +
+  theme_classic()
+  
+```
+
+O aluno **F** permanece ainda isolado
+
+## Dendrograma
+
+Como base nesse esquema de aglomeração, podemos construir um gráfico em
+formato de árvore, conhecido como **dendrograma**
+
+```{r echo=FALSE}
+#| fig-align: center
+dig <- aluno |> 
+  remove_rownames() |> 
+  column_to_rownames(var="Aluno") |> 
+  dist() |> 
+  hclust() |> 
+  as.dendrogram() 
+
+dig |> 
+  plot(main = "Método Complete")
+```
+
+## Dendrograma
+
+<br>
+
+::: columns
+::: column
+**Single**
+
+```{r echo=FALSE}
+#| fig-align: center
+dig <- aluno |> 
+  remove_rownames() |> 
+  column_to_rownames(var="Aluno") |> 
+  dist() |> 
+  hclust(method = "single") |> 
+  as.dendrogram() 
+
+dig |> 
+  plot()
+```
+:::
+
+::: column
+**Complete**
+
+```{r echo=FALSE}
+#| fig-align: center
+dig <- aluno |> 
+  remove_rownames() |> 
+  column_to_rownames(var="Aluno") |> 
+  dist() |> 
+  hclust(method = "complete") |> 
+  as.dendrogram() 
+
+dig |> 
+  plot()
+```
+:::
+:::
+
+## Dendrograma
+
+<br>
+
+::: columns
+::: column
+**Average**
+
+```{r echo=FALSE}
+#| fig-align: center
+dig <- aluno |> 
+  remove_rownames() |> 
+  column_to_rownames(var="Aluno") |> 
+  dist() |> 
+  hclust(method = "average") |> 
+  as.dendrogram() 
+
+dig |> 
+  plot()
+```
+:::
+
+::: column
+**Centroid**
+
+```{r echo=FALSE}
+#| fig-align: center
+dig <- aluno |> 
+  remove_rownames() |> 
+  column_to_rownames(var="Aluno") |> 
+  dist() |> 
+  hclust(method = "centroid") |> 
+  as.dendrogram() 
+
+dig |> 
+  plot()
+```
+:::
+:::
+
+## Número de Cluster
+
+Como você decidiria o número de cluster?
+
+```{r echo=FALSE}
+#| fig-align: center
+# Hierarchical Clustering with hclust
+dig <- aluno |> 
+  remove_rownames() |> 
+  column_to_rownames(var="Aluno") |> 
+  dist() |> 
+  hclust() |> 
+  as.dendrogram() 
+
+dig |> 
+  plot(xlab = c(1:6), main = "Método Complete")
+```
+
+## Número de Cluster
+
+Como você decidiria o número de cluster?
+
+```{r echo=FALSE}
+#| fig-align: center
+# Hierarchical Clustering with hclust
+dig <- aluno |> 
+  remove_rownames() |> 
+  column_to_rownames(var="Aluno") |> 
+  dist() |> 
+  hclust() |> 
+  as.dendrogram() 
+
+dig |> 
+  plot(xlab = c(1:6), main = "Método Complete")
+
+abline(h = 3, lty = 2, col = "red")
+```
+
+## Número de Cluster
+
+3 grupos é uma boa solução?
+```{r echo=FALSE}
+#| fig-align: center
+ggplot(aluno) + 
+  geom_point(aes(x = Matematica, y = Portugues)) + 
+  geom_label(aes(x = Matematica, y = Portugues, label = Aluno), label.size = .6,
+             fill= c('green', 'red', 'red', 'green', 'red', 'blue')) +
+  geom_line(aes(x = c(NA, 5, 6, NA, 4, NA), y = c(NA, 4, 6, NA, 4, NA)), color = 'red', linetype = 2, linewidth = 1.2) +
+  geom_line(aes(x = c(9, NA, NA, 10, NA, NA), y = c(7, NA, NA, 8, NA, NA)), color = 'green', linetype = 2, linewidth = 1.2) +
+  scale_x_continuous(limits = c(0, 10)) +
+  scale_y_continuous(limits = c(0, 10)) +
+  theme_classic()
+  
+```
+
+
+# Técnicas para escolher o número de cluster
+
+## Método Elbow
+
+Assim como no princípio de cluster, a ideia do método é minimizar a
+variabilidade dentro do cluster, ou seja:
+
+$$\small min(\sum_{i=1}^{n} W(C_k))$$ onde $C_k$ é o 𝑘 cluster e
+$𝑊(C_k)$ é a variação dentro do cluster.
+
+Então, o total da soma dos quadrados dentro do cluster $(wss)$ mede a
+homegenidade do cluster e queremos que seja tão pequeno quanto possível.
+
+## Método Elbow
+
+De acordo com o método, o número ideal de grupos se dá quando o ponto
+forma uma curva semelhante de um cotovelo, que é o ponto considerado
+ideal.
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/metodo_cotovelo.png")
+```
+
+## Método Silhueta
+
+<br>
+
+Determina o quão bem cada objeto está alocado em um grupo, ou seja, a
+homogeneidade de um grupo.
+
+$$\small s_i = \frac {\bar x_i - \bar y_i}{max(\bar y_i, \bar x_i)}$$
+
+$\bar y_i$ é a distância média entre o ponto e todos os demais pontos do
+cluster. $\bar x_i$ é a distância média entre o ponto e todos os pontos
+do cluster vizinho mais próximo.
+
+## Método Silhueta
+
+O índice de Silhueta varia de -1 a 1. Valores próximos a 1 indicam que o
+objeto possui semelhança com objetos de seu grupo e dessemelhança com
+objetos de outros grupos.
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/indice_silhueta.png")
+```
+
+## Padronização
+
+<br>
+
+É necessário padronizar variáveis em unidades distintas. O médoto mais
+comumente utilizado para padronização de variáveis é conhecido por
+**procedimento Zscore**
+$$\displaystyle Z_{score}(X)={\frac {x_{i} - \bar x}{DesvioPadrão}}$$
+
+# Não Hierárquico
+
+## Não Hierárquico
+
+<br>
+
+o Metodo hierárquico é menos eficiente com grande volume de dados
+
+```{r echo=FALSE}
+#| fig-align: center
+knitr::include_graphics("imagens/dendrogram_big.png")
+```
+
+## k-means
+
+<br>
+
+O método K-means classifica os objetos dentro de múltiplos grupos, de forma que a variação intra-cluster seja minimizada pela soma dos quadrados das distâncias Euclidianas entre os itens e seus centroides.
+
+$$\small W(C_k) = \sum_{x_i \in C_k}^{n} (x_i - \bar x_k)^2$$
+
+
+## K-means
+
+O método k-means utiliza a distância Euclidiana como medida de dissimilaridade.
+
+```{r echo=FALSE}
+#| fig-align: center
+knitr::include_graphics("imagens/plot-k-means.png")
+```
+
+## K-means
+
+É necessário avisar de antemão o valor de k.
+
+```{r echo=FALSE}
+#| fig-align: center
+knitr::include_graphics("imagens/plot-k-means1.png")
+```
+
+## K-means
+
+O objetivo é minimizar a soma dos quadrados intra-cluster
+
+```{r echo=FALSE}
+#| fig-align: center
+knitr::include_graphics("imagens/plot-k-means2.png")
+```
+
+## K-means
+
+O objetivo é minimizar a soma dos quadrados intra-cluster
+
+```{r echo=FALSE}
+#| fig-align: center
+knitr::include_graphics("imagens/plot-k-means3.png")
+```
+
+## K-means
+
+<br>
+
+A metodologia k-means segue 4 passos:
+
+1.   Seleciona randomicamente os centróides iniciais (sementes).
+
+2.   Calcula distância Euclidiana em relação aos seus centróides
+
+3.   Atualiza os centróides, esse processo é repetido até a convergência.
+
+4.   Uma leitura final dos dados assinala cada observação ao centróide mais próximo.
