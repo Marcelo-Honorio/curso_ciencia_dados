@@ -274,6 +274,28 @@ knitr::kable(round(d[2:6, 1:5], 4), align = "lccrr", booktabs = T, escape = F) |
 Inicialmente cada obsercação é considerada um cluster individual, ou
 seja, no estágio 0, temos 6 clusters.
 
+## Matriz de Distância
+
+A matriz $D_0$ composta pelas distâncias euclidianas entre cada par de
+observações, conforme segue:
+
+```{r}
+d <- as.matrix(dist(aluno[2:3]))
+d <- data.frame(d, row.names = LETTERS[1:6])
+colnames(d) <- LETTERS[1:6]
+
+knitr::kable(round(d[2:6, 1:5], 4), align = "lccrr", booktabs = T, escape = F) |> 
+  kable_styling("striped", full_width = F)  |> 
+  row_spec(0, font_size = 25, monospace = F)  |> 
+  row_spec(1:5, font_size = 25, color = 'black') |> 
+  column_spec(1, bold = T)
+```
+
+<br>
+
+Depois de calcular as distâncias quem pode formar grupo?
+
+
 ## Métodos de agrupamento
 
 <br>
@@ -376,13 +398,14 @@ ggplot(aluno) +
   geom_line(aes(x = c(NA, 5, NA, NA, 4, NA), y = c(NA, 4, NA, NA, 4, NA)), color = 'red', linetype = 2, linewidth = 1.2) +
   scale_x_continuous(limits = c(0, 10)) +
   scale_y_continuous(limits = c(0, 10)) +
+  labs(x = 'Matemática', y = 'Português') +
   theme_classic()
   
 ```
 
 . . .
 
-Como vamos calcular a distância entre o *cluster* **B-E** e as demais observações?
+Como vamos calcular a distância entre o *cluster* [**B-E**]{style="color:red"} e as demais observações?
 
 ## Técnicas de Agrupamentos
 
@@ -408,7 +431,7 @@ knitr::include_graphics("imagens/met_encadeamento.png")
 
 ## Técnicas de Agrupamentos
 
-Calculadas as distâncias entre o cluster (**B-E**) e os demais alunos.
+Calculadas as distâncias entre o cluster [(**B-E**)]{style="color:red"} e os demais alunos.
 
 ```{r}
 knitr::kable(round(d[2:6, 1:5], 4), align = "lccrr", booktabs = T, escape = F) |> 
@@ -437,7 +460,7 @@ knitr::include_graphics("imagens/tec_agrupamento.png")
 
 ## Segundo estágio
 
-Portando, no segundo estágio, um segundo cluster será formado (**A-D**)
+Portando, no segundo estágio, um segundo cluster será formado [(**A-D**)]{style="color:green"}
 
 ```{r echo=FALSE}
 #| fig-align: center
@@ -449,6 +472,7 @@ ggplot(aluno) +
   geom_line(aes(x = c(9, NA, NA, 10, NA, NA), y = c(7, NA, NA, 8, NA, NA)), color = 'green', linetype = 2, linewidth = 1.2) +
   scale_x_continuous(limits = c(0, 10)) +
   scale_y_continuous(limits = c(0, 10)) +
+  labs(x = 'Matemática', y = 'Português') +
   theme_classic()
   
 ```
@@ -457,7 +481,7 @@ Os alunos **C** e **F** permanecem ainda isolados
 
 ## Terceiro estágio
 
-Neste estágio C é inserido no cluster já formado (**E-B**)
+Neste estágio C é inserido no cluster já formado [(**E-B**)]{style="color:red"}
 
 ```{r echo=FALSE}
 #| fig-align: center
@@ -469,6 +493,7 @@ ggplot(aluno) +
   geom_line(aes(x = c(9, NA, NA, 10, NA, NA), y = c(7, NA, NA, 8, NA, NA)), color = 'green', linetype = 2, linewidth = 1.2) +
   scale_x_continuous(limits = c(0, 10)) +
   scale_y_continuous(limits = c(0, 10)) +
+  labs(x = 'Matemática', y = 'Português') +
   theme_classic()
   
 ```
@@ -624,6 +649,7 @@ ggplot(aluno) +
   geom_line(aes(x = c(9, NA, NA, 10, NA, NA), y = c(7, NA, NA, 8, NA, NA)), color = 'green', linetype = 2, linewidth = 1.2) +
   scale_x_continuous(limits = c(0, 10)) +
   scale_y_continuous(limits = c(0, 10)) +
+  labs(x = 'Matemática', y = 'Português') +
   theme_classic()
   
 ```

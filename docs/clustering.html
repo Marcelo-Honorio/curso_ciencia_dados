@@ -786,6 +786,72 @@ Marcelo Honorio
 <p><br></p>
 <p>Inicialmente cada obsercação é considerada um cluster individual, ou seja, no estágio 0, temos 6 clusters.</p>
 </section>
+<section id="matriz-de-distância-1" class="slide level2">
+<h2>Matriz de Distância</h2>
+<p>A matriz <span class="math inline">\(D_0\)</span> composta pelas distâncias euclidianas entre cada par de observações, conforme segue:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;font-size: 25px;">   </th>
+   <th style="text-align:left;font-size: 25px;"> A </th>
+   <th style="text-align:center;font-size: 25px;"> B </th>
+   <th style="text-align:center;font-size: 25px;"> C </th>
+   <th style="text-align:right;font-size: 25px;"> D </th>
+   <th style="text-align:right;font-size: 25px;"> E </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;color: black !important;font-size: 25px;font-weight: bold;"> B </td>
+   <td style="text-align:left;color: black !important;font-size: 25px;"> 5.0000 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 0.0000 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 2.2361 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 6.4031 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 1.0000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;color: black !important;font-size: 25px;font-weight: bold;"> C </td>
+   <td style="text-align:left;color: black !important;font-size: 25px;"> 3.1623 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 2.2361 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 0.0000 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 4.4721 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 2.8284 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;color: black !important;font-size: 25px;font-weight: bold;"> D </td>
+   <td style="text-align:left;color: black !important;font-size: 25px;"> 1.4142 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 6.4031 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 4.4721 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 0.0000 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 7.2111 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;color: black !important;font-size: 25px;font-weight: bold;"> E </td>
+   <td style="text-align:left;color: black !important;font-size: 25px;"> 5.8310 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 1.0000 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 2.8284 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 7.2111 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 0.0000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;color: black !important;font-size: 25px;font-weight: bold;"> F </td>
+   <td style="text-align:left;color: black !important;font-size: 25px;"> 5.3852 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 5.0990 </td>
+   <td style="text-align:center;color: black !important;font-size: 25px;"> 3.6056 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 6.0828 </td>
+   <td style="text-align:right;color: black !important;font-size: 25px;"> 5.0000 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p><br></p>
+<p>Depois de calcular as distâncias quem pode formar grupo?</p>
+</section>
 <section id="métodos-de-agrupamento" class="slide level2">
 <h2>Métodos de agrupamento</h2>
 <p><br></p>
@@ -794,7 +860,7 @@ Marcelo Honorio
 <p><strong>Hierárquico</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
@@ -819,7 +885,7 @@ Marcelo Honorio
 <p><strong>Hierárquico</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
@@ -863,8 +929,8 @@ Marcelo Honorio
 <h2>Primeiro estágio</h2>
 <p>A menor distância entre todas as observações e, portanto, serão inicialmente agrupadas formando um novo <em>cluster</em>.</p>
 
-<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch quarto-figure-center"><div class="fragment">
-<p>Como vamos calcular a distância entre o <em>cluster</em> <strong>B-E</strong> e as demais observações?</p>
+<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"><div class="fragment">
+<p>Como vamos calcular a distância entre o <em>cluster</em> <span style="color:red"><strong>B-E</strong></span> e as demais observações?</p>
 </div>
 </section>
 <section id="técnicas-de-agrupamentos" class="slide level2">
@@ -885,7 +951,7 @@ Marcelo Honorio
 <img data-src="imagens/met_encadeamento.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="técnicas-de-agrupamentos-2" class="slide level2">
 <h2>Técnicas de Agrupamentos</h2>
-<p>Calculadas as distâncias entre o cluster (<strong>B-E</strong>) e os demais alunos.</p>
+<p>Calculadas as distâncias entre o cluster <span style="color:red">(<strong>B-E</strong>)</span> e os demais alunos.</p>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -962,21 +1028,21 @@ Marcelo Honorio
 <img data-src="imagens/tec_agrupamento.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
 <section id="segundo-estágio" class="slide level2">
 <h2>Segundo estágio</h2>
-<p>Portando, no segundo estágio, um segundo cluster será formado (<strong>A-D</strong>)</p>
+<p>Portando, no segundo estágio, um segundo cluster será formado <span style="color:green">(<strong>A-D</strong>)</span></p>
 
-<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch quarto-figure-center"><p>Os alunos <strong>C</strong> e <strong>F</strong> permanecem ainda isolados</p>
+<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"><p>Os alunos <strong>C</strong> e <strong>F</strong> permanecem ainda isolados</p>
 </section>
 <section id="terceiro-estágio" class="slide level2">
 <h2>Terceiro estágio</h2>
-<p>Neste estágio C é inserido no cluster já formado (<strong>E-B</strong>)</p>
+<p>Neste estágio C é inserido no cluster já formado <span style="color:red">(<strong>E-B</strong>)</span></p>
 
-<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"><p>O aluno <strong>F</strong> permanece ainda isolado</p>
+<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"><p>O aluno <strong>F</strong> permanece ainda isolado</p>
 </section>
 <section id="dendrograma" class="slide level2">
 <h2>Dendrograma</h2>
 <p>Como base nesse esquema de aglomeração, podemos construir um gráfico em formato de árvore, conhecido como <strong>dendrograma</strong></p>
 
-<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="dendrograma-1" class="slide level2">
 <h2>Dendrograma</h2>
 <p><br></p>
@@ -987,7 +1053,7 @@ Marcelo Honorio
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -998,7 +1064,7 @@ Marcelo Honorio
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1016,7 +1082,7 @@ Marcelo Honorio
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1027,7 +1093,7 @@ Marcelo Honorio
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+<p><img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1039,17 +1105,17 @@ Marcelo Honorio
 <h2>Número de Cluster</h2>
 <p>Como você decidiria o número de cluster?</p>
 
-<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="número-de-cluster-1" class="slide level2">
 <h2>Número de Cluster</h2>
 <p>Como você decidiria o número de cluster?</p>
 
-<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="número-de-cluster-2" class="slide level2">
 <h2>Número de Cluster</h2>
 <p>3 grupos é uma boa solução?</p>
 
-<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
+<img data-src="n_supervisionado_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
 <section>
 <section id="técnicas-para-escolher-o-número-de-cluster" class="title-slide slide level1 center">
 <h1>Técnicas para escolher o número de cluster</h1>

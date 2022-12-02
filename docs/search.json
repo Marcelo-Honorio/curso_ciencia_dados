@@ -1839,5 +1839,12 @@
     "title": "Análise de Agrupamento",
     "section": "K-means",
     "text": "K-means\n\nA metodologia k-means segue 4 passos:\n\nSeleciona randomicamente os centróides iniciais (sementes).\nCalcula distância Euclidiana em relação aos seus centróides\nAtualiza os centróides, esse processo é repetido até a convergência.\nUma leitura final dos dados assinala cada observação ao centróide mais próximo."
+  },
+  {
+    "objectID": "clustering.html#matriz-de-distância-1",
+    "href": "clustering.html#matriz-de-distância-1",
+    "title": "Análise de Agrupamento",
+    "section": "Matriz de Distância",
+    "text": "Matriz de Distância\nA matriz \\(D_0\\) composta pelas distâncias euclidianas entre cada par de observações, conforme segue:\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n  \n \n\n  \n    B \n    5.0000 \n    0.0000 \n    2.2361 \n    6.4031 \n    1.0000 \n  \n  \n    C \n    3.1623 \n    2.2361 \n    0.0000 \n    4.4721 \n    2.8284 \n  \n  \n    D \n    1.4142 \n    6.4031 \n    4.4721 \n    0.0000 \n    7.2111 \n  \n  \n    E \n    5.8310 \n    1.0000 \n    2.8284 \n    7.2111 \n    0.0000 \n  \n  \n    F \n    5.3852 \n    5.0990 \n    3.6056 \n    6.0828 \n    5.0000 \n  \n\n\n\n\n\n\nDepois de calcular as distâncias quem pode formar grupo?"
   }
 ]
