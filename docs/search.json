@@ -1846,5 +1846,593 @@
     "title": "Análise de Agrupamento",
     "section": "Matriz de Distância",
     "text": "Matriz de Distância\nA matriz \\(D_0\\) composta pelas distâncias euclidianas entre cada par de observações, conforme segue:\n\n\n\n\n \n  \n      \n    A \n    B \n    C \n    D \n    E \n  \n \n\n  \n    B \n    5.0000 \n    0.0000 \n    2.2361 \n    6.4031 \n    1.0000 \n  \n  \n    C \n    3.1623 \n    2.2361 \n    0.0000 \n    4.4721 \n    2.8284 \n  \n  \n    D \n    1.4142 \n    6.4031 \n    4.4721 \n    0.0000 \n    7.2111 \n  \n  \n    E \n    5.8310 \n    1.0000 \n    2.8284 \n    7.2111 \n    0.0000 \n  \n  \n    F \n    5.3852 \n    5.0990 \n    3.6056 \n    6.0828 \n    5.0000 \n  \n\n\n\n\n\n\nDepois de calcular as distâncias quem pode formar grupo?"
+  },
+  {
+    "objectID": "supervisionado.html#dataset",
+    "href": "supervisionado.html#dataset",
+    "title": "supervisionado",
+    "section": "Dataset",
+    "text": "Dataset\n\n\n\n\n \n  \n    estudante \n    tempo \n    distancia \n  \n \n\n  \n    Gabriela \n    15 \n    8 \n  \n  \n    Dalila \n    20 \n    6 \n  \n  \n    Gustavo \n    20 \n    15 \n  \n  \n    Letícia \n    40 \n    20 \n  \n  \n    Luiz \n    50 \n    25 \n  \n  \n    Leonor \n    25 \n    11 \n  \n  \n    Ana \n    10 \n    5 \n  \n  \n    Antônio \n    55 \n    32 \n  \n  \n    Júlia \n    35 \n    28 \n  \n  \n    Mariana \n    30 \n    20 \n  \n\n\n\n\n\n   tempo distancia\n1     15         8\n2     20         6\n3     20        15\n4     40        20\n5     50        25\n6     25        11\n7     10         5\n8     55        32\n9     35        28\n10    30        20"
+  },
+  {
+    "objectID": "supervisionado.html#visualização",
+    "href": "supervisionado.html#visualização",
+    "title": "supervisionado",
+    "section": "Visualização",
+    "text": "Visualização"
+  },
+  {
+    "objectID": "supervisionado.html#forma-linear",
+    "href": "supervisionado.html#forma-linear",
+    "title": "Aprendizado Supervisionado",
+    "section": "Forma linear",
+    "text": "Forma linear\n… Para descrever a relação entre a distância e tempo"
+  },
+  {
+    "objectID": "supervisionado.html#terminologia",
+    "href": "supervisionado.html#terminologia",
+    "title": "supervisionado",
+    "section": "Terminologia",
+    "text": "Terminologia\n\n\n\nResultado, Y: variável que descreve os resultado de interesse\nPreditor, X: variável usada para ajudar a entender a variabilidade no resultado"
+  },
+  {
+    "objectID": "supervisionado.html#regression-model-1",
+    "href": "supervisionado.html#regression-model-1",
+    "title": "supervisionado",
+    "section": "Modelo de regressão",
+    "text": "Modelo de regressão\nUm modelo de regressão é uma função que descreve a relação entre o resultado, \\(Y\\), e o preditor, \\(X\\).\n\\[\\begin{aligned} Y &= \\color{black}{\\textbf{Modelo}} + \\text{Error} \\\\[8pt]\n&= \\color{black}{\\mathbf{f(X)}} + \\epsilon \\\\[8pt]\n&= \\color{black}{\\boldsymbol{\\mu_{Y|X}}} + \\epsilon \\end{aligned}\\]"
+  },
+  {
+    "objectID": "supervisionado.html#modelo-de-regressão-1",
+    "href": "supervisionado.html#modelo-de-regressão-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Modelo de regressão",
+    "text": "Modelo de regressão\n\n\n\nResultado, Y: variável que descreve os resultado de interesse\nPreditor, X: variável usada para ajudar a entender a variabilidade no resultado\n\n\n\\[Y_i = \\beta_0 + \\beta_1 X_i + e_i\\]"
+  },
+  {
+    "objectID": "supervisionado.html#modelo-de-regressão-residuos",
+    "href": "supervisionado.html#modelo-de-regressão-residuos",
+    "title": "Aprendizado Supervisionado",
+    "section": "Modelo de regressão + residuos",
+    "text": "Modelo de regressão + residuos\n\n\n\n\\[\\begin{aligned} Y &= \\color{purple}{\\textbf{Modelo}} + \\color{blue}{\\textbf{Error}} \\\\[8pt]\n&= \\color{purple}{\\mathbf{f(X)}} + \\color{blue}{\\boldsymbol{\\epsilon}} \\\\[8pt]\n&= \\color{purple}{\\boldsymbol{\\mu_{Y|X}}} + \\color{blue}{\\boldsymbol{\\epsilon}} \\\\[8pt]\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-linear-simples-1",
+    "href": "supervisionado.html#regressão-linear-simples-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão linear simples",
+    "text": "Regressão linear simples\nPara modelar a relação entre um resultado quantitativo (\\(Y\\)) e um único preditor quantitativo (\\(X\\)): \\[\\Large{Y = \\beta_0 + \\beta_1 X + e}\\]\n\n\n\\(\\beta_1\\): Inclinação da relação entre \\(X\\) e \\(Y\\)\n\\(\\beta_0\\): Intercepto da relação entre \\(X\\) e \\(Y\\)\n\\(X\\): Variável explicativa\n\\(e\\) : Erro (residual)"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-linear-simples-2",
+    "href": "supervisionado.html#regressão-linear-simples-2",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão linear simples",
+    "text": "Regressão linear simples\nObjetivo: desenvolver uma equação linear que apresente a relação entre uma variável dependente e uma explicativa\n\\[\\Large{\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X}\\]\n\n\\(\\hat{\\beta}_1\\): Inclinação estimada da relação entre \\(X\\) e \\(Y\\)\n\\(\\hat{\\beta}_0\\): Intercepto estimado da relação entre \\(X\\) e \\(Y\\)\nSem termo de erro!"
+  },
+  {
+    "objectID": "supervisionado.html#escolhendo-valores-para-hatbeta_1-and-hatbeta_0",
+    "href": "supervisionado.html#escolhendo-valores-para-hatbeta_1-and-hatbeta_0",
+    "title": "supervisionado",
+    "section": "Escolhendo valores para \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\)",
+    "text": "Escolhendo valores para \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\)"
+  },
+  {
+    "objectID": "supervisionado.html#residual",
+    "href": "supervisionado.html#residual",
+    "title": "Aprendizado Supervisionado",
+    "section": "Residual",
+    "text": "Residual\nO termo de erro deverá capturar o efeito das demais variáveis não incluidas no modelo.\n\n\\[\\text{residual} = \\text{observado} - \\text{previsto} = y - \\hat{y}\\]"
+  },
+  {
+    "objectID": "supervisionado.html#mínimos-quadrados",
+    "href": "supervisionado.html#mínimos-quadrados",
+    "title": "Aprendizado Supervisionado",
+    "section": "Mínimos quadrados",
+    "text": "Mínimos quadrados\n\nO residuo para a observação \\(i^{th}\\) é\n\n\\[e_i = \\text{observed} - \\text{predicted} = y_i - \\hat{y}_i\\]\n\nA soma do quadrado residual é\n\n\\[e^2_1 + e^2_2 + \\dots + e^2_n\\]\n\nA soma dos mínimos quadrados é aquele que minimiza soma dos quadrados dos risíduos"
+  },
+  {
+    "objectID": "supervisionado.html#propriedades-do-mínimos-quadrados",
+    "href": "supervisionado.html#propriedades-do-mínimos-quadrados",
+    "title": "Aprendizado Supervisionado",
+    "section": "Propriedades do Mínimos Quadrados",
+    "text": "Propriedades do Mínimos Quadrados\n\nA linha de regressão passa pelo ponto do centro de massa, as coordenadas correspondentes à média \\(X\\) e à média \\(Y\\): \\(\\hat{\\beta}_0 = \\bar{Y} - \\hat{\\beta}_1\\bar{X}\\)\nA inclinação tem o mesmo sinal que o coeficiente de correlação: \\(\\hat{\\beta}_1 = r \\frac{s_Y}{s_X}\\)\nA soma dos resíduos é zero: \\(\\sum_{i = 1}^n \\epsilon_i = 0\\)\nOs valores residuais e \\(X\\) não são correlacionados"
+  },
+  {
+    "objectID": "supervisionado.html#interpretando",
+    "href": "supervisionado.html#interpretando",
+    "title": "supervisionado",
+    "section": "interpretando",
+    "text": "interpretando\n\\[\\widehat{\\text{tempo}} = 5.878 + 1.419 \\times \\text{distancia}\\]\n\n\n\nCall:\nlm(formula = tempo ~ distancia, data = tempodist)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-10.6081  -3.9358   0.6419   5.1351   8.6486 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   5.8784     4.5323   1.297 0.230788    \ndistancia     1.4189     0.2355   6.025 0.000314 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.719 on 8 degrees of freedom\nMultiple R-squared:  0.8194,    Adjusted R-squared:  0.7969 \nF-statistic:  36.3 on 1 and 8 DF,  p-value: 0.0003144"
+  },
+  {
+    "objectID": "supervisionado.html#fazendo-uma-predição",
+    "href": "supervisionado.html#fazendo-uma-predição",
+    "title": "Aprendizado Supervisionado",
+    "section": "Fazendo uma predição",
+    "text": "Fazendo uma predição\n\nSuponha que um estudante more à 20 km de distância. De acordo com esse modelo, qual é o tempo previsto para chegar?\n\\[\n\\begin{aligned}\n\\widehat{\\text{audience}} &= 5.878 + 1.419 \\times \\text{distancia} \\\\\n&= 5.878 + 1.419 \\times 20 \\\\\n&= 34.258\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "supervisionado.html#r2",
+    "href": "supervisionado.html#r2",
+    "title": "Aprendizado Supervisionado",
+    "section": "\\(R^2\\)",
+    "text": "\\(R^2\\)"
+  },
+  {
+    "objectID": "supervisionado.html#escolhendo-valores-para-hatbeta_1-e-hatbeta_0",
+    "href": "supervisionado.html#escolhendo-valores-para-hatbeta_1-e-hatbeta_0",
+    "title": "supervisionado",
+    "section": "Escolhendo valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)",
+    "text": "Escolhendo valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)"
+  },
+  {
+    "objectID": "supervisionado.html#coeficiente-de-ajuste-do-modelo",
+    "href": "supervisionado.html#coeficiente-de-ajuste-do-modelo",
+    "title": "supervisionado",
+    "section": "Coeficiente de ajuste do modelo",
+    "text": "Coeficiente de ajuste do modelo"
+  },
+  {
+    "objectID": "supervisionado.html#r2-e-teste-f",
+    "href": "supervisionado.html#r2-e-teste-f",
+    "title": "supervisionado",
+    "section": "\\(R^2\\) e Teste F",
+    "text": "\\(R^2\\) e Teste F\n\n\n\nCoeficiente de ajuste do modelo, indica o percentual de variância da variável y que é devido ao comportamento de variação conjunta da(s) variável(is) explicativa(s)."
+  },
+  {
+    "objectID": "supervisionado.html#teste-f",
+    "href": "supervisionado.html#teste-f",
+    "title": "Aprendizado Supervisionado",
+    "section": "Teste F",
+    "text": "Teste F\nTeste F: Analisa se pelo menos um dos \\(\\beta'\\)s é significativo para a explicação de \\(Y\\)\nHipóteses:\n\n\\(H_0 :\\beta_1 = \\beta_2 = \\beta_3 = ...\\beta_k = 0\\)\n\\(H_1 : pelo\\ menos\\ um\\ \\beta \\neq 0\\)\n\n\nEspera-se rejeitar a hipótese nula, ou seja, que pelo menos um dos \\(\\beta'\\)s seja estatisticamente diferente de zero para explicar o comportamento de Y - p-valor abaixo de nível crítico (0,05, usualmente)"
+  },
+  {
+    "objectID": "supervisionado.html#teste-t",
+    "href": "supervisionado.html#teste-t",
+    "title": "Aprendizado Supervisionado",
+    "section": "Teste \\(t\\)",
+    "text": "Teste \\(t\\)\nAnalisa individualmente cada um dos parâmetros, identificando se os mesmo são estatisticamente diferentes de zero.\nHipóteses:\n\n\\(H_0: \\beta = 0\\)\n\\(H_1: \\beta \\neq 0\\)\n\n\nEspera-se o mesmo fato, em termos de significância estatística, do que o discutido para o teste F."
+  },
+  {
+    "objectID": "supervisionado.html#variáveis-qualitativas",
+    "href": "supervisionado.html#variáveis-qualitativas",
+    "title": "Aprendizado Supervisionado",
+    "section": "Variáveis qualitativas",
+    "text": "Variáveis qualitativas\nSão variáveis categóricas que representam um atributo por meio de combinação binária (0 para a ausência ou 1 para presença).\n\n\n\n\n \n  \n    estudante \n    tempo \n    distancia \n    semafaro \n    periodo \n    perfil \n  \n \n\n  \n    Gabriela \n    15 \n    8 \n    0 \n    manha \n    calmo \n  \n  \n    Dalila \n    20 \n    6 \n    1 \n    manha \n    moderado \n  \n  \n    Gustavo \n    20 \n    15 \n    0 \n    manha \n    moderado \n  \n  \n    Letícia \n    40 \n    20 \n    1 \n    tarde \n    agressivo \n  \n  \n    Luiz \n    50 \n    25 \n    2 \n    tarde \n    agressivo \n  \n  \n    Leonor \n    25 \n    11 \n    1 \n    manha \n    moderado \n  \n  \n    Ana \n    10 \n    5 \n    0 \n    manha \n    calmo \n  \n  \n    Antônio \n    55 \n    32 \n    3 \n    tarde \n    calmo \n  \n  \n    Júlia \n    35 \n    28 \n    1 \n    manha \n    moderado \n  \n  \n    Mariana \n    30 \n    20 \n    1 \n    manha \n    moderado"
+  },
+  {
+    "objectID": "supervisionado.html#variáveis-qualitativas-1",
+    "href": "supervisionado.html#variáveis-qualitativas-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Variáveis qualitativas",
+    "text": "Variáveis qualitativas\nPara uma variável categórica com mais de duas categorias?\n\nNeste caso, devemos incluir \\(n - 1\\) dummies, em que \\(n\\) é a quantidade de categorias existentes na variável original.\n\n\n\n\n \n  \n    estudante \n    tempo \n    distancia \n    semafaro \n    periodo \n    perfil \n    periodo_tarde \n    perfil_calmo \n    perfil_moderado \n  \n \n\n  \n    Gabriela \n    15 \n    8 \n    0 \n    manha \n    calmo \n    0 \n    1 \n    0 \n  \n  \n    Dalila \n    20 \n    6 \n    1 \n    manha \n    moderado \n    0 \n    0 \n    1 \n  \n  \n    Gustavo \n    20 \n    15 \n    0 \n    manha \n    moderado \n    0 \n    0 \n    1 \n  \n  \n    Letícia \n    40 \n    20 \n    1 \n    tarde \n    agressivo \n    1 \n    0 \n    0 \n  \n  \n    Luiz \n    50 \n    25 \n    2 \n    tarde \n    agressivo \n    1 \n    0 \n    0 \n  \n  \n    Leonor \n    25 \n    11 \n    1 \n    manha \n    moderado \n    0 \n    0 \n    1 \n  \n  \n    Ana \n    10 \n    5 \n    0 \n    manha \n    calmo \n    0 \n    1 \n    0 \n  \n  \n    Antônio \n    55 \n    32 \n    3 \n    tarde \n    calmo \n    1 \n    1 \n    0 \n  \n  \n    Júlia \n    35 \n    28 \n    1 \n    manha \n    moderado \n    0 \n    0 \n    1 \n  \n  \n    Mariana \n    30 \n    20 \n    1 \n    manha \n    moderado \n    0 \n    0 \n    1"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-múltipla",
+    "href": "supervisionado.html#regressão-múltipla",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão Múltipla",
+    "text": "Regressão Múltipla\n\nQual a diferença entre um modelo de regressão simples para um modelo de regressão múltipla?\n\nA forma funcional passa a ser a seguinte: \\[\\displaystyle{Y_i = \\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon}\\]\nA regressão linear múltipla apresenta a mesma lógica apresentada para a regressão linear simples."
+  },
+  {
+    "objectID": "supervisionado.html#modelos-não-lineares",
+    "href": "supervisionado.html#modelos-não-lineares",
+    "title": "supervisionado",
+    "section": "Modelos não lineares",
+    "text": "Modelos não lineares\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResultados da aplicação de quatro diferentes formas funcionais em regressão"
+  },
+  {
+    "objectID": "supervisionado.html#box---cox",
+    "href": "supervisionado.html#box---cox",
+    "title": "supervisionado",
+    "section": "Box - Cox",
+    "text": "Box - Cox\n\\[\\displaystyle \\frac{Y_i^\\lambda - 1}{\\lambda} = \\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon\\]"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-logística-binária-1",
+    "href": "supervisionado.html#regressão-logística-binária-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão Logística Binária",
+    "text": "Regressão Logística Binária\n\nTécnica supervisionada de machine learning utilizada para explicar ou predizer a probabilidade de ocorrência de determinado evento em função de uma ou mais variáveis explicativas.\nVariável dependente: binária\n\nResultados interpretados em termos de probabilidades.\n\nVariáveis do vetor X: métricas ou não métricas"
+  },
+  {
+    "objectID": "supervisionado.html#objetivos-da-técnica",
+    "href": "supervisionado.html#objetivos-da-técnica",
+    "title": "Aprendizado Supervisionado",
+    "section": "Objetivos da técnica",
+    "text": "Objetivos da técnica\n\nAtribuição de probabilidades:\nestimar a probabilidade de ocorrência de determinando evento ou de que um indivíduo venha a se enquadrar nessa ou naquela categoria.\n\nClassificação em categorias:\nclassificar indivíduos ou observações em categorias específicas."
+  },
+  {
+    "objectID": "supervisionado.html#probabilidade",
+    "href": "supervisionado.html#probabilidade",
+    "title": "Aprendizado Supervisionado",
+    "section": "Probabilidade",
+    "text": "Probabilidade\n\nSeja \\(Y\\) a resposta a um estímulo (sim ou não) - pode ser a preferência por um produto, adimplência, aprovação em um curso, etc.\n\n\\(p\\) : probabilidade da resposta “sim”.\n\\(1 - p\\) : probabilidade da resposta “não”"
+  },
+  {
+    "objectID": "supervisionado.html#chance-odds",
+    "href": "supervisionado.html#chance-odds",
+    "title": "Aprendizado Supervisionado",
+    "section": "Chance (ODDS)",
+    "text": "Chance (ODDS)\n\nChance (odds) de ocorrência de um evento:\n\\[\\displaystyle chance = \\frac {p}{1 - p}\\]\n\n\\(p\\) : Evento\n\\(1 - p\\) : Não Evento\n\nExemplo:\nse \\(p = 0,75\\), chance = 3 (3 para 1)"
+  },
+  {
+    "objectID": "supervisionado.html#logito",
+    "href": "supervisionado.html#logito",
+    "title": "Aprendizado Supervisionado",
+    "section": "Logito",
+    "text": "Logito\nlogaritmo natural da chance de ocorrência de uma resposta do tipo “sim”. \\(Z = \\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon\\)\n\\[\\displaystyle logito = Z = ln \\left(\\frac {p}{1 - p} \\right)\\]\n\\[\\displaystyle e^{logito} = e^Z = \\frac {p}{1 - p} = odds\\]\n\\[\\displaystyle p = \\frac {e^Z}{1 + e^Z} = \\frac {1}{1 + e^{-Z}}\\]"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-logística",
+    "href": "supervisionado.html#regressão-logística",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão logística",
+    "text": "Regressão logística\n\nA curva logística, ou sigmóide, descreve a relação entre a probabilidade associada à ocorrência de determinando evento e um conjunto de variáveis preditoras.\n\\[\\displaystyle p_i = \\frac {1}{1 + e^{-Z}} = \\frac {1}{1 + e^{-(\\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon)}}\\]"
+  },
+  {
+    "objectID": "supervisionado.html#função-logística",
+    "href": "supervisionado.html#função-logística",
+    "title": "Aprendizado Supervisionado",
+    "section": "Função logística",
+    "text": "Função logística\n\n\\[\\displaystyle p_i = \\frac {1}{1 + e^{-Z}} = \\frac {1}{1 + e^{-(\\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon)}}\\]\n\nEstimação dos parâmetros: processo iterativo para maximizar o acerto da probabilidade de ocorrência de um evento à sua real ocorrência (Método de Máxima Verossimilhança)."
+  },
+  {
+    "objectID": "supervisionado.html#modelos-supervisionado",
+    "href": "supervisionado.html#modelos-supervisionado",
+    "title": "supervisionado",
+    "section": "Modelos supervisionado",
+    "text": "Modelos supervisionado"
+  },
+  {
+    "objectID": "supervisionado.html#função-logística-1",
+    "href": "supervisionado.html#função-logística-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Função logística",
+    "text": "Função logística\n\n\\[\\displaystyle p_i = \\frac {1}{1 + e^{-Z}} = \\frac {1}{1 + e^{-(\\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon)}}\\]\n\nOs resultados atribuíveis à variável dependente estarão entre 0 e 1.\nAnálise do ajuste do modelo: testes de significância dos parâmetros e tabela de classificação (matriz de confusão)."
+  },
+  {
+    "objectID": "supervisionado.html#árvore-de-decisão",
+    "href": "supervisionado.html#árvore-de-decisão",
+    "title": "Aprendizado Supervisionado",
+    "section": "Árvore de decisão",
+    "text": "Árvore de decisão\nA nomenclatura árvore deriva da metodologia proposta. Sua estruturação envolve o nó raiz, os nós de decisão e os nós folha."
+  },
+  {
+    "objectID": "supervisionado.html#ideia-central---mudar",
+    "href": "supervisionado.html#ideia-central---mudar",
+    "title": "Aprendizado Supervisionado",
+    "section": "Ideia central - mudar",
+    "text": "Ideia central - mudar\nVamos supor que queremos descobrir o nome de um personagem escolhido aleatoriamente.\n\nQual deveria ser a primeira pergunta?\n\n\nO personagem é do sexo feminino?\nO personagem possui um coelho de pelúcia?"
+  },
+  {
+    "objectID": "supervisionado.html#iniciando-pela-pergunta-2",
+    "href": "supervisionado.html#iniciando-pela-pergunta-2",
+    "title": "Aprendizado Supervisionado",
+    "section": "Iniciando pela pergunta 2:",
+    "text": "Iniciando pela pergunta 2:"
+  },
+  {
+    "objectID": "supervisionado.html#iniciando-pela-pergunta-1",
+    "href": "supervisionado.html#iniciando-pela-pergunta-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Iniciando pela pergunta 1:",
+    "text": "Iniciando pela pergunta 1:"
+  },
+  {
+    "objectID": "supervisionado.html#objetivo-central",
+    "href": "supervisionado.html#objetivo-central",
+    "title": "Aprendizado Supervisionado",
+    "section": "Objetivo central",
+    "text": "Objetivo central\nDescobrir quais variáveis possuem a maior carga de informação para que as perguntas “corretas” possam ser feitas.\n\nComo medir a melhor partição em cada etapa do processo?\n\nEntropia de Shannon\nCoeficiente de Gini"
+  },
+  {
+    "objectID": "supervisionado.html#ganho-de-informação",
+    "href": "supervisionado.html#ganho-de-informação",
+    "title": "Aprendizado Supervisionado",
+    "section": "Ganho de informação",
+    "text": "Ganho de informação\n\nUm critério muito utilizado é o índice de Gini:\n\\[I(Y, D) = 1-\\sum_{i=i}^m p_i^2\\]\nO Coeficiente de Gini será 0 quando todas as \\(i\\) observações pertencerem a mesma classe \\(𝑚\\), e \\(1 − \\frac {1}{m}\\) quando todas as \\(𝑚\\) classes possuírem a mesma probabilidade de ocorrência."
+  },
+  {
+    "objectID": "supervisionado.html#coeficiente-de-gini",
+    "href": "supervisionado.html#coeficiente-de-gini",
+    "title": "Aprendizado Supervisionado",
+    "section": "Coeficiente de Gini",
+    "text": "Coeficiente de Gini\n\nObserve a seguinte base de dados:\n\n\n\n\n \n  \n    id \n    palavras_suspeitas \n    remetente_desconhecido \n    presenca_imagens \n    classificacao \n  \n \n\n  \n    1 \n    sim \n    não \n    sim \n    spam \n  \n  \n    2 \n    sim \n    sim \n    não \n    spam \n  \n  \n    3 \n    sim \n    sim \n    não \n    spam \n  \n  \n    4 \n    não \n    sim \n    sim \n    genuíno \n  \n  \n    5 \n    não \n    não \n    não \n    genuíno \n  \n  \n    6 \n    não \n    não \n    não \n    genuíno"
+  },
+  {
+    "objectID": "supervisionado.html#coeficiente-de-gini-1",
+    "href": "supervisionado.html#coeficiente-de-gini-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Coeficiente de Gini",
+    "text": "Coeficiente de Gini\nPasso 1: Calcular o coeficiente de Gini do dataset com respeito à variável alvo:\n\n\n\n\n \n  \n    id \n    palavras_suspeitas \n    remetente_desconhecido \n    presenca_imagens \n    classificacao \n  \n \n\n  \n    1 \n    sim \n    não \n    sim \n    spam \n  \n  \n    2 \n    sim \n    sim \n    não \n    spam \n  \n  \n    3 \n    sim \n    sim \n    não \n    spam \n  \n  \n    4 \n    não \n    sim \n    sim \n    genuíno \n  \n  \n    5 \n    não \n    não \n    não \n    genuíno \n  \n  \n    6 \n    não \n    não \n    não \n    genuíno"
+  },
+  {
+    "objectID": "supervisionado.html#modelos-lineares-generalizados",
+    "href": "supervisionado.html#modelos-lineares-generalizados",
+    "title": "Aprendizado Supervisionado",
+    "section": "Modelos lineares generalizados",
+    "text": "Modelos lineares generalizados"
+  },
+  {
+    "objectID": "supervisionado.html#modelo-de-regressão-2",
+    "href": "supervisionado.html#modelo-de-regressão-2",
+    "title": "Aprendizado Supervisionado",
+    "section": "Modelo de regressão",
+    "text": "Modelo de regressão\n\nUm modelo de regressão é uma função que descreve a relação entre o resultado, \\(Y\\), e o preditor, \\(X\\).\n\\[\\displaystyle \\begin{aligned} Y &= \\color{black}{\\textbf{Modelo}} + \\text{Error} \\\\[8pt]\n&= \\color{black}{\\mathbf{f(X)}} + \\epsilon \\\\[8pt]\n&= \\color{black}{\\boldsymbol{\\mu_{Y|X}}} + \\epsilon \\end{aligned}\\]"
+  },
+  {
+    "objectID": "supervisionado.html#modelo-de-regressão-3",
+    "href": "supervisionado.html#modelo-de-regressão-3",
+    "title": "Aprendizado Supervisionado",
+    "section": "Modelo de regressão",
+    "text": "Modelo de regressão\n\n\n\n\\[\\displaystyle\n\\begin{aligned} Y &= \\color{purple}{\\textbf{Modelo}} + \\text{Error} \\\\[8pt]\n&= \\color{purple}{\\mathbf{f(X)}} + \\epsilon \\\\[8pt]\n&= \\color{purple}{\\boldsymbol{\\mu_{Y|X}}} + \\epsilon\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "supervisionado.html#análise-inicial",
+    "href": "supervisionado.html#análise-inicial",
+    "title": "Aprendizado Supervisionado",
+    "section": "Análise inicial",
+    "text": "Análise inicial\n\n\\[\\widehat{\\text{tempo}} = 5.878 + 1.419 \\times \\text{distancia}\\]\n\n\n\nCall:\nlm(formula = tempo ~ distancia, data = tempodist)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-10.6081  -3.9358   0.6419   5.1351   8.6486 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   5.8784     4.5323   1.297 0.230788    \ndistancia     1.4189     0.2355   6.025 0.000314 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.719 on 8 degrees of freedom\nMultiple R-squared:  0.8194,    Adjusted R-squared:  0.7969 \nF-statistic:  36.3 on 1 and 8 DF,  p-value: 0.0003144"
+  },
+  {
+    "objectID": "supervisionado.html#normalizar-por-box---cox",
+    "href": "supervisionado.html#normalizar-por-box---cox",
+    "title": "Aprendizado Supervisionado",
+    "section": "Normalizar por Box - Cox",
+    "text": "Normalizar por Box - Cox\nPara que seja corrigido este problema, pode-se alterar a formulação matemática.\\(\\lambda\\) é o parâmetro que maximiza a aderência à normalidade da districuição da nova variável. \\[\\displaystyle \\frac{Y_i^\\lambda - 1}{\\lambda} = \\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon\\]"
+  },
+  {
+    "objectID": "supervisionado.html#dados",
+    "href": "supervisionado.html#dados",
+    "title": "Aprendizado Supervisionado",
+    "section": "Dados",
+    "text": "Dados\n\n\n\n\n\n\n\n \n  \n    estudante \n    tempo \n    distancia \n  \n \n\n  \n    Gabriela \n    15 \n    8 \n  \n  \n    Dalila \n    20 \n    6 \n  \n  \n    Gustavo \n    20 \n    15 \n  \n  \n    Letícia \n    40 \n    20 \n  \n  \n    Luiz \n    50 \n    25 \n  \n  \n    Leonor \n    25 \n    11 \n  \n  \n    Ana \n    10 \n    5 \n  \n  \n    Antônio \n    55 \n    32 \n  \n  \n    Júlia \n    35 \n    28 \n  \n  \n    Mariana \n    30 \n    20 \n  \n\n\n\n\n\n\nVisualização"
+  },
+  {
+    "objectID": "supervisionado.html#escolhendo-valores-para-hatbeta_1-e-hatbeta_0-1",
+    "href": "supervisionado.html#escolhendo-valores-para-hatbeta_1-e-hatbeta_0-1",
+    "title": "supervisionado",
+    "section": "Escolhendo valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)",
+    "text": "Escolhendo valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)"
+  },
+  {
+    "objectID": "supervisionado.html#análise-inicial-1",
+    "href": "supervisionado.html#análise-inicial-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Análise inicial",
+    "text": "Análise inicial\n\n\n\n\\(R^2\\) coeficiente de ajuste do modelo, indica o percentual de variância da variável \\(Y\\) que é devido ao comportamento de variação conjunta da(s) variável(is) explicativa(s)."
+  },
+  {
+    "objectID": "supervisionado.html#regressão-múltipla-1",
+    "href": "supervisionado.html#regressão-múltipla-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão Múltipla",
+    "text": "Regressão Múltipla\n\nQual a diferença entre um modelo de regressão simples para um modelo de regressão múltipla?\n\nA forma funcional passa a ser a seguinte: \\[\\displaystyle{Y_i = \\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon}\\]\nA regressão linear múltipla apresenta a mesma lógica apresentada para a regressão linear simples."
+  },
+  {
+    "objectID": "supervisionado.html#análise-regressão-múltipla",
+    "href": "supervisionado.html#análise-regressão-múltipla",
+    "title": "Aprendizado Supervisionado",
+    "section": "Análise Regressão Múltipla",
+    "text": "Análise Regressão Múltipla\n\\[\\widehat{\\text{tempo}} = 8.1512 + 0.7972 \\times \\text{distancia} + 8.2963\\times \\text{semafaro}\\]\n\n\n\nCall:\nlm(formula = tempo ~ distancia + semafaro, data = tempodist_s)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.7693 -2.3280 -0.7238  0.3260  7.6084 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)   8.1512     2.9201   2.791  0.02685 * \ndistancia     0.7972     0.2264   3.522  0.00971 **\nsemafaro      8.2963     2.2835   3.633  0.00836 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.228 on 7 degrees of freedom\nMultiple R-squared:  0.9374,    Adjusted R-squared:  0.9195 \nF-statistic: 52.43 on 2 and 7 DF,  p-value: 6.13e-05"
+  },
+  {
+    "objectID": "supervisionado.html#análise-regressão-múltipla-1",
+    "href": "supervisionado.html#análise-regressão-múltipla-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Análise Regressão Múltipla",
+    "text": "Análise Regressão Múltipla\n\nQuando houver o intuito de se compararem os resultados das estimações de dois modelos com quantidades distintas de parâmetros e/ou obtidos a partir de amostras com tamanhos diferentes, faz-se necessário o uso do R² ajustado.\n\\[\\displaystyle R_{ajust}^2 = 1 - \\frac{n - 1}{n - k}(1 - R^2)\\]\n\n\\(n\\) tamanho da amostra\n\\(k\\) é o número de parâmetros do modelo"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-múltipla-2",
+    "href": "supervisionado.html#regressão-múltipla-2",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão Múltipla",
+    "text": "Regressão Múltipla\nA inlcusão de mais variáveis dependerá da teoria subjacente e de estudos anteriores, bem como da experiência e do bom senso do pesquisador.\n\n\n\n\n \n  \n    estudante \n    tempo \n    distancia \n    semafaro \n  \n \n\n  \n    Gabriela \n    15 \n    8 \n    0 \n  \n  \n    Dalila \n    20 \n    6 \n    1 \n  \n  \n    Gustavo \n    20 \n    15 \n    0 \n  \n  \n    Letícia \n    40 \n    20 \n    1 \n  \n  \n    Luiz \n    50 \n    25 \n    2 \n  \n  \n    Leonor \n    25 \n    11 \n    1 \n  \n  \n    Ana \n    10 \n    5 \n    0 \n  \n  \n    Antônio \n    55 \n    32 \n    3 \n  \n  \n    Júlia \n    35 \n    28 \n    1 \n  \n  \n    Mariana \n    30 \n    20 \n    1 \n  \n\n\n\n\n\n\\[\\widehat{\\text{tempo}_i} = \\alpha + \\beta_1.dist_i + \\beta_2.sem_i\\]"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-stepwise",
+    "href": "supervisionado.html#regressão-stepwise",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão Stepwise",
+    "text": "Regressão Stepwise\n\nO método stepwise é usado para selecionar quais variáveis mais influenciam o conjunto de saída podendo, assim, diminuir o número de variáveis a compor a equação de regressão."
+  },
+  {
+    "objectID": "supervisionado.html#regressão-stepwise-1",
+    "href": "supervisionado.html#regressão-stepwise-1",
+    "title": "supervisionado",
+    "section": "Regressão Stepwise",
+    "text": "Regressão Stepwise\n\nO método stepwise é usado para selecionar quais variáveis mais influenciam o conjunto de saída podendo, assim, diminuir o número de variáveis a compor a equação de regressão."
+  },
+  {
+    "objectID": "supervisionado.html#pressupostos-do-modelo-de-regressão",
+    "href": "supervisionado.html#pressupostos-do-modelo-de-regressão",
+    "title": "Aprendizado Supervisionado",
+    "section": "Pressupostos do modelo de regressão",
+    "text": "Pressupostos do modelo de regressão"
+  },
+  {
+    "objectID": "supervisionado.html#normalidade-dos-resíduos",
+    "href": "supervisionado.html#normalidade-dos-resíduos",
+    "title": "Aprendizado Supervisionado",
+    "section": "Normalidade dos resíduos",
+    "text": "Normalidade dos resíduos\n\nA não aderência à normalidade dos termos de erro pode indicar que o medelo foi especificado incorretamente quanto à forma funcional e que houve a omissão de variáveis explicativas."
+  },
+  {
+    "objectID": "supervisionado.html#análise-regressão",
+    "href": "supervisionado.html#análise-regressão",
+    "title": "Aprendizado Supervisionado",
+    "section": "Análise Regressão",
+    "text": "Análise Regressão\n\n\nRegressão Simples\n\n\n\nCall:\nlm(formula = tempo ~ distancia, data = tempodist)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-10.6081  -3.9358   0.6419   5.1351   8.6486 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   5.8784     4.5323   1.297 0.230788    \ndistancia     1.4189     0.2355   6.025 0.000314 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.719 on 8 degrees of freedom\nMultiple R-squared:  0.8194,    Adjusted R-squared:  0.7969 \nF-statistic:  36.3 on 1 and 8 DF,  p-value: 0.0003144\n\n\n\nRegressão Múltipla\n\n\n\nCall:\nlm(formula = tempo ~ distancia + semafaro, data = tempodist_s)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.7693 -2.3280 -0.7238  0.3260  7.6084 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)   8.1512     2.9201   2.791  0.02685 * \ndistancia     0.7972     0.2264   3.522  0.00971 **\nsemafaro      8.2963     2.2835   3.633  0.00836 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.228 on 7 degrees of freedom\nMultiple R-squared:  0.9374,    Adjusted R-squared:  0.9195 \nF-statistic: 52.43 on 2 and 7 DF,  p-value: 6.13e-05"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-múltipla-3",
+    "href": "supervisionado.html#regressão-múltipla-3",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão Múltipla",
+    "text": "Regressão Múltipla\n\n\n\n\n\n \n  \n    estudante \n    tempo \n    distancia \n    semafaro \n    periodo \n    perfil \n  \n \n\n  \n    Gabriela \n    15 \n    8 \n    0 \n    manha \n    calmo \n  \n  \n    Dalila \n    20 \n    6 \n    1 \n    manha \n    moderado \n  \n  \n    Gustavo \n    20 \n    15 \n    0 \n    manha \n    moderado \n  \n  \n    Letícia \n    40 \n    20 \n    1 \n    tarde \n    agressivo \n  \n  \n    Luiz \n    50 \n    25 \n    2 \n    tarde \n    agressivo \n  \n  \n    Leonor \n    25 \n    11 \n    1 \n    manha \n    moderado \n  \n  \n    Ana \n    10 \n    5 \n    0 \n    manha \n    calmo \n  \n  \n    Antônio \n    55 \n    32 \n    3 \n    tarde \n    calmo \n  \n  \n    Júlia \n    35 \n    28 \n    1 \n    manha \n    moderado \n  \n  \n    Mariana \n    30 \n    20 \n    1 \n    manha \n    moderado"
+  },
+  {
+    "objectID": "supervisionado.html#modelos-não-lineares-1",
+    "href": "supervisionado.html#modelos-não-lineares-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Modelos não lineares",
+    "text": "Modelos não lineares\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResultados da aplicação de quatro diferentes formas funcionais em regressão"
+  },
+  {
+    "objectID": "supervisionado.html#dados-1",
+    "href": "supervisionado.html#dados-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Dados",
+    "text": "Dados\n\n\nAgora a variável alvo é categórica.\n1: atrasado\n0: não atrasado\n\n\n\n      estudante atrasado dist sem\n1      Gabriela        0 12.5   7\n2      Patrícia        0 13.3  10\n3       Gustavo        0 13.4   8\n4       Letícia        0 23.5   7\n5   Luiz Ovídio        0  9.5   8\n6        Leonor        0 13.5  10\n7        Dalila        0 13.5  10\n8       Antônio        0 15.4  10\n9         Júlia        0 14.7  10\n10      Mariana        0 14.7  10\n11      Roberto        0 13.7  10\n12       Renata        0 11.0  10\n13    Guilherme        0 18.4  10\n14      Rodrigo        0 11.0  11\n15       Giulia        0 11.0  10\n16       Felipe        0 12.0   7\n17       Karina        0 14.0  10\n18       Pietro        0 11.2  10\n19      Cecília        0 13.0  10\n20       Gisele        0 12.0   6\n21       Elaine        0 17.0  10\n22        Kamal        0 12.0   9\n23      Rodolfo        0 12.0  10\n24        Pilar        0 13.0   5\n25       Vivian        0 11.7  10\n26     Danielle        0 17.0  10\n27      Juliana        0 14.4  10\n28      Adriano        0 13.5  10\n29      Adelino        0 13.0  10\n30     Carolina        0 12.0  10\n31     Cristina        0  9.5  10\n32      Eduardo        0 15.8  10\n33      Zenilda        0 16.0  10\n34       Cintia        0 11.5  10\n35     Raimundo        0 12.9  10\n36      Luciana        0 13.0  10\n37      Emerson        0 12.0  10\n38       Raquel        0 14.0  11\n39   Anna Luiza        0 12.0  10\n40      Claudio        0 11.6  10\n41        Moara        0 12.3  10\n42     Fernanda        1 22.0  11\n43        Edson        1 29.0  10\n44         Nuno        1 18.7  10\n45      Bráulio        1 22.0  11\n46      Marcelo        1 19.0  10\n47        Lucia        1 15.0  10\n48       Camilo        1 15.0  10\n49     Filomena        1 12.8  11\n50        Lídia        1 13.2  10\n51       Gilmar        1 16.5  10\n52       Itamar        1 10.5  10\n53      Tatiana        1 19.0  12\n54   Alessandra        1 11.5  10\n55        Ester        1 17.0  10\n56      Marcela        1 19.0  10\n57      Viviane        1 15.0  10\n58       Bianca        1 20.0  10\n59     Angélica        1 15.5  11\n60    Frederico        1 17.0  10\n61     Franklin        1 15.0  10\n62       Inácio        1 17.0  12\n63       Lilian        1 14.0  10\n64        Lucio        1 15.0  10\n65       Soraya        1 12.0  11\n66       Amanda        1 13.8  10\n67    Cristiane        1 13.0  11\n68         Cida        1 17.0  10\n69        Zilda        1 13.0  11\n70    Ana Lúcia        1 13.0  10\n71       Robson        1 28.0  10\n72       Renato        1 17.0  10\n73       Marina        1 12.0  11\n74       Flavia        1 18.0  10\n75      Adriana        1 14.8  10\n76    Alexandre        1  1.0  12\n77       Cleber        1 12.1  11\n78        Paola        1  1.0  11\n79    Ana Paula        1 17.0  10\n80       Andréa        1 10.2  11\n81      Shirley        1 11.0  17\n82     Edinalva        1 18.7  10\n83       Ernani        1 12.2  10\n84       Afonso        1 10.5  10\n85     Reinaldo        1 11.5  10\n86        César        1 12.0  10\n87        Bruna        1 14.2  11\n88       Márcia        1 13.0  10\n89      Fabiana        1 12.0  10\n90       Rebeca        1 11.0  18\n91       Sandra        1 12.0  10\n92      Geovani        1 15.4  11\n93         Rita        1 17.0  10\n94     Giovanna        1 19.0  10\n95    Jaqueline        1 10.1  15\n96       Sheila        1 24.0  10\n97        Pedro        1 10.0  10\n98      Horácio        1  9.4  10\n99      Leandro        1 14.2  10\n100      Estela        1  1.0  13"
+  },
+  {
+    "objectID": "supervisionado.html#visualização-dos-dados",
+    "href": "supervisionado.html#visualização-dos-dados",
+    "title": "Aprendizado Supervisionado",
+    "section": "Visualização dos dados",
+    "text": "Visualização dos dados"
+  },
+  {
+    "objectID": "supervisionado.html#testando-modelo-linear",
+    "href": "supervisionado.html#testando-modelo-linear",
+    "title": "Aprendizado Supervisionado",
+    "section": "Testando modelo linear",
+    "text": "Testando modelo linear\nResultado: \\(Y\\) = 1: sim, 0: não"
+  },
+  {
+    "objectID": "supervisionado.html#testando-modelo-linear-1",
+    "href": "supervisionado.html#testando-modelo-linear-1",
+    "title": "supervisionado",
+    "section": "Testando modelo linear",
+    "text": "Testando modelo linear\n\n🛑 Este modelo produz previsões fora do 0 e 1."
+  },
+  {
+    "objectID": "supervisionado.html#vamos-usar-proporções",
+    "href": "supervisionado.html#vamos-usar-proporções",
+    "title": "Aprendizado Supervisionado",
+    "section": "Vamos usar proporções",
+    "text": "Vamos usar proporções\nResultado: Probabilidade de chegar atrasado"
+  },
+  {
+    "objectID": "supervisionado.html#vamos-usar-proporções-1",
+    "href": "supervisionado.html#vamos-usar-proporções-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Vamos usar proporções",
+    "text": "Vamos usar proporções\nResultado: Probabilidade de chegar atrasado\n\n🛑 Este modelo produz previsões fora do 0 e 1."
+  },
+  {
+    "objectID": "supervisionado.html#testando-outro-modelo",
+    "href": "supervisionado.html#testando-outro-modelo",
+    "title": "Aprendizado Supervisionado",
+    "section": "Testando outro modelo",
+    "text": "Testando outro modelo\n\n✅ O Modelo de regressão logística só produz previsões entre 0 e 1"
+  },
+  {
+    "objectID": "supervisionado.html#tipos-de-modelos",
+    "href": "supervisionado.html#tipos-de-modelos",
+    "title": "Aprendizado Supervisionado",
+    "section": "Tipos de modelos",
+    "text": "Tipos de modelos\n\n\n\n\n\n\n\n\nMétodo\nResultado\nFunção\n\n\n\n\nRegressão linear\nQuantitativo\n\\(Y = \\beta_0 + \\beta_1~ X\\)\n\n\nRegressão linear (transform Y)\nQuantitativo\n\\(\\log(Y) = \\beta_0 + \\beta_1~ X\\)\n\n\nRegressão Logística\nBinário\n\\(\\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1 ~ X\\)"
+  },
+  {
+    "objectID": "supervisionado.html#os-alunos-estão-atrasando",
+    "href": "supervisionado.html#os-alunos-estão-atrasando",
+    "title": "Aprendizado Supervisionado",
+    "section": "Os alunos estão atrasando?",
+    "text": "Os alunos estão atrasando?\n\n\natrasado |> \n  count(atrasado) |> \n  mutate(p = round(n / sum(n), 3))\n\n  atrasado  n    p\n1        0 41 0.41\n2        1 59 0.59\n\n\n\n\n\\(P(\\text{atrasado}) = P(Y = 1) = p = 0.59\\)\n\n\n\\(P(\\text{não atrasado}) = P(Y = 0) = 1 - p = 0.41\\)\n\n\n\\(P(\\text{odds de atrasado}) = \\frac{0.59}{0.41} = 1.439\\)"
+  },
+  {
+    "objectID": "supervisionado.html#supervisionado-e-não-supervisionado",
+    "href": "supervisionado.html#supervisionado-e-não-supervisionado",
+    "title": "Aprendizado Supervisionado",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "supervisionado.html#supervisionado-e-não-supervisionado-1",
+    "href": "supervisionado.html#supervisionado-e-não-supervisionado-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Supervisionado e Não Supervisionado",
+    "text": "Supervisionado e Não Supervisionado"
+  },
+  {
+    "objectID": "supervisionado.html#estimando-valores-para-hatbeta_1-e-hatbeta_0",
+    "href": "supervisionado.html#estimando-valores-para-hatbeta_1-e-hatbeta_0",
+    "title": "Aprendizado Supervisionado",
+    "section": "Estimando valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)",
+    "text": "Estimando valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)"
+  },
+  {
+    "objectID": "supervisionado.html#estimando-valores-para-hatbeta_1-e-hatbeta_0-1",
+    "href": "supervisionado.html#estimando-valores-para-hatbeta_1-e-hatbeta_0-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Estimando valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)",
+    "text": "Estimando valores para \\(\\hat{\\beta}_1\\) e \\(\\hat{\\beta}_0\\)"
+  },
+  {
+    "objectID": "supervisionado.html#cutoff-sensitividade-e-especificidade",
+    "href": "supervisionado.html#cutoff-sensitividade-e-especificidade",
+    "title": "Aprendizado Supervisionado",
+    "section": "Cutoff, sensitividade e especificidade",
+    "text": "Cutoff, sensitividade e especificidade\n\nO cutoff é definido para que sejam classificadas as observações em função das suas probabilidades calculadas.\n\nSe \\(p_i\\) > cutoff: \\(i\\) deverá classificado como evento\nSe \\(p_i\\) < cutoff: \\(i\\) deverá classificado como não evento"
+  },
+  {
+    "objectID": "supervisionado.html#cutoff-sensitividade-e-especificidade-1",
+    "href": "supervisionado.html#cutoff-sensitividade-e-especificidade-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Cutoff, sensitividade e especificidade",
+    "text": "Cutoff, sensitividade e especificidade\n\n\n\n\n\n\n\n\n\naluno atrasou\naluno não atrasou\n\n\n\n\nClassificado com Evento\nVerdadeiro positivo\nFalso positivo\n\n\nClassificado como Não Evento\nFalso negativo\nVerdadeiro negativo\n\n\n\n\nsensitividade : percentual de acerto considerando-se apenas as observações que de fato são evento. \\[Sensitividade = \\frac {\\text{verdadeiro positivo}}{\\text{total de evento}}\\]\nespecificidade : percentual de acerto considerando-se apenas as observações que não são evento. \\[Especificidade = \\frac {\\text{falso negativo}}{\\text{total de não evento}}\\]"
+  },
+  {
+    "objectID": "supervisionado.html#regressão-múltipla-4",
+    "href": "supervisionado.html#regressão-múltipla-4",
+    "title": "Aprendizado Supervisionado",
+    "section": "Regressão Múltipla",
+    "text": "Regressão Múltipla\n\n\n\nCall:\nlm(formula = tempo ~ distancia + semafaro + periodo + perfil, \n    data = tempodist_s)\n\nResiduals:\n         1          2          3          4          5          6          7 \n 1.489e+00 -5.889e-01 -8.516e-03  8.516e-03 -8.516e-03  1.041e+00 -1.489e+00 \n         8          9         10 \n 6.661e-16 -4.179e-01 -2.555e-02 \n\nCoefficients:\n               Estimate Std. Error t value Pr(>|t|)    \n(Intercept)    14.49234    2.37457   6.103 0.003647 ** \ndistancia       0.67405    0.07172   9.399 0.000714 ***\nsemafaro        6.64680    1.09487   6.071 0.003719 ** \nperiodotarde    5.37141    3.77878   1.421 0.228234    \nperfilcalmo    -6.37364    2.24311  -2.841 0.046800 *  \nperfilmoderado -4.59452    3.21084  -1.431 0.225692    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.229 on 4 degrees of freedom\nMultiple R-squared:  0.997, Adjusted R-squared:  0.9932 \nF-statistic: 264.1 on 5 and 4 DF,  p-value: 3.978e-05"
+  },
+  {
+    "objectID": "supervisionado.html#condições-relacionadas-aos-resíduos",
+    "href": "supervisionado.html#condições-relacionadas-aos-resíduos",
+    "title": "Aprendizado Supervisionado",
+    "section": "Condições relacionadas aos resíduos",
+    "text": "Condições relacionadas aos resíduos\n\n1. A somatória dos residuos deve ser zero: \\(\\sum_{i=1}^n u_i = 0\\)"
+  },
+  {
+    "objectID": "supervisionado.html#condições-relacionadas-aos-resíduos-1",
+    "href": "supervisionado.html#condições-relacionadas-aos-resíduos-1",
+    "title": "Aprendizado Supervisionado",
+    "section": "Condições relacionadas aos resíduos",
+    "text": "Condições relacionadas aos resíduos\n\n2. A somatória dos resíduos ao quadrado é a mínima possível: \\(\\sum_{i=1}^n u_i^n = \\text{mín}\\)"
+  },
+  {
+    "objectID": "supervisionado.html#predição",
+    "href": "supervisionado.html#predição",
+    "title": "Aprendizado Supervisionado",
+    "section": "Predição",
+    "text": "Predição\n\nSuponha que um estudante more à 20 km de distância. De acordo com esse modelo, qual é o tempo previsto para chegar?\n\\[\n\\begin{aligned}\n\\widehat{\\text{tempo}} &= 5.878 + 1.419 \\times \\text{distancia} \\\\\n&= 5.878 + 1.419 \\times 20 \\\\\n&= 34.258\n\\end{aligned}\n\\]\nÉ importante realizar inferências sobre o comportamento de uma variável \\(Y\\) dentreo dos limites de variação de \\(X\\)."
+  },
+  {
+    "objectID": "supervisionado.html#comparando-regressões",
+    "href": "supervisionado.html#comparando-regressões",
+    "title": "Aprendizado Supervisionado",
+    "section": "Comparando Regressões",
+    "text": "Comparando Regressões\n\n\nRegressão Simples\n\n\n\nCall:\nlm(formula = tempo ~ distancia, data = tempodist)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-10.6081  -3.9358   0.6419   5.1351   8.6486 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   5.8784     4.5323   1.297 0.230788    \ndistancia     1.4189     0.2355   6.025 0.000314 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.719 on 8 degrees of freedom\nMultiple R-squared:  0.8194,    Adjusted R-squared:  0.7969 \nF-statistic:  36.3 on 1 and 8 DF,  p-value: 0.0003144\n\n\n\nRegressão Múltipla\n\n\n\nCall:\nlm(formula = tempo ~ distancia + semafaro, data = tempodist_s)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.7693 -2.3280 -0.7238  0.3260  7.6084 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)   8.1512     2.9201   2.791  0.02685 * \ndistancia     0.7972     0.2264   3.522  0.00971 **\nsemafaro      8.2963     2.2835   3.633  0.00836 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.228 on 7 degrees of freedom\nMultiple R-squared:  0.9374,    Adjusted R-squared:  0.9195 \nF-statistic: 52.43 on 2 and 7 DF,  p-value: 6.13e-05"
+  },
+  {
+    "objectID": "supervisionado.html#normalizar-por-box-cox",
+    "href": "supervisionado.html#normalizar-por-box-cox",
+    "title": "Aprendizado Supervisionado",
+    "section": "Normalizar por Box-Cox",
+    "text": "Normalizar por Box-Cox\nPara que seja corrigido este problema, pode-se alterar a formulação matemática.\\(\\lambda\\) é o parâmetro que maximiza a aderência à normalidade da districuição da nova variável. \\[\\displaystyle \\frac{Y_i^\\lambda - 1}{\\lambda} = \\beta_0 + \\beta_1 X_{1i} + \\beta_2 X_{2i} + \\beta_3 X_{3i}... + \\beta_k X_{ki} + \\epsilon\\]"
+  },
+  {
+    "objectID": "supervisionado.html#curva-roc",
+    "href": "supervisionado.html#curva-roc",
+    "title": "Aprendizado Supervisionado",
+    "section": "Curva ROC",
+    "text": "Curva ROC\nMostra o comportamento propriamente dito do trade off entre sensitividade e especificidade.\n\n\n\n\n\n\nModelos com maior área abaixo da curva ROC apresenta maior eficiência global de previsão."
   }
 ]

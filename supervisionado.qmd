@@ -1,0 +1,960 @@
+---
+title: "Aprendizado Supervisionado"
+author: "Marcelo Honorio"
+format: 
+  revealjs:
+    output-file: supervisionado.html
+    theme: custom.scss
+    transition: fade
+    background-transition: fade
+    highlight-style: ayu-mirage
+    slide-number: c/t
+    show-slide-number: all
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Supervisionado e Não Supervisionado
+
+```{r echo=FALSE, out.width="40%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/sup-uns-learning2.jpg")
+```
+
+## Supervisionado e Não Supervisionado
+
+```{r echo=FALSE, out.width="40%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/sup-uns-learning.jpg")
+```
+
+## Modelos lineares generalizados
+
+<br>
+
+```{r echo=FALSE, out.width="60%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/modelos_generalizados.jpg")
+```
+
+
+```{r}
+#| echo: false
+#| message: false
+
+# load packages
+library(pROC)
+library(plotly)
+library(tidyverse)       # for data wrangling
+library(tidymodels)      # for modeling
+library(fivethirtyeight) # for the fandango dataset
+```
+
+```{r}
+#| echo: false
+load(file = "tempodist.RData")
+```
+
+# Modelo de Regressão
+
+## Dados
+
+<br>
+
+::: {.columns}
+::: {.column width="40%"}
+
+```{r, echo=FALSE}
+estudante <- c('Gabriela', 'Dalila', 'Gustavo', 'Letícia', 'Luiz', 'Leonor', 'Ana', 'Antônio', 'Júlia', 'Mariana')
+
+tempodist_q <- cbind(estudante, tempodist)
+
+knitr::kable(tempodist_q, col.names = gsub("[.]", " ", names(tempodist_q)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 20)
+```
+:::
+::: {.column width="60%"}
+
+**Visualização**
+```{r}
+ggplot(tempodist, 
+       aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.7, size = 3) +
+  theme_classic() +
+  theme(axis.title = element_text(size = 18)) +
+  labs(
+    x = "Distância" , 
+    y = "Tempo"
+    )
+```
+:::
+:::
+
+## Forma linear
+
+... Para descrever a relação entre a distância e tempo
+```{r}
+#| out.width: "70%"
+p <- ggplot(data = tempodist, 
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.7, size = 2) + 
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  theme_classic() +
+  theme(axis.title = element_text(size = 18)) +
+  labs(
+    x = "distância" , 
+    y = "tempo"
+    )
+
+p
+```
+
+## Modelo de regressão
+
+::: columns
+::: {.column width="30%"}
+-   **Resultado, Y**: variável que descreve os resultado de interesse
+-   **Preditor, X**: variável usada para ajudar a entender a variabilidade no resultado
+:::
+
+::: {.column width="70%"}
+
+$$Y_i = \beta_0 + \beta_1 X_i + e_i$$
+```{r}
+#| out.width: "100%"
+p
+```
+:::
+:::
+
+## Modelo de regressão
+
+<br>
+
+Um modelo de regressão é uma função que descreve a relação entre o resultado, $Y$, e o preditor, $X$.
+
+$$\displaystyle \begin{aligned} Y &= \color{black}{\textbf{Modelo}} + \text{Error} \\[8pt]
+&= \color{black}{\mathbf{f(X)}} + \epsilon \\[8pt]
+&= \color{black}{\boldsymbol{\mu_{Y|X}}} + \epsilon \end{aligned}$$
+
+##  Modelo de regressão
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+$$\displaystyle
+\begin{aligned} Y &= \color{purple}{\textbf{Modelo}} + \text{Error} \\[8pt]
+&= \color{purple}{\mathbf{f(X)}} + \epsilon \\[8pt]
+&= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \epsilon 
+\end{aligned}
+$$
+:::
+
+::: {.column width="70%"}
+```{r}
+m <- lm(tempo ~ distancia, data = tempodist)
+
+ggplot(data = tempodist, 
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.7, size = 2) + 
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  labs(x = "X", y = "Y") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 18),
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(), 
+    axis.ticks.y = element_blank()
+    )
+```
+:::
+:::
+
+## Modelo de regressão + residuos
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+$$\begin{aligned} Y &= \color{purple}{\textbf{Modelo}} + \color{blue}{\textbf{Error}} \\[8pt]
+&= \color{purple}{\mathbf{f(X)}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
+&= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
+ \end{aligned}$$
+:::
+
+::: {.column width="70%"}
+```{r}
+#| echo: false
+ggplot(data = tempodist,
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.7, size = 2) +
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  geom_segment(aes(x = distancia, xend = distancia, 
+                   y = tempo, yend = predict(m)), 
+               color = "blue") +
+  labs(x = "X", y = "Y") +
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 18),
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+:::
+:::
+
+# Regressão linear simples
+
+## Regressão linear simples
+
+Para modelar a relação entre um resultado quantitativo ($Y$) e um único preditor quantitativo ($X$): 
+$$\Large{Y = \beta_0 + \beta_1 X + e}$$
+
+::: incremental
+-   $\beta_1$: Inclinação da relação entre $X$ e $Y$
+-   $\beta_0$: Intercepto da relação entre $X$ e $Y$
+-   $X$: Variável explicativa
+-   $e$ : Erro (residual)
+:::
+
+## Regressão linear simples
+
+**Objetivo**: desenvolver uma equação linear que apresente a relação entre uma variável dependente e uma explicativa
+
+$$\Large{\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X}$$
+
+-   $\hat{\beta}_1$: Inclinação estimada da relação entre $X$ e $Y$
+-   $\hat{\beta}_0$: Intercepto estimado da relação entre $X$ e $Y$
+-   Sem termo de erro!
+
+## Residual
+
+O termo de erro deverá capturar o efeito das demais variáveis não incluidas no modelo.
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-align: center
+ggplot(data = tempodist, mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.7, size = 2) +
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  geom_segment(aes(x = distancia, xend = distancia, y = tempo, yend = predict(m)), color = "steel blue") +
+  labs(x = "Distância", y = "Tempo") +
+  theme_classic() +
+  theme(axis.title = element_text(size = 18))+
+  theme(legend.position = "none")
+```
+
+$$\text{residual} = \text{observado} - \text{previsto} = y - \hat{y}$$
+
+## Condições relacionadas aos resíduos
+
+<br>
+
+**1. A somatória dos residuos deve ser zero:** $\sum_{i=1}^n u_i = 0$
+
+```{r}
+ggplot(data = tempodist, 
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.7, size = 2) + 
+  geom_abline(intercept = 5.878, slope = 1.419, color = "purple", size = 2) +
+  geom_abline(intercept = 4.8, slope = 1.6, color = "red") +
+  geom_abline(intercept = 3, slope = 1.8, color = "red") +
+  geom_abline(intercept = 6.9, slope = 1.2, color = "red") +
+  theme_classic() +
+  theme(axis.title = element_text(size = 18))+
+  labs(x = "Distância", y = "Tempo")
+```
+
+## Condições relacionadas aos resíduos
+
+<br>
+
+**2. A somatória dos resíduos ao quadrado é a mínima possível:** $\sum_{i=1}^n u_i^n = \text{mín}$
+
+```{r}
+ggplot(data = tempodist, 
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.7, size = 2) + 
+  geom_abline(intercept = 5.878, slope = 1.419, color = "purple", size = 2) +
+  geom_abline(intercept = 4.8, slope = 1.6, color = "red") +
+  geom_abline(intercept = 3, slope = 1.8, color = "red") +
+  geom_abline(intercept = 6.9, slope = 1.2, color = "red") +
+  theme_classic() +
+  theme(axis.title = element_text(size = 18))+
+  labs(x = "Distância", y = "Tempo")
+```
+
+
+## Estimando valores para $\hat{\beta}_1$ e $\hat{\beta}_0$
+
+```{r}
+ggplot(data = tempodist, 
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.5) + 
+  geom_abline(intercept = 5.878, slope = 1.419, color = "purple", size = 2) +
+  geom_abline(intercept = 4.8, slope = 1.6, color = "red") +
+  geom_abline(intercept = 3, slope = 1.8, color = "red") +
+  geom_abline(intercept = 6.9, slope = 1.2, color = "red") +
+  theme_classic() +
+  theme(axis.title = element_text(size = 18))+
+  labs(x = "Distância", y = "Tempo")
+```
+
+## Análise inicial 
+
+<br>
+
+$$\widehat{\text{tempo}} = 5.878 + 1.419 \times \text{distancia}$$
+```{r}
+#| fig-align: center
+summary(m)
+```
+
+## Análise inicial
+```{r, echo=F}
+constante <- c(30, 35, 30, 35, 30, 35, 35, 30, 35, 30)
+x_constate <- c(1, 2, 3, 4, 5, 5, 6, 7, 8, 9)
+aleatorio <- sample(20:60, 10, replace=TRUE)
+
+tempodist_r <- cbind(tempodist, constante, aleatorio)
+
+m <- lm(tempo ~ distancia, data = tempodist)
+m1 <- lm(tempo ~ aleatorio, data = tempodist_r)
+m2 <- lm(tempo ~ constante, data = tempodist_r)
+```
+
+**$R^2$** coeficiente de ajuste do modelo, indica o percentual de variância da variável $Y$ que é devido ao comportamento de variação conjunta da(s) variável(is) explicativa(s).
+
+```{r, echo=F}
+#| fig-align: center
+ggplot(data = tempodist_r,
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(intercept = m$coefficients[1], slope = m$coefficients[2], color = "purple", size = 1) +
+  labs(title = paste("R²: ", round(summary(m)$r.squared, 4)),
+       x = "X", y = "Y") +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank()
+  ) +
+  scale_x_continuous(limits = c(0, 35)) +
+  scale_y_continuous(limits = c(0, 60))
+```
+
+
+## $R^2$
+
+::: columns
+
+::: column
+```{r, echo=F}
+ggplot(data = tempodist_r,
+       mapping = aes(x = distancia, y = tempo)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(intercept = m$coefficients[1], slope = m$coefficients[2], color = "purple", size = 1) +
+  labs(title = paste("R²: ", round(summary(m)$r.squared, 4)),
+       x = "X", y = "Y") +
+  theme(
+    plot.title = element_text(size = 25),
+    axis.title = element_text(size = 18),
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank()
+  ) +
+  scale_x_continuous(limits = c(0, 35)) +
+  scale_y_continuous(limits = c(0, 60))
+```
+
+:::
+::: column
+```{r, echo=F}
+ggplot(data = tempodist_r,
+       mapping = aes(x = aleatorio, y = tempo)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(intercept = m1$coefficients[1], slope = m1$coefficients[2], color = "purple", size = 1) +
+  labs(title = paste("R²: ", round(summary(m1)$r.squared, 4)),
+       x = "X", y = "Y") +
+  theme(
+    plot.title = element_text(size = 25),
+    axis.title = element_text(size = 18),
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank()
+  )+
+  scale_x_continuous(limits = c(0, 60)) +
+  scale_y_continuous(limits = c(0, 60))
+```
+:::
+:::
+
+```{r, echo=F}
+#| out.width: "50%"
+#| fig-align: center
+ggplot(data = tempodist_r,
+       mapping = aes(x = x_constate, y = constante)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  labs(title = paste("R²: ", round(summary(m2)$r.squared)),
+       x = "X", y = "Y") +
+  theme(
+    plot.title = element_text(size = 25),
+    axis.title = element_text(size = 18),
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank()
+  ) +
+  scale_x_continuous(limits = c(0, 12)) +
+  scale_y_continuous(limits = c(0, 60))
+```
+
+## Teste F
+
+**Teste F**: Analisa se pelo menos um dos $\beta'$s é significativo para a explicação de $Y$
+
+  **Hipóteses**: 
+  
+  -   $H_0 :\beta_1 = \beta_2 = \beta_3 = ...\beta_k = 0$ 
+  
+  -   $H_1 : pelo\ menos\ um\ \beta \neq 0$
+
+
+> Espera-se rejeitar a hipótese nula, ou seja, que pelo menos um dos $\beta'$s seja estatisticamente diferente de zero para explicar o comportamento de Y - p-valor abaixo de nível crítico (0,05, usualmente)
+
+## Teste $t$
+
+Analisa individualmente cada um dos parâmetros, identificando se os mesmo são estatisticamente diferentes de zero.
+
+  **Hipóteses**:
+  
+  -   $H_0: \beta = 0$ 
+  
+  -   $H_1: \beta \neq 0$
+
+> Espera-se o mesmo fato, em termos de significância estatística, do que o discutido para o teste F.
+
+
+## Predição
+
+<br>
+
+Suponha que um estudante more à 20 km de distância. De acordo com esse modelo, qual é o tempo previsto para chegar?
+
+$$
+\begin{aligned}
+\widehat{\text{tempo}} &= 5.878 + 1.419 \times \text{distancia} \\
+&= 5.878 + 1.419 \times 20 \\
+&= 34.258
+\end{aligned}
+$$
+
+É **importante** realizar inferências sobre o comportamento de uma variável $Y$ dentreo dos limites de variação de $X$.
+
+
+# Regressão Múltipla
+
+## Regressão Múltipla
+
+<br>
+
+Qual a diferença entre um modelo de regressão simples para um modelo de regressão múltipla?
+
+. . .
+
+A forma funcional passa a ser a seguinte:
+$$\displaystyle{Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i}... + \beta_k X_{ki} + \epsilon}$$
+
+A regressão linear múltipla apresenta a mesma lógica apresentada para a regressão linear simples.
+
+## Regressão Múltipla
+
+A inlcusão de mais variáveis dependerá da teoria subjacente e de estudos anteriores, bem como da experiência e do bom senso do pesquisador.
+
+```{r}
+estudante <- c('Gabriela', 'Dalila', 'Gustavo', 'Letícia', 'Luiz', 'Leonor', 'Ana', 'Antônio', 'Júlia', 'Mariana')
+semafaro <- c(0, 1, 0, 1, 2, 1, 0, 3, 1, 1)
+
+tempodist_s <- cbind(estudante, tempodist, semafaro)
+
+knitr::kable(tempodist_s, col.names = gsub("[.]", " ", names(tempodist_s)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 18)
+```
+
+$$\widehat{\text{tempo}_i} = \alpha + \beta_1.dist_i + \beta_2.sem_i$$
+
+## Análise Regressão Múltipla
+
+$$\widehat{\text{tempo}} = 8.1512 + 0.7972 \times \text{distancia} + 8.2963\times \text{semafaro}$$
+
+```{r, echo=FALSE}
+m1 <- lm(tempo ~ distancia + semafaro, data = tempodist_s)
+
+summary(m1)
+```
+
+## Análise Regressão Múltipla
+
+<br>
+
+Quando houver o intuito de se compararem os resultados das estimações de dois modelos com quantidades distintas de parâmetros e/ou obtidos a partir de amostras com tamanhos diferentes, faz-se necessário o uso do **R² ajustado**.
+
+$$\displaystyle R_{ajust}^2 = 1 - \frac{n - 1}{n - k}(1 - R^2)$$
+
+-   $n$ tamanho da amostra
+-   $k$ é o número de parâmetros do modelo
+
+## Comparando Regressões
+
+:::{.columns}
+:::{.column}
+
+**Regressão Simples**
+```{r, echo=FALSE}
+summary(m)
+```
+:::
+:::{.column}
+
+**Regressão Múltipla**
+```{r, echo=FALSE}
+summary(m1)
+```
+:::
+:::
+
+## Regressão Múltipla
+
+<br>
+
+```{r}
+periodo <- c('manha', 'manha', 'manha', 'tarde', 'tarde', 'manha', 'manha', 'tarde', 'manha', 'manha')
+
+perfil <- c('calmo', 'moderado', 'moderado', 'agressivo', 'agressivo', 'moderado', 'calmo', 'calmo', 'moderado', 'moderado')
+
+tempodist_s <- cbind(tempodist_s, periodo, perfil)
+
+knitr::kable(tempodist_s, col.names = gsub("[.]", " ", names(tempodist_s)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 20)
+```
+
+## Variáveis qualitativas
+
+São variáveis categóricas que representam um atributo por meio de combinação **binária** (0 para a ausência ou 1 para presença).
+
+```{r, echo=FALSE}
+knitr::kable(tempodist_s, col.names = gsub("[.]", " ", names(tempodist_s)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 20)
+             
+```
+
+## Variáveis qualitativas
+
+Para uma variável categórica com mais de duas categorias?
+
+. . .
+
+Neste caso, devemos incluir $n - 1$ *dummies*, em que $n$ é a quantidade de categorias existentes na variável original.
+
+```{r, echo=FALSE}
+library(fastDummies)
+df_b <- dummy_cols(tempodist_s, select_columns = c('periodo', 'perfil'), remove_first_dummy = TRUE)
+
+knitr::kable(df_b, col.names = gsub("[.]", " ", names(df_b)), align = "lccrr") |> 
+  kableExtra::kable_styling(bootstrap_options = c('striped', 'condensed', 'houver'), full_width = F, row_label_position = "c", font_size = 20)
+```
+
+
+## Regressão Múltipla
+
+```{r, echo=FALSE}
+#| panel: center
+#| layout-align: center
+m2 <- lm(tempo ~ distancia + semafaro + periodo + perfil, data = tempodist_s)
+
+summary(m2)
+```
+
+## Regressão Stepwise
+
+<br>
+
+O método stepwise é usado para selecionar quais variáveis mais influenciam o conjunto de saída podendo, assim, diminuir o número de variáveis a compor a equação de regressão.
+
+# Modelos não lineares
+
+## Modelos não lineares
+
+::: columns
+::: column
+```{r echo=FALSE, out.width="80%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/nao_linear1.png")
+```
+:::
+::: column
+```{r echo=FALSE, out.width="80%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/nao_linear2.png")
+```
+:::
+:::
+
+```{r echo=FALSE, out.width="40%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/nao_linear2.png")
+```
+
+Resultados da aplicação de quatro diferentes formas funcionais em regressão
+
+## Pressupostos do modelo de regressão
+
+<br>
+
+```{r echo=FALSE, out.width="40%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/pressupostos.jpg")
+```
+
+## Normalidade dos resíduos
+
+<br>
+
+A não aderência à normalidade dos termos de erro pode indicar que o medelo foi especificado incorretamente quanto à forma funcional e que houve a omissão de variáveis explicativas. 
+
+```{r echo=FALSE, out.width="60%"}
+knitr::include_graphics("imagens/residual_normalidade.jpg")
+```
+
+
+## Normalizar por Box-Cox
+
+Para que seja corrigido este problema, pode-se alterar a formulação matemática.$\lambda$ é o parâmetro que maximiza a aderência à normalidade da districuição da nova variável. 
+$$\displaystyle \frac{Y_i^\lambda - 1}{\lambda} = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i}... + \beta_k X_{ki} + \epsilon$$
+```{r echo=FALSE, out.width="50%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/box-cox.jpg")
+```
+
+# Regressão Logística Binária
+
+## Regressão Logística Binária
+
+<br>
+
+Técnica supervisionada de machine learning utilizada para explicar ou predizer a probabilidade de ocorrência de determinado evento em função de uma ou mais variáveis explicativas.
+
+**Variável dependente**: binária
+
+>  Resultados interpretados em termos de probabilidades.
+
+**Variáveis do vetor X**: métricas ou não métricas
+
+## Objetivos da técnica
+
+<br>
+
+**Atribuição de probabilidades**: 
+
+estimar a probabilidade de ocorrência de determinando evento ou de que um indivíduo venha a se enquadrar nessa ou naquela categoria.
+
+<br>
+
+**Classificação em categorias**: 
+
+classificar indivíduos ou observações em categorias específicas.
+
+## Dados
+
+:::{.columns}
+:::{.column}
+
+Agora a variável alvo é categórica.
+
+1: atrasado
+
+0: não atrasado
+
+:::
+:::{.column}
+```{r, echo=FALSE}
+atrasado <- readr::read_rds("atrasado.rds")
+
+atrasado
+```
+:::
+:::
+
+## Visualização dos dados
+
+```{r, echo=FALSE}
+ggplot(atrasado, aes(x = dist, y = atrasado)) +
+  geom_point() + 
+  labs(y = "Chegou Atrasado") +
+  theme_classic()
+
+```
+
+## Testando modelo linear
+
+**Resultado**: $Y$ = 1: sim, 0: não 
+
+```{r, echo=FALSE}
+ggplot(atrasado, aes(x = dist, y = atrasado)) +
+  geom_point() + 
+  labs(y = "Chegou Atrasado") +
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  theme_classic()
+
+```
+
+## Vamos usar proporções
+
+**Resultado**: Probabilidade de chegar atrasado
+
+```{r, echo=FALSE}
+atrasado_dist <- atrasado  |> 
+  mutate(dist = round(dist)) |> 
+  group_by(dist)  |> 
+  summarise(prop = mean(atrasado))
+
+ggplot(atrasado_dist, aes(x = dist, y = prop)) +
+  geom_point() + 
+  labs(y = "P(Chegou Atrasado)") +
+  geom_hline(yintercept = c(0,1), lty = 2) + 
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  theme_classic()
+
+```
+
+## Vamos usar proporções
+
+**Resultado**: Probabilidade de chegar atrasado
+```{r, echo=FALSE}
+ggplot(atrasado_dist, aes(x = dist, y = prop)) +
+  geom_point() + 
+  geom_hline(yintercept = c(0,1), lty = 2) +
+  labs(y = "P(Chegou Atrasado)") +
+  geom_smooth(method = "lm", color = "purple", se = FALSE, fullrange = TRUE) +
+  theme_classic() +
+  xlim(1, 55) +
+  ylim(-1, 2)
+```
+
+🛑 *Este modelo produz previsões fora do 0 e 1.*
+
+## Testando outro modelo
+
+```{r}
+#| label: logistic-model-plot
+#| echo: false
+
+ggplot(atrasado_dist, aes(x = dist, y = prop)) +
+  geom_point() + 
+  geom_hline(yintercept = c(0,1), lty = 2) + 
+  stat_smooth(method ="glm", method.args = list(family = "binomial"), 
+              fullrange = TRUE, se = FALSE) +
+  labs(y = "P(Chegou Atrasado)") +
+  theme_classic() +
+  xlim(1, 55) +
+  ylim(-1, 2)
+```
+
+✅ **O Modelo de regressão logística só produz previsões entre 0 e 1**
+
+## Tipos de modelos
+
+| Método                          | Resultado    | Função                                                     |
+|---------------------------------|--------------|-----------------------------------------------------------|
+| Regressão linear                | Quantitativo | $Y = \beta_0 + \beta_1~ X$                                |
+| Regressão linear (transform Y) | Quantitativo | $\log(Y) = \beta_0 + \beta_1~ X$                          |
+| Regressão Logística             | Binário       | $\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1 ~ X$ |
+
+# Chance (Odds) e probabilidade
+
+## Probabilidade
+
+<br>
+
+Seja $Y$ a resposta a um estímulo (sim ou não) - pode ser a preferência por um produto, adimplência, aprovação em um curso, etc.
+
+-   **$p$** : probabilidade da resposta "sim".
+
+-   **$1 - p$** : probabilidade da resposta "não"
+
+## Chance (ODDS)
+
+<br>
+
+Chance (odds) de ocorrência de um evento:
+
+$$\displaystyle chance = \frac {p}{1 - p}$$
+
+-   **$p$** : Evento
+
+-   **$1 - p$** : Não Evento
+
+**Exemplo**: 
+
+  se $p = 0,75$, chance = 3 (3 para 1)
+
+## Logito
+
+logaritmo natural da chance de ocorrência de uma resposta do tipo “sim”. $Z = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i}... + \beta_k X_{ki} + \epsilon$
+
+$$\displaystyle logito = Z = ln \left(\frac {p}{1 - p} \right)$$
+
+$$\displaystyle e^{logito} = e^Z = \frac {p}{1 - p} = odds$$
+
+$$\displaystyle p = \frac {e^Z}{1 + e^Z} = \frac {1}{1 + e^{-Z}}$$
+
+## Regressão logística
+
+<br>
+
+A curva logística, ou sigmóide, descreve a relação entre a probabilidade associada à ocorrência de determinando evento e um conjunto de variáveis preditoras.
+
+$$\displaystyle p_i = \frac {1}{1 + e^{-Z}} = \frac {1}{1 + e^{-(\beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i}... + \beta_k X_{ki} + \epsilon)}}$$
+
+## Função logística
+
+<br>
+
+$$\displaystyle p_i = \frac {1}{1 + e^{-Z}} = \frac {1}{1 + e^{-(\beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i}... + \beta_k X_{ki} + \epsilon)}}$$
+
+-   Estimação dos parâmetros: processo iterativo para maximizar o acerto da probabilidade
+de ocorrência de um evento à sua real ocorrência (Método de Máxima Verossimilhança).
+
+
+## Função logística
+
+<br>
+
+$$\displaystyle p_i = \frac {1}{1 + e^{-Z}} = \frac {1}{1 + e^{-(\beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i}... + \beta_k X_{ki} + \epsilon)}}$$
+
+-   Os resultados atribuíveis à variável dependente estarão entre 0 e 1.
+
+-   Análise do ajuste do modelo: testes de significância dos parâmetros e tabela de
+classificação (matriz de confusão).
+
+## Cutoff, sensitividade e especificidade
+
+<br>
+
+O **cutoff** é definido para que sejam classificadas as observações em função das suas probabilidades calculadas.
+
+-   Se $p_i$ > *cutoff*: $i$ deverá classificado como evento
+-   Se $p_i$ < *cutoff*: $i$ deverá classificado como não evento
+
+## Cutoff, sensitividade e especificidade {.smaller}
+
+|                              | aluno atrasou                    | aluno não atrasou                  |
+|------------------------------|----------------------------------|------------------------------------|
+| Classificado com Evento      | Verdadeiro positivo               | Falso positivo                    |
+| Classificado como Não Evento | Falso negativo                    | Verdadeiro negativo               |
+
+-   **sensitividade** : percentual de acerto considerando-se apenas as observações que de fato são evento.
+$$Sensitividade = \frac {\text{verdadeiro positivo}}{\text{total de evento}}$$
+-   **especificidade** : percentual de acerto considerando-se apenas as observações que não são evento.
+$$Especificidade = \frac {\text{falso negativo}}{\text{total de não evento}}$$
+
+## Curva ROC
+
+Mostra o comportamento propriamente dito do *trade off* entre sensitividade e especificidade.
+
+```{r, echo=FALSE}
+atrasado <- readRDS("atrasado.rds")
+
+# Estimação de modelo Logístico Binário
+modelo_atrasos <- glm(formula = atrasado ~ dist + sem, 
+                      data = atrasado, 
+                      family = "binomial")
+
+
+ROC <- roc(response = atrasado$atrasado, 
+           predictor = modelo_atrasos$fitted.values)
+
+ggplotly(
+  ggroc(ROC, color = "darkorchid", size = 1) +
+    geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), 
+                 color="orange", 
+                 linewidth = 0.2)+
+    labs(x = "1 - Especificidade",
+         y = "Sensitividade",
+         title = paste("Área abaixo da curva:", 
+                       round(ROC$auc, 3))) +
+    theme_bw()
+    )
+
+```
+
+Modelos com maior área abaixo da curva ROC apresenta maior eficiência global de previsão.
+
+# Outros modelos
+
+## Árvore de decisão
+
+A nomenclatura árvore deriva da metodologia proposta. Sua estruturação envolve o nó raiz, os nós de decisão e os nós folha.
+
+```{r echo=FALSE, out.width="80%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/arvore_decisao.png")
+```
+
+## Ideia central - mudar
+
+Vamos supor que queremos descobrir o nome de um personagem escolhido aleatoriamente. 
+
+```{r echo=FALSE, out.width="80%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/turma_monica.jpg")
+```
+
+Qual deveria ser a primeira pergunta?
+
+. . .
+
+- O personagem é do sexo feminino?
+- O personagem possui um coelho de pelúcia?
+
+## Iniciando pela pergunta 2:
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/pergunta1.png")
+```
+
+## Iniciando pela pergunta 1:
+
+```{r echo=FALSE, out.width="100%"}
+#| fig-align: "center"
+knitr::include_graphics("imagens/pergunta2.png")
+```
+
+## Objetivo central
+
+Descobrir quais variáveis possuem a maior carga de informação para que as perguntas "corretas" possam ser feitas.
+
+<br>
+
+Como medir a melhor partição em cada etapa do processo?
+
+-   Entropia de **Shannon**
+
+-   Coeficiente de **Gini**
+
+## Ganho de informação
+
+<br>
+
+Um critério muito utilizado é o índice de Gini:
+
+$$I(Y, D) = 1-\sum_{i=i}^m p_i^2$$
+
+O Coeficiente de Gini será 0 quando todas as $i$ observações pertencerem a mesma classe $𝑚$, e $1 − \frac {1}{m}$ quando todas as $𝑚$ classes possuírem a mesma probabilidade de ocorrência.
+
+
+
