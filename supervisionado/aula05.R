@@ -2,20 +2,12 @@
 #                 INSTALAÇÃO E CARREGAMENTO DE PACOTES NECESSÁRIOS               #
 ##################################################################################
 #Pacotes utilizados
-pacotes <- c("plotly","tidyverse","ggrepel","fastDummies","knitr","kableExtra",
-             "splines", "reshape2", "PerformanceAnalytics", "nortest", "rgl",
-             "car", "olsrr", "jtools", "ggstance", "GGally")
+pacotes <- c("plotly","ggrepel","fastDummies", "splines", "reshape2", 
+             "PerformanceAnalytics", "nortest", "rgl", "car", "olsrr", 
+             "jtools", "ggstance", "GGally")
+install.packages(pacotes)
 
-if(sum(as.numeric(!pacotes %in% installed.packages())) != 0){
-  instalador <- pacotes[!pacotes %in% installed.packages()]
-  for(i in 1:length(instalador)) {
-    install.packages(instalador, dependencies = T)
-    break()}
-  sapply(pacotes, require, character = T) 
-} else {
-  sapply(pacotes, require, character = T) 
-}
-
+## Liberar pacotes
 library(tidyverse)
 library(plotly)
 library(car)
@@ -31,6 +23,7 @@ library(rattle)
 library(olsrr)
 library(caret)
 ##################################################################################
+#                                                                                #
 #                               REGRESSÃO LINEAR SIMPLES                         #
 #                       EXEMPLO 01 - CARREGAMENTO DA BASE DE DADOS               #
 ##################################################################################
@@ -40,18 +33,13 @@ list.files()
 #Carregando a base de dados
 load(file = "tempodist.RData")
 
-#################################################################################
-#                    OBSERVANDO OS DADOS CARREGADOS DA BASE tempodist           #
-#################################################################################
 glimpse(tempodist) #Visualização das observações e das especificações referentes
 #às variáveis da base de dados
 
 #Estatísticas univariadas
 summary(tempodist)
 
-#################################################################################
-#                       PLOTANDO AS OBSERVAÇÕES DA BASE tempodist               #
-#################################################################################
+#plotando as observações
 ggplotly(
   ggplot(tempodist, aes(x = distancia, y = tempo)) +
     geom_point(color = "darkorchid") +
@@ -60,9 +48,6 @@ ggplotly(
     theme_classic()
 )
 
-#################################################################################
-#   ELABORANDO UMA MATRIZ DE CORRELAÇÕES PARA AS VARIÁVEIS DA BASE tempodist    #
-#################################################################################
 #Elaborando uma Matriz de Correlações
 cor(tempodist)
 
@@ -77,7 +62,6 @@ modelo_simples <- lm(formula = tempo ~ distancia,
 summary(modelo_simples)
 
 #Calculando os intervalos de confiança
-
 confint(modelo_simples, level = 0.90) # siginificância 10%
 confint(modelo_simples, level = 0.95) # siginificância 5%
 confint(modelo_simples, level = 0.99) # siginificância 1%
@@ -575,6 +559,9 @@ summary(modelosaeb_dummies_uf)
 
 #teste breusch_pagan
 ols_test_breusch_pagan(modelosaeb_dummies_uf)
+#Prodemos afirmar que este modelo final não apresenta problemas 
+#de heterocedasticidade (Valor-P chi2 = 0,2996 > 0,05)
+
 
 ggplotly(
   ggplot(saeb_rend, aes(x = rendimento, y = saeb, color = uf, shape = uf)) +
@@ -659,6 +646,7 @@ confusionMatrix(table(predict(modelo_atrasos, type = "response") >= 0.4,
 ##############################################################################
 #                       EXEMPLO 01 - CONSTRUÇÃO DA CURVA ROC                 #
 ##############################################################################
+#função roc() do pacote pROC
 ROC <- roc(response = atrasado$atrasado, 
            predictor = modelo_atrasos$fitted.values)
 
@@ -666,7 +654,7 @@ ggplotly(
   ggroc(ROC, color = "darkorchid", size = 1) +
     geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), 
                  color="orange", 
-                 size = 0.2)+
+                 linewidth = 0.2)+
     labs(x = "1 - Especificidade",
          y = "Sensitividade",
          title = paste("Área abaixo da curva:", 
